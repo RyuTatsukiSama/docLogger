@@ -1,8 +1,9 @@
 #include <iostream>
+#include "../Logger/rLogger.h"
 
 int main()
 {
-	std::cout << "Hello World!" << std::endl;
+	std::cout << LogSeverity::ERROR.value << std::endl;
 
 	system("pause");
 
