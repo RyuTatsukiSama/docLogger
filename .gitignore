@@ -43,3 +43,13 @@
 # CMake cache
 CMakeCache.txt
 CMakeFiles/
+
+# Build folders
+build/
+out/
+
+# visual studio
+.vs/
+*.vcxproj
+*.vcxproj.user
+*.sln
