@@ -4,9 +4,25 @@ project(rLog_cpp LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Fichiers sources
-set(SOURCES
-    "main.cpp"
-)
+# Common Library
+add_library(LoggerLib
+    "./src/Logger/rLogger.cpp"
+    "./src/Logger/rLogger.h"
+    "./src/TaskManager/taskManager.cpp"
+    "./src/TaskManager/taskManager.h")
 
-add_executable(rLog_cpp ${SOURCES})
+# Task Manager Executable
+add_executable(TaskManagerApp "./src/TaskManager/taskManager.cpp")
+target_link_libraries(TaskManagerApp PRIVATE LoggerLib)
+
+# Unit Test Executable
+include(FetchContent)
+FetchContent_Declare(
+    googletest
+    GIT_REPOSITORY https://github.com/google/googletest.git
+    GIT_TAG v1.15.0
+)
+FetchContent_MakeAvailable(googletest)
+
+add_executable(UnitTests "./UnitTest/unitTest.cpp")
+target_link_libraries(UnitTests PRIVATE LoggerLib gtest_main)
