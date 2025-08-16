@@ -6,3 +6,29 @@ const rLogSeverity rLogSeverity::INFO = rLogSeverity(2);
 const rLogSeverity rLogSeverity::WARNING = rLogSeverity(3);
 const rLogSeverity rLogSeverity::ERROR = rLogSeverity(4);
 const rLogSeverity rLogSeverity::CRITICAL = rLogSeverity(5);
+
+#pragma region rLogger Class
+#pragma region Protected Methods
+
+std::string rLogger::FormatLog(const rLogSeverity &_severity, const std::string _message)
+{
+}
+
+#pragma endregion
+
+#pragma region Public Methods
+
+rLogger::rLogger(std::string _threadName = "Main")
+{
+}
+
+void rLogger::Log(const rLogSeverity &_severity, const std::string &_message)
+{
+}
+
+void rLogger::RegisterOutputStream(const std::ofstream &_stream)
+{
+}
+
+#pragma endregion
+#pragma endregion
