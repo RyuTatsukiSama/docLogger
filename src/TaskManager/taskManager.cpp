@@ -3,7 +3,7 @@
 
 int main()
 {
-	std::cout << LogSeverity::ERROR.value << std::endl;
+	std::cout << rLogSeverity::ERROR.value << std::endl;
 
 	system("pause");
 

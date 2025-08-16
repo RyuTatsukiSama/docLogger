@@ -1,6 +1,11 @@
-struct LogSeverity
+struct rLogSeverity
 {
 	int value;
 
-	static const LogSeverity LOG, DEBUG, INFO, WARNING, ERROR, CRITICAL;
+	static const rLogSeverity LOG, DEBUG, INFO, WARNING, ERROR, CRITICAL;
+};
+
+class rLogger
+{
+
 };
