@@ -24,5 +24,5 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(googletest)
 
-add_executable(UnitTests "./UnitTest/unitTest.cpp")
+add_executable(UnitTests "UnitTest/unitTest.cpp" "UnitTest/logSeverityTest.cpp")
 target_link_libraries(UnitTests PRIVATE LoggerLib gtest_main)
