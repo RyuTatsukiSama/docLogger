@@ -12,13 +12,14 @@ const rLogSeverity rLogSeverity::CRITICAL = rLogSeverity(5);
 
 std::string rLogger::FormatLog(const rLogSeverity &_severity, const std::string _message)
 {
+    return "";
 }
 
 #pragma endregion
 
 #pragma region Public Methods
 
-rLogger::rLogger(std::string _threadName = "Main")
+rLogger::rLogger(std::string _threadName)
 {
 }
 

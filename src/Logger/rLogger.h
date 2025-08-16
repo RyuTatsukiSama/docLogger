@@ -21,15 +21,15 @@ class rLogger
 {
 protected:
 	rLogSeverity severityThreshdold = rLogSeverity::LOG;
-	std::vector<std::ofstream*> outputStreams;
+	std::vector<std::ofstream *> outputStreams;
 
-	std::string FormatLog(const rLogSeverity& _severity, const std::string _message);
+	std::string FormatLog(const rLogSeverity &_severity, const std::string _message);
 
 public:
 	rLogger(std::string _threadName = "Main");
 	~rLogger() = default;
 
-	void Log(const rLogSeverity& _severity, const std::string& _message);
-	void RegisterOutputStream(const std::ofstream& _stream);
+	void Log(const rLogSeverity &_severity, const std::string &_message);
+	void RegisterOutputStream(const std::ofstream &_stream);
 };
 #endif // !RLOGGER_H
