@@ -26,18 +26,18 @@ std::string rLogger::FormatLog(const rLogSeverity &_severity, const std::string 
 void rLogger::ColorConsole(const rLogSeverity &_severity)
 {
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-	int consoleColor = 7;
+	int consoleColor = 7; // White
 
 	switch (_severity.value)
 	{
-	case 3: // WARNING
-		consoleColor = 6;
+	case 3:				  // WARNING
+		consoleColor = 6; // Yellow
 		break;
-	case 4: // ERROR
-		consoleColor = 4;
+	case 4:				  // ERROR
+		consoleColor = 4; // Red
 		break;
-	case 5: // CRITICAL
-		consoleColor = 12;
+	case 5:				   // CRITICAL
+		consoleColor = 12; // bright red
 		break;
 	default:
 		break;
@@ -57,21 +57,26 @@ rLogger::rLogger(std::string _threadName)
 	RegisterOutputStream(&std::cout);
 }
 
-void rLogger::Log(const rLogSeverity &_severity, const std::string &_message)
+void rLogger::Log(const rLogSeverity &_severity, const std::string &_message) // Color change can be optimise
 {
 	if (_severity.value < severityThreshdold.value)
 		return;
 
 	std::string formattedMessage = FormatLog(_severity, _message);
 
+	bool consoleColorChanged = false;
 	for (const auto stream : outputStreams)
 	{
-		if (stream == &std::cout)
+		if (stream == &std::cout && _severity.value > rLogSeverity::Info.value)
 		{
 			ColorConsole(_severity);
+			consoleColorChanged = true;
 		}
 
 		(*stream) << formattedMessage << std::endl;
+
+		if (consoleColorChanged)
+			ColorConsole(rLogSeverity::Log); // Us this to reset the color of the console to white
 	}
 }
 

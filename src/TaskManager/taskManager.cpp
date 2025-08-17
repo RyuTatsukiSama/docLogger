@@ -16,6 +16,9 @@ int main()
 	rLogger log("Main");
 
 	log.Log(rLogSeverity::Log, "This is a log test");
+	log.Log(rLogSeverity::Warning, "This is a Warning test");
+	log.Log(rLogSeverity::Error, "This is a Error test");
+	log.Log(rLogSeverity::Critical, "This is a Critical test");
 
 	/*
 	std::thread t1(threadFunc, "t1");
