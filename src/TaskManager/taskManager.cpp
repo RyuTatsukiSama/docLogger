@@ -14,6 +14,12 @@ void anotherFunc(void)
 int main()
 {
 	rLogger log("Main");
+	std::chrono::time_point now = std::chrono::floor<std::chrono::seconds>(std::chrono::system_clock::now());
+	std::fstream logFile(std::format("{:%Y-%m-%d_%H-%M-%S}.log", now), std::ios::out);
+	log.RegisterOutputStream(&logFile);
+
+	if (!logFile.is_open())
+		log.Log(rLogSeverity::Error, "File is not open");
 
 	log.Log(rLogSeverity::Log, "This is a log test");
 	log.Log(rLogSeverity::Warning, "This is a Warning test");
@@ -29,6 +35,8 @@ int main()
 	*/
 
 	system("pause");
+
+	logFile.close();
 
 	return 0;
 }
