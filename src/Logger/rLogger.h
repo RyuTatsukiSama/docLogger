@@ -9,6 +9,7 @@
 #include <functional>
 #include <unordered_map>
 #include <format>
+#include <thread>
 
 struct rLogSeverity
 {
@@ -16,6 +17,8 @@ struct rLogSeverity
 
 	static const rLogSeverity LOG, DEBUG, INFO, WARNING, ERROR, CRITICAL;
 };
+
+thread_local static std::string threadName; // ! rename this variable
 
 class rLogger
 {
