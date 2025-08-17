@@ -33,7 +33,7 @@ protected:
 	void ColorConsole(const rLogSeverity &_severity);
 
 public:
-	rLogger(std::string _threadName = "Main");
+	rLogger(std::string _threadName);
 	~rLogger() = default;
 
 	void Log(const rLogSeverity &_severity, const std::string &_message);
