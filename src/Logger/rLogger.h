@@ -10,6 +10,7 @@
 #include <unordered_map>
 #include <format>
 #include <thread>
+#include <ctime>
 
 struct rLogSeverity
 {
@@ -24,9 +25,11 @@ class rLogger
 {
 protected:
 	rLogSeverity severityThreshdold = rLogSeverity::LOG;
-	std::vector<std::ofstream *> outputStreams;
+	std::vector<std::ostream *> outputStreams;
+	static std::unordered_map<rLogSeverity, std::string> severityText;
 
 	std::string FormatLog(const rLogSeverity &_severity, const std::string _message);
+	void ColorConsole(const rLogSeverity &_severity);
 
 public:
 	rLogger(std::string _threadName = "Main");
@@ -34,5 +37,12 @@ public:
 
 	void Log(const rLogSeverity &_severity, const std::string &_message);
 	void RegisterOutputStream(const std::ofstream &_stream);
+
+#ifdef RTESTING
+	std::string GetFormatLog(const rLogSeverity &_severity, const std::string _message)
+	{
+		FormatLog(_severity, _message);
+	}
+#endif
 };
 #endif // !RLOGGER_H
