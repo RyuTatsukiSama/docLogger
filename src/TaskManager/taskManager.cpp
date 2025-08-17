@@ -15,6 +15,8 @@ int main()
 {
 	std::cout << rLogSeverity::ERROR.value << std::endl;
 
+	std::cout << threadName << std::endl;
+
 	std::thread t1(threadFunc, "t1");
 	t1.join();
 
