@@ -13,7 +13,7 @@ void anotherFunc(void)
 
 int main()
 {
-	rLogger log;
+	rLogger log("Main");
 
 	log.Log(rLogSeverity::Log, "This is a log test");
 
