@@ -15,10 +15,7 @@ int main()
 {
 	rLogger log;
 
-	log.Log(rLogSeverity::Log, "This is a log level");
-	log.Log(rLogSeverity::Warning, "This is a Warning level");
-	log.Log(rLogSeverity::Error, "This is a Error level");
-	log.Log(rLogSeverity::Critical, "This is a Critical level");
+	log.Log(rLogSeverity::Log, "This is a log test");
 
 	/*
 	std::thread t1(threadFunc, "t1");
