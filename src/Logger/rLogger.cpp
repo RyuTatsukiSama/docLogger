@@ -1,30 +1,49 @@
 #include "rLogger.h"
 
-const rLogSeverity rLogSeverity::LOG = rLogSeverity(0);
-const rLogSeverity rLogSeverity::DEBUG = rLogSeverity(1);
-const rLogSeverity rLogSeverity::INFO = rLogSeverity(2);
-const rLogSeverity rLogSeverity::WARNING = rLogSeverity(3);
-const rLogSeverity rLogSeverity::ERROR = rLogSeverity(4);
-const rLogSeverity rLogSeverity::CRITICAL = rLogSeverity(5);
+const rLogSeverity rLogSeverity::Log = rLogSeverity(0);
+const rLogSeverity rLogSeverity::Debug = rLogSeverity(1);
+const rLogSeverity rLogSeverity::Info = rLogSeverity(2);
+const rLogSeverity rLogSeverity::Warning = rLogSeverity(3);
+const rLogSeverity rLogSeverity::Error = rLogSeverity(4);
+const rLogSeverity rLogSeverity::Critical = rLogSeverity(5);
 
 #pragma region rLogger Class
 #pragma region Protected
 
-std::unordered_map<rLogSeverity, std::string> rLogger::severityText = {
-    {rLogSeverity::LOG, "LOG"},
-    {rLogSeverity::DEBUG, "DEBUG"},
-    {rLogSeverity::INFO, "INFO"},
-    {rLogSeverity::WARNING, "WARNING"},
-    {rLogSeverity::ERROR, "ERROR"},
-    {rLogSeverity::CRITICAL, "CRITICAL"}};
+std::unordered_map<int, std::string> rLogger::severityText = {
+	{rLogSeverity::Log.value, "LOG"},
+	{rLogSeverity::Debug.value, "DEBUG"},
+	{rLogSeverity::Info.value, "INFO"},
+	{rLogSeverity::Warning.value, "WARNING"},
+	{rLogSeverity::Error.value, "ERROR"},
+	{rLogSeverity::Critical.value, "CRITICAL"} };
 
-std::string rLogger::FormatLog(const rLogSeverity &_severity, const std::string _message)
+std::string rLogger::FormatLog(const rLogSeverity& _severity, const std::string _message)
 {
-    return std::format("[{}] [{}] [{}] {}", severityText.at(_severity), threadName, time(NULL), _message);
+	return std::format("[{}] [{}] [{}] {}", severityText.at(_severity.value), time(NULL), threadName, _message);
 }
 
-void rLogger::ColorConsole(const rLogSeverity &_severity)
+void rLogger::ColorConsole(const rLogSeverity& _severity)
 {
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	int consoleColor = 7;
+
+	switch (_severity.value)
+	{
+	case 3: // WARNING
+		consoleColor = 6;
+		break;
+	case 4: // ERROR
+		consoleColor = 4;
+		break;
+	case 5: // CRITICAL
+		consoleColor = 12;
+		break;
+	default:
+		break;
+	}
+
+	SetConsoleTextAttribute(hConsole, consoleColor);
 }
 
 #pragma endregion
@@ -33,24 +52,32 @@ void rLogger::ColorConsole(const rLogSeverity &_severity)
 
 rLogger::rLogger(std::string _threadName)
 {
-    threadName = _threadName;
+	threadName = _threadName;
 
-    outputStreams.push_back(&std::cout);
+	RegisterOutputStream(&std::cout);
 }
 
-void rLogger::Log(const rLogSeverity &_severity, const std::string &_message)
+void rLogger::Log(const rLogSeverity& _severity, const std::string& _message)
 {
-    if (_severity.value < severityThreshdold.value)
-        return;
+	if (_severity.value < severityThreshdold.value)
+		return;
 
-    std::string_view formattedMessage = FormatLog(_severity, _message);
+	std::string formattedMessage = FormatLog(_severity, _message);
 
-    for (auto os : outputStreams)
-        (*os) << formattedMessage << std::endl;
+	for (const auto stream : outputStreams)
+	{
+		if (stream == &std::cout)
+		{
+			ColorConsole(_severity);
+		}
+
+		(*stream) << formattedMessage << std::endl;
+	}
 }
 
-void rLogger::RegisterOutputStream(const std::ofstream &_stream)
+void rLogger::RegisterOutputStream(std::ostream* _stream)
 {
+	outputStreams.push_back(_stream);
 }
 
 #pragma endregion
