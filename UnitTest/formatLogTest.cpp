@@ -4,7 +4,7 @@
 
 TEST(FormatLogTest, TestOne) // ! Change the test name
 {
-    rLogger testLogger;
+    rLogger testLogger("Main");
 
     std::string tester = std::format("[LOG] [{}] [Main] This is a log level", time(NULL));
     std::string format = testLogger.GetFormatLog(rLogSeverity::Log, "This is a log level");
