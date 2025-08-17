@@ -16,14 +16,14 @@ std::unordered_map<int, std::string> rLogger::severityText = {
 	{rLogSeverity::Info.value, "INFO"},
 	{rLogSeverity::Warning.value, "WARNING"},
 	{rLogSeverity::Error.value, "ERROR"},
-	{rLogSeverity::Critical.value, "CRITICAL"} };
+	{rLogSeverity::Critical.value, "CRITICAL"}};
 
-std::string rLogger::FormatLog(const rLogSeverity& _severity, const std::string _message)
+std::string rLogger::FormatLog(const rLogSeverity &_severity, const std::string _message)
 {
-	return std::format("[{}] [{}] [{}] {}", severityText.at(_severity.value), time(NULL), threadName, _message);
+	return std::format("[{}] [{}] [{}] {}", severityText.at(_severity.value), std::chrono::system_clock::now(), threadName, _message);
 }
 
-void rLogger::ColorConsole(const rLogSeverity& _severity)
+void rLogger::ColorConsole(const rLogSeverity &_severity)
 {
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	int consoleColor = 7;
@@ -57,7 +57,7 @@ rLogger::rLogger(std::string _threadName)
 	RegisterOutputStream(&std::cout);
 }
 
-void rLogger::Log(const rLogSeverity& _severity, const std::string& _message)
+void rLogger::Log(const rLogSeverity &_severity, const std::string &_message)
 {
 	if (_severity.value < severityThreshdold.value)
 		return;
@@ -75,7 +75,7 @@ void rLogger::Log(const rLogSeverity& _severity, const std::string& _message)
 	}
 }
 
-void rLogger::RegisterOutputStream(std::ostream* _stream)
+void rLogger::RegisterOutputStream(std::ostream *_stream)
 {
 	outputStreams.push_back(_stream);
 }
