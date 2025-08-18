@@ -44,7 +44,7 @@ public:
 	void RegisterOutputStream(std::ostream *_stream);
 
 #ifdef RTESTING
-	std::string GetFormatLog(const rLogSeverity &_severity, const std::string _message)
+	std::string GetFormatLog(const rLoggerSeverity &_severity, const std::string _message)
 	{
 		return FormatLog(_severity, _message);
 	}

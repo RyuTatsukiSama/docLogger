@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "../src/Logger/rLogger.h"
+#include "../src/rLogger/rLogger.h"
 
 TEST(rLogSeverityTest, LogTest)
 {
