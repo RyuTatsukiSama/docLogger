@@ -3,30 +3,30 @@
 
 TEST(rLogSeverityTest, LogTest)
 {
-	EXPECT_EQ(rLogSeverity::Log.value, 0);
+	EXPECT_EQ(rLoggerSeverity::Log.value, 0);
 }
 
 TEST(rLogSeverityTest, DebugTest)
 {
-	EXPECT_EQ(rLogSeverity::Debug.value, 1);
+	EXPECT_EQ(rLoggerSeverity::Debug.value, 1);
 }
 
 TEST(rLogSeverityTest, InfoTest)
 {
-	EXPECT_EQ(rLogSeverity::Info.value, 2);
+	EXPECT_EQ(rLoggerSeverity::Info.value, 2);
 }
 
 TEST(rLogSeverityTest, WarningTest)
 {
-	EXPECT_EQ(rLogSeverity::Warning.value, 3);
+	EXPECT_EQ(rLoggerSeverity::Warning.value, 3);
 }
 
 TEST(rLogSeverityTest, ErrorTest)
 {
-	EXPECT_EQ(rLogSeverity::Error.value, 4);
+	EXPECT_EQ(rLoggerSeverity::Error.value, 4);
 }
 
 TEST(rLogSeverityTest, CriticalTest)
 {
-	EXPECT_EQ(rLogSeverity::Critical.value, 5);
+	EXPECT_EQ(rLoggerSeverity::Critical.value, 5);
 }
