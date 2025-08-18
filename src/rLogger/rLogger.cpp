@@ -24,7 +24,7 @@ const std::unordered_map<rLoggerSeverity, int> &rLogger::getSeverityColor()
 		{rLoggerSeverity::Info, 2},		  // Green
 		{rLoggerSeverity::Warning, 6},	  // Yellow
 		{rLoggerSeverity::Error, 4},	  // Red
-		{rLoggerSeverity::Critical, 244}, // Red on white
+		{rLoggerSeverity::Critical, 79}, // 244 Red on white or 79 White on Red
 		{rLoggerSeverity::None, 7}		  // White
 	};
 
