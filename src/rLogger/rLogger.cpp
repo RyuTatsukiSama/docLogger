@@ -1,17 +1,17 @@
 #include "rLogger.h"
 
-const rLoggerSeverity rLoggerSeverity::Log = rLoggerSeverity(0);
-const rLoggerSeverity rLoggerSeverity::Debug = rLoggerSeverity(1);
-const rLoggerSeverity rLoggerSeverity::Info = rLoggerSeverity(2);
-const rLoggerSeverity rLoggerSeverity::Warning = rLoggerSeverity(3);
-const rLoggerSeverity rLoggerSeverity::Error = rLoggerSeverity(4);
-const rLoggerSeverity rLoggerSeverity::Critical = rLoggerSeverity(5);
+const rLoggerSeverity rLoggerSeverity::Trace = rLoggerSeverity{0};
+const rLoggerSeverity rLoggerSeverity::Debug = rLoggerSeverity{1};
+const rLoggerSeverity rLoggerSeverity::Info = rLoggerSeverity{2};
+const rLoggerSeverity rLoggerSeverity::Warning = rLoggerSeverity{3};
+const rLoggerSeverity rLoggerSeverity::Error = rLoggerSeverity{4};
+const rLoggerSeverity rLoggerSeverity::Critical = rLoggerSeverity{5};
 
 #pragma region rLogger Class
 #pragma region Protected
 
 std::unordered_map<int, std::string> rLogger::severityText = {
-	{rLoggerSeverity::Log.value, "LOG"},
+	{rLoggerSeverity::Trace.value, "LOG"},
 	{rLoggerSeverity::Debug.value, "DEBUG"},
 	{rLoggerSeverity::Info.value, "INFO"},
 	{rLoggerSeverity::Warning.value, "WARNING"},
@@ -120,7 +120,7 @@ void rLogger::Log(const rLoggerSeverity &_severity, const std::string &_message)
 		(*stream) << formattedMessage << std::endl;
 
 		if (consoleColorChanged)
-			ColorConsole(rLoggerSeverity::Log); // Us this to reset the color of the console to white
+			ColorConsole(rLoggerSeverity::Trace); // Us this to reset the color of the console to white
 	}
 }
 

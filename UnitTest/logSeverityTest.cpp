@@ -3,7 +3,7 @@
 
 TEST(rLogSeverityTest, LogTest)
 {
-	EXPECT_EQ(rLoggerSeverity::Log.value, 0);
+	EXPECT_EQ(rLoggerSeverity::Trace.value, 0);
 }
 
 TEST(rLogSeverityTest, DebugTest)

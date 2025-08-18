@@ -13,12 +13,14 @@ void anotherFunc(void)
 
 int main()
 {
-	rLogger log(rLoggerOptions{});
-
-	log.Log(rLoggerSeverity::Log, "This is a log test");
-	log.Log(rLoggerSeverity::Warning, "This is a Warning test");
-	log.Log(rLoggerSeverity::Error, "This is a Error test");
-	log.Log(rLoggerSeverity::Critical, "This is a Critical test");
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	// you can loop k higher to see more color choices
+	for (int k = 1; k < 255; k++)
+	{
+		// pick the colorattribute k you want
+		SetConsoleTextAttribute(hConsole, k);
+		std::cout << k << " I want to be nice today!" << std::endl;
+	}
 
 	/*
 	std::thread t1(threadFunc, "t1");
