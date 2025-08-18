@@ -20,7 +20,7 @@ struct rLoggerSeverity
 {
 	int value;
 
-	static const rLoggerSeverity Trace, Debug, Info, Warning, Error, Critical;
+	static const rLoggerSeverity Trace, Debug, Info, Warning, Error, Critical, None;
 };
 
 thread_local static std::string threadName; // ! rename this variable
@@ -31,9 +31,9 @@ protected:
 	rLoggerSeverity severityThreshdold = rLoggerSeverity::Trace;
 	std::vector<std::ostream *> outputStreams;
 	static std::unordered_map<int, std::string> severityText;
+	static std::unordered_map<int, int> severityColor;
 
 	std::string FormatLog(const rLoggerSeverity &_severity, const std::string _message);
-	void ColorConsole(const rLoggerSeverity &_severity);
 
 public:
 	rLogger(std::string _threadName);

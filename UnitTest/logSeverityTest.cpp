@@ -30,3 +30,8 @@ TEST(rLogSeverityTest, CriticalTest)
 {
 	EXPECT_EQ(rLoggerSeverity::Critical.value, 5);
 }
+
+TEST(rLogSeverityTest, CriticalTest)
+{
+	EXPECT_EQ(rLoggerSeverity::None.value, 5);
+}
