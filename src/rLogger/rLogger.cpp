@@ -6,44 +6,32 @@ const rLoggerSeverity rLoggerSeverity::Info = rLoggerSeverity{2};
 const rLoggerSeverity rLoggerSeverity::Warning = rLoggerSeverity{3};
 const rLoggerSeverity rLoggerSeverity::Error = rLoggerSeverity{4};
 const rLoggerSeverity rLoggerSeverity::Critical = rLoggerSeverity{5};
+const rLoggerSeverity rLoggerSeverity::None = rLoggerSeverity{6};
 
 #pragma region rLogger Class
 #pragma region Protected
 
 std::unordered_map<int, std::string> rLogger::severityText = {
-	{rLoggerSeverity::Trace.value, "LOG"},
+	{rLoggerSeverity::Trace.value, "TRACE"},
 	{rLoggerSeverity::Debug.value, "DEBUG"},
 	{rLoggerSeverity::Info.value, "INFO"},
 	{rLoggerSeverity::Warning.value, "WARNING"},
 	{rLoggerSeverity::Error.value, "ERROR"},
 	{rLoggerSeverity::Critical.value, "CRITICAL"}};
 
+std::unordered_map<int, int> rLogger::severityColor = {
+	{rLoggerSeverity::Trace.value, 5},		// Purple
+	{rLoggerSeverity::Debug.value, 1},		// Blue
+	{rLoggerSeverity::Info.value, 2},		// Green
+	{rLoggerSeverity::Warning.value, 6},	// Yellow
+	{rLoggerSeverity::Error.value, 4},		// Red
+	{rLoggerSeverity::Critical.value, 244}, // Red on white
+	{rLoggerSeverity::None.value, 7}		// White
+};
+
 std::string rLogger::FormatLog(const rLoggerSeverity &_severity, const std::string _message)
 {
 	return std::format("[{}] [{}] [{}] {}", severityText.at(_severity.value), std::chrono::system_clock::now(), threadName, _message);
-}
-
-void rLogger::ColorConsole(const rLoggerSeverity &_severity)
-{
-	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-	int consoleColor = 7; // White
-
-	switch (_severity.value)
-	{
-	case 3:				  // WARNING
-		consoleColor = 6; // Yellow
-		break;
-	case 4:				  // ERROR
-		consoleColor = 4; // Red
-		break;
-	case 5:				   // CRITICAL
-		consoleColor = 12; // bright red
-		break;
-	default:
-		break;
-	}
-
-	SetConsoleTextAttribute(hConsole, consoleColor);
 }
 
 #pragma endregion
@@ -108,19 +96,20 @@ void rLogger::Log(const rLoggerSeverity &_severity, const std::string &_message)
 
 	std::string formattedMessage = FormatLog(_severity, _message);
 
-	bool consoleColorChanged = false;
 	for (const auto stream : outputStreams)
 	{
-		if (stream == &std::cout && _severity.value > rLoggerSeverity::Info.value)
+		if (stream == &std::cout)
 		{
-			ColorConsole(_severity);
-			consoleColorChanged = true;
+			HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
+			SetConsoleTextAttribute(hConsole, severityColor.at(_severity.value));
+
+			(*stream) << formattedMessage << std::endl;
+
+			SetConsoleTextAttribute(hConsole, severityColor.at(rLoggerSeverity::None.value)); // reset to white
 		}
-
-		(*stream) << formattedMessage << std::endl;
-
-		if (consoleColorChanged)
-			ColorConsole(rLoggerSeverity::Trace); // Us this to reset the color of the console to white
+		else
+			(*stream) << formattedMessage << std::endl;
 	}
 }
 
