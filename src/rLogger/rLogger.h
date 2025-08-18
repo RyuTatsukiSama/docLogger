@@ -15,13 +15,7 @@
 #include <filesystem>
 
 #include "rLoggerOptions.h"
-
-struct rLoggerSeverity
-{
-	int value;
-
-	static const rLoggerSeverity Trace, Debug, Info, Warning, Error, Critical, None;
-};
+#include "rLoggerSeverity.h"
 
 thread_local static std::string threadName; // ! rename this variable
 
@@ -30,8 +24,9 @@ class rLogger
 protected:
 	rLoggerSeverity severityThreshdold = rLoggerSeverity::Trace;
 	std::vector<std::ostream *> outputStreams;
-	static std::unordered_map<int, std::string> severityText;
-	static std::unordered_map<int, int> severityColor;
+
+	static const std::unordered_map<rLoggerSeverity, std::string> &getSeverityText();
+	static const std::unordered_map<rLoggerSeverity, int> &getSeverityColor();
 
 	std::string FormatLog(const rLoggerSeverity &_severity, const std::string _message);
 
