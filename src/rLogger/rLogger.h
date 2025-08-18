@@ -20,7 +20,7 @@ struct rLoggerSeverity
 {
 	int value;
 
-	static const rLoggerSeverity Log, Debug, Info, Warning, Error, Critical;
+	static const rLoggerSeverity Trace, Debug, Info, Warning, Error, Critical;
 };
 
 thread_local static std::string threadName; // ! rename this variable
@@ -28,7 +28,7 @@ thread_local static std::string threadName; // ! rename this variable
 class rLogger
 {
 protected:
-	rLoggerSeverity severityThreshdold = rLoggerSeverity::Log;
+	rLoggerSeverity severityThreshdold = rLoggerSeverity::Trace;
 	std::vector<std::ostream *> outputStreams;
 	static std::unordered_map<int, std::string> severityText;
 
