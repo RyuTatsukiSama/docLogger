@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 #define RTESTING
-#include "../src/Logger/rLogger.h"
+#include "../src/rLogger/rLogger.h"
 
 TEST(FormatLogTest, TestOne) // ! Change the test name
 {
