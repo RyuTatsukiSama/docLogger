@@ -6,9 +6,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Common Library
 add_library(LoggerLib
+    "./src/rLogger/rLoggerSeverity.cpp"
+    "./src/rLogger/rLoggerSeverity.h"
+    "./src/rLogger/rLoggerOptions.h"
     "./src/rLogger/rLogger.cpp"
     "./src/rLogger/rLogger.h"
-    "./src/rLogger/rLoggerOptions.h"
     "./src/TaskManager/taskManager.cpp"
     "./src/TaskManager/taskManager.h")
 

@@ -1,37 +1,39 @@
 #include "rLogger.h"
 
-const rLoggerSeverity rLoggerSeverity::Trace = rLoggerSeverity{0};
-const rLoggerSeverity rLoggerSeverity::Debug = rLoggerSeverity{1};
-const rLoggerSeverity rLoggerSeverity::Info = rLoggerSeverity{2};
-const rLoggerSeverity rLoggerSeverity::Warning = rLoggerSeverity{3};
-const rLoggerSeverity rLoggerSeverity::Error = rLoggerSeverity{4};
-const rLoggerSeverity rLoggerSeverity::Critical = rLoggerSeverity{5};
-const rLoggerSeverity rLoggerSeverity::None = rLoggerSeverity{6};
-
 #pragma region rLogger Class
 #pragma region Protected
 
-std::unordered_map<int, std::string> rLogger::severityText = {
-	{rLoggerSeverity::Trace.value, "TRACE"},
-	{rLoggerSeverity::Debug.value, "DEBUG"},
-	{rLoggerSeverity::Info.value, "INFO"},
-	{rLoggerSeverity::Warning.value, "WARNING"},
-	{rLoggerSeverity::Error.value, "ERROR"},
-	{rLoggerSeverity::Critical.value, "CRITICAL"}};
+const std::unordered_map<rLoggerSeverity, std::string> &rLogger::getSeverityText()
+{
+	static const std::unordered_map<rLoggerSeverity, std::string> st = {
+		{rLoggerSeverity::Trace, "TRACE"},
+		{rLoggerSeverity::Debug, "DEBUG"},
+		{rLoggerSeverity::Info, "INFO"},
+		{rLoggerSeverity::Warning, "WARNING"},
+		{rLoggerSeverity::Error, "ERROR"},
+		{rLoggerSeverity::Critical, "CRITICAL"}};
 
-std::unordered_map<int, int> rLogger::severityColor = {
-	{rLoggerSeverity::Trace.value, 5},		// Purple
-	{rLoggerSeverity::Debug.value, 1},		// Blue
-	{rLoggerSeverity::Info.value, 2},		// Green
-	{rLoggerSeverity::Warning.value, 6},	// Yellow
-	{rLoggerSeverity::Error.value, 4},		// Red
-	{rLoggerSeverity::Critical.value, 244}, // Red on white
-	{rLoggerSeverity::None.value, 7}		// White
-};
+	return st;
+}
+
+const std::unordered_map<rLoggerSeverity, int> &rLogger::getSeverityColor()
+{
+	static const std::unordered_map<rLoggerSeverity, int> sc = {
+		{rLoggerSeverity::Trace, 5},	  // Purple
+		{rLoggerSeverity::Debug, 1},	  // Blue
+		{rLoggerSeverity::Info, 2},		  // Green
+		{rLoggerSeverity::Warning, 6},	  // Yellow
+		{rLoggerSeverity::Error, 4},	  // Red
+		{rLoggerSeverity::Critical, 244}, // Red on white
+		{rLoggerSeverity::None, 7}		  // White
+	};
+
+	return sc;
+}
 
 std::string rLogger::FormatLog(const rLoggerSeverity &_severity, const std::string _message)
 {
-	return std::format("[{}] [{}] [{}] {}", severityText.at(_severity.value), std::chrono::system_clock::now(), threadName, _message);
+	return std::format("[{}] [{}] [{}] {}", getSeverityText().at(_severity), std::chrono::system_clock::now(), threadName, _message);
 }
 
 #pragma endregion
@@ -102,11 +104,11 @@ void rLogger::Log(const rLoggerSeverity &_severity, const std::string &_message)
 		{
 			HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
-			SetConsoleTextAttribute(hConsole, severityColor.at(_severity.value));
+			SetConsoleTextAttribute(hConsole, getSeverityColor().at(_severity));
 
 			(*stream) << formattedMessage << std::endl;
 
-			SetConsoleTextAttribute(hConsole, severityColor.at(rLoggerSeverity::None.value)); // reset to white
+			SetConsoleTextAttribute(hConsole, getSeverityColor().at(rLoggerSeverity::None)); // reset to white
 		}
 		else
 			(*stream) << formattedMessage << std::endl;
