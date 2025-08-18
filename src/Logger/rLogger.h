@@ -13,11 +13,13 @@
 #include <chrono>
 #include <Windows.h>
 
-struct rLogSeverity
+#include "rLoggerOptions.h"
+
+struct rLoggerSeverity
 {
 	int value;
 
-	static const rLogSeverity Log, Debug, Info, Warning, Error, Critical;
+	static const rLoggerSeverity Log, Debug, Info, Warning, Error, Critical;
 };
 
 thread_local static std::string threadName; // ! rename this variable
@@ -25,18 +27,19 @@ thread_local static std::string threadName; // ! rename this variable
 class rLogger
 {
 protected:
-	rLogSeverity severityThreshdold = rLogSeverity::Log;
+	rLoggerSeverity severityThreshdold = rLoggerSeverity::Log;
 	std::vector<std::ostream *> outputStreams;
 	static std::unordered_map<int, std::string> severityText;
 
-	std::string FormatLog(const rLogSeverity &_severity, const std::string _message);
-	void ColorConsole(const rLogSeverity &_severity);
+	std::string FormatLog(const rLoggerSeverity &_severity, const std::string _message);
+	void ColorConsole(const rLoggerSeverity &_severity);
 
 public:
 	rLogger(std::string _threadName);
-	~rLogger() = default;
+	rLogger(rLoggerOptions _options);
+	~rLogger();
 
-	void Log(const rLogSeverity &_severity, const std::string &_message);
+	void Log(const rLoggerSeverity &_severity, const std::string &_message);
 	void RegisterOutputStream(std::ostream *_stream);
 
 #ifdef RTESTING
