@@ -73,12 +73,18 @@ rLogger::rLogger(rLoggerOptions _options)
 			_options.fileName = std::format("{:%Y-%m-%d_%H-%M-%S}", now);
 		}
 
-		std::fstream *logFile = new std::fstream(std::format("{}.log", _options.fileName), std::ios::out);
+		if (!std::filesystem::exists("rLogs"))
+		{
+			std::filesystem::create_directory("rLogs");
+		}
+
+		std::string fileName = std::format("rLogs/{}.log", _options.fileName);
+		std::fstream *logFile = new std::fstream(fileName, std::ios::out);
 
 		if (logFile->is_open())
 			RegisterOutputStream(logFile);
 		else
-			std::cout << FormatLog(rLoggerSeverity::Warning, std::format("The file {} can't be open.", _options.fileName));
+			std::cout << FormatLog(rLoggerSeverity::Warning, std::format("The file {} can't be open.", fileName)) << std::endl;
 	}
 }
 

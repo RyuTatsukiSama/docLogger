@@ -12,6 +12,7 @@
 #include <thread>
 #include <chrono>
 #include <Windows.h>
+#include <filesystem>
 
 #include "rLoggerOptions.h"
 
