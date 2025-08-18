@@ -53,3 +53,7 @@ out/
 *.vcxproj
 *.vcxproj.user
 *.sln
+
+# log
+*.log
+rLogs/
