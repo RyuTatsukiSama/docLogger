@@ -16,16 +16,16 @@ const std::unordered_map<rLoggerSeverity, std::string> &rLogger::getSeverityText
 	return st;
 }
 
-const std::unordered_map<rLoggerSeverity, int> &rLogger::getSeverityColor()
+const std::unordered_map<rLoggerSeverity, std::string> &rLogger::getSeverityColor()
 {
-	static const std::unordered_map<rLoggerSeverity, int> sc = {
-		{rLoggerSeverity::Trace, 5},	  // Purple
-		{rLoggerSeverity::Debug, 1},	  // Blue
-		{rLoggerSeverity::Info, 2},		  // Green
-		{rLoggerSeverity::Warning, 6},	  // Yellow
-		{rLoggerSeverity::Error, 4},	  // Red
-		{rLoggerSeverity::Critical, 79}, // 244 Red on white or 79 White on Red
-		{rLoggerSeverity::None, 7}		  // White
+	static const std::unordered_map<rLoggerSeverity, std::string> sc = {
+		{rLoggerSeverity::Trace, " \033[35m "},		  // Purple
+		{rLoggerSeverity::Debug, " \033[34m "},		  // Blue
+		{rLoggerSeverity::Info, " \033[32m "},		  // Green
+		{rLoggerSeverity::Warning, " \033[33m "},	  // Yellow
+		{rLoggerSeverity::Error, " \033[31m "},		  // Red
+		{rLoggerSeverity::Critical, " \033[97;41m "}, // 244 Red on white or 79 White on Red
+		{rLoggerSeverity::None, " \033[0m "}		  // White
 	};
 
 	return sc;
@@ -100,18 +100,7 @@ void rLogger::Log(const rLoggerSeverity &_severity, const std::string &_message)
 
 	for (const auto stream : outputStreams)
 	{
-		if (stream == &std::cout)
-		{
-			HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-
-			SetConsoleTextAttribute(hConsole, getSeverityColor().at(_severity));
-
-			(*stream) << formattedMessage << std::endl;
-
-			SetConsoleTextAttribute(hConsole, getSeverityColor().at(rLoggerSeverity::None)); // reset to white
-		}
-		else
-			(*stream) << formattedMessage << std::endl;
+		(*stream) << getSeverityColor().at(_severity) << formattedMessage << getSeverityColor().at(rLoggerSeverity::None) << std::endl;
 	}
 }
 
