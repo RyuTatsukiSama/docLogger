@@ -26,7 +26,7 @@ protected:
 	std::vector<std::ostream *> outputStreams;
 
 	static const std::unordered_map<rLoggerSeverity, std::string> &getSeverityText();
-	static const std::unordered_map<rLoggerSeverity, int> &getSeverityColor();
+	static const std::unordered_map<rLoggerSeverity, std::string> &getSeverityColor();
 
 	std::string FormatLog(const rLoggerSeverity &_severity, const std::string _message);
 
