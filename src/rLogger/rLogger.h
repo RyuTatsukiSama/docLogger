@@ -17,7 +17,10 @@
 #include "rLoggerOptions.h"
 #include "rLoggerSeverity.h"
 
-thread_local static std::string threadName; // ! rename this variable
+namespace r
+{
+	thread_local static std::string threadName; // ! rename this variable
+};
 
 class rLogger
 {
