@@ -33,7 +33,13 @@ const std::unordered_map<rLoggerSeverity, std::string> &rLogger::getSeverityColo
 
 std::string rLogger::FormatLog(const rLoggerSeverity &_severity, const std::string _message)
 {
-	return std::format("[{}] [{}] [{}] {}", getSeverityText().at(_severity), std::chrono::system_clock::now(), threadName, _message);
+	return std::format("[{}] [{:%Y-%m-%d %H:%M:%S}] [{}] {}",
+					   getSeverityText().at(_severity),
+					   std::chrono::zoned_time{
+						   std::chrono::current_zone(),
+						   std::chrono::system_clock::now()},
+					   threadName,
+					   _message);
 }
 
 #pragma endregion
@@ -60,7 +66,8 @@ rLogger::rLogger(rLoggerOptions _options)
 		if (_options.fileName == "")
 		{
 			std::chrono::time_point now = std::chrono::floor<std::chrono::seconds>(std::chrono::system_clock::now());
-			_options.fileName = std::format("{:%Y-%m-%d_%H-%M-%S}", now);
+			std::chrono::zoned_time local_time{std::chrono::current_zone(), now};
+			_options.fileName = std::format("{:%Y-%m-%d_%H-%M-%S}", local_time);
 		}
 
 		if (!std::filesystem::exists("rLogs"))
