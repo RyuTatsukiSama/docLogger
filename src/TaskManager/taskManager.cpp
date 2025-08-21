@@ -2,18 +2,20 @@
 
 void threadFunc(const std::string _threadName)
 {
-	threadName = _threadName;
+	r::threadName = _threadName;
 	std::cout << "Hi to " << _threadName << std::endl;
 }
 
 void anotherFunc(void)
 {
-	std::cout << "Another func says hi to " << threadName << std::endl;
+	std::cout << "Another func says hi to " << r::threadName << std::endl;
 }
 
 int main()
 {
-	rLogger log(rLoggerOptions{});
+	rLogger log(rLoggerOptions{
+
+	});
 
 	log.Log(rLoggerSeverity::Trace, "This is a Trace test");
 	log.Log(rLoggerSeverity::Debug, "This is a Debug test");

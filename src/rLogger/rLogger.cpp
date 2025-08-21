@@ -38,7 +38,7 @@ std::string rLogger::FormatLog(const rLoggerSeverity &_severity, const std::stri
 					   std::chrono::zoned_time{
 						   std::chrono::current_zone(),
 						   std::chrono::system_clock::now()},
-					   threadName,
+					   r::threadName,
 					   _message);
 }
 
@@ -49,12 +49,12 @@ std::string rLogger::FormatLog(const rLoggerSeverity &_severity, const std::stri
 
 rLogger::rLogger(std::string _threadName)
 {
-	threadName = _threadName;
+	r::threadName = _threadName;
 }
 
 rLogger::rLogger(rLoggerOptions _options)
 {
-	threadName = _options.threadName;
+	r::threadName = _options.threadName;
 
 	if (_options.outputConsole)
 	{
