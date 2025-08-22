@@ -13,9 +13,12 @@ void anotherFunc(void)
 
 int main()
 {
-	rLogger log(rLoggerOptions{
+	rLoggerOptions options{
+		.outputConsole = true,
+		.fileName = "foo"};
+	rLogger log(options);
 
-	});
+	std::cout << options.fileName;
 
 	log.Log(rLoggerSeverity::Trace, "This is a Trace test");
 	log.Log(rLoggerSeverity::Debug, "This is a Debug test");

@@ -27,7 +27,12 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(googletest)
 
-add_executable(UnitTests "UnitTest/unitTest.cpp" "UnitTest/logSeverityTest.cpp" "UnitTest/formatLogTest.cpp")
+enable_testing()
+
+add_executable(UnitTests "UnitTest/unitTest.cpp" "UnitTest/logSeverityTest.cpp" "UnitTest/formatLogTest.cpp" "UnitTest/optionsTest.cpp")
 target_link_libraries(UnitTests PRIVATE LoggerLib gtest_main)
+
+include(GoogleTest)
+gtest_discover_tests(UnitTests)
 
 add_executable(rViewerLog "./rViewerLog/rViewerLog.cpp" "./rViewerLog/icon.rc")
