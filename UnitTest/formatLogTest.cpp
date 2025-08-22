@@ -4,9 +4,11 @@
 
 TEST(FormatLogTest, TestOne) // ! Change the test name
 {
-    rLogger testLogger("Main");
+    rLogger testLogger(rLoggerOptions::defaults);
 
-    std::string tester = std::format("[LOG] [{}] [Main] This is a log level", time(NULL));
-    std::string format = testLogger.GetFormatLog(rLoggerSeverity::Trace, "This is a log level");
+    std::string tester = std::format("[TRACE] [{:%Y-%m-%d %H:%M:%S}] [Main] This is a trace level", std::chrono::zoned_time{
+                                                                                                        std::chrono::current_zone(),
+                                                                                                        std::chrono::system_clock::now()});
+    std::string format = testLogger.GetFormatLog(rLoggerSeverity::Trace, "This is a trace level");
     EXPECT_EQ(format, tester);
 }
