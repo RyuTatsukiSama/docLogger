@@ -47,11 +47,6 @@ std::string rLogger::FormatLog(const rLoggerSeverity &_severity, const std::stri
 #pragma region Public
 #pragma region Constructor
 
-rLogger::rLogger(std::string _threadName)
-{
-	r::threadName = _threadName;
-}
-
 rLogger::rLogger(rLoggerOptions _options)
 {
 	r::threadName = _options.threadName;

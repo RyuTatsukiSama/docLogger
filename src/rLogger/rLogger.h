@@ -34,7 +34,6 @@ protected:
 	std::string FormatLog(const rLoggerSeverity &_severity, const std::string _message);
 
 public:
-	rLogger(std::string _threadName);
 	rLogger(rLoggerOptions _options);
 	~rLogger();
 
