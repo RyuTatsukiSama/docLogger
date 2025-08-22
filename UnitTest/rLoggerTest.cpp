@@ -2,7 +2,7 @@
 #define RTESTING
 #include "../src/rLogger/rLogger.h"
 
-TEST(FormatLogTest, TestOne) // ! Change the test name
+TEST(rLoggerTest, FormatLogTest) // ! Change the test name
 {
     rLogger testLogger(rLoggerOptions::defaults);
 
