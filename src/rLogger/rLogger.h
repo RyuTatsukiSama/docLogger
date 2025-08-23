@@ -40,6 +40,17 @@ public:
 	void Log(const rLoggerSeverity &_severity, const std::string &_message);
 	void RegisterOutputStream(std::ostream *_stream);
 
+#pragma region Severity Functions
+
+	void Trace(const std::string &_message);
+	void Debug(const std::string &_message);
+	void Info(const std::string &_message);
+	void Warning(const std::string &_message);
+	void Error(const std::string &_message);
+	void Critical(const std::string &_message);
+
+#pragma endregion
+
 #ifdef RTESTING
 	std::string GetFormatLog(const rLoggerSeverity &_severity, const std::string _message)
 	{
