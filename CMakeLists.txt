@@ -10,6 +10,7 @@ add_library(LoggerLib
     "./src/rLogger/rLoggerSeverity.h"
     "./src/rLogger/rLoggerOptions.h"
     "./src/rLogger/rLogger.cpp"
+    "./src/rLogger/rLogger_severityFunc.cpp"
     "./src/rLogger/rLogger.h"
     "./src/TaskManager/taskManager.cpp"
     "./src/TaskManager/taskManager.h")
