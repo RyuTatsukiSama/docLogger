@@ -35,9 +35,7 @@ std::string rLogger::FormatLog(const rLoggerSeverity &_severity, const std::stri
 {
 	return std::format("[{}] [{:%Y-%m-%d %H:%M:%S}] [{}] {}",
 					   getSeverityText().at(_severity),
-					   std::chrono::zoned_time{
-						   std::chrono::current_zone(),
-						   std::chrono::system_clock::now()},
+					   timeProvider(),
 					   r::threadName,
 					   _message);
 }
@@ -51,6 +49,8 @@ rLogger::rLogger(rLoggerOptions _options)
 {
 	r::threadName = _options.threadName;
 
+	timeProvider = _options.timeProvider;
+
 	if (_options.outputConsole)
 	{
 		RegisterOutputStream(&std::cout);
@@ -60,9 +60,8 @@ rLogger::rLogger(rLoggerOptions _options)
 	{
 		if (_options.fileName == "")
 		{
-			std::chrono::time_point now = std::chrono::floor<std::chrono::seconds>(std::chrono::system_clock::now());
-			std::chrono::zoned_time local_time{std::chrono::current_zone(), now};
-			_options.fileName = std::format("{:%Y-%m-%d_%H-%M-%S}", local_time);
+			std::chrono::time_point now = std::chrono::floor<std::chrono::seconds>(timeProvider());
+			_options.fileName = std::format("{:%Y-%m-%d_%H-%M-%S}", now);
 		}
 
 		if (!std::filesystem::exists("rLogs"))

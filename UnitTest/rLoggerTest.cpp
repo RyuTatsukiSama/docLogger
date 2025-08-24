@@ -2,13 +2,13 @@
 #define RTESTING
 #include "../src/rLogger/rLogger.h"
 
-TEST(rLoggerTest, FormatLogTest) // ! Change the test name
+TEST(rLoggerTest, FormatLogTest)
 {
-    rLogger testLogger(rLoggerOptions::defaults);
+    auto fixedTime = std::chrono::system_clock::from_time_t(0);
+    rLogger testLogger(rLoggerOptions::make({.timeProvider = [=]
+                                             { return fixedTime; }}));
 
-    std::string tester = std::format("[TRACE] [{:%Y-%m-%d %H:%M:%S}] [Main] This is a trace level", std::chrono::zoned_time{
-                                                                                                        std::chrono::current_zone(),
-                                                                                                        std::chrono::system_clock::now()});
+    std::string tester = std::format("[TRACE] [{:%Y-%m-%d %H:%M:%S}] [Main] This is a trace level", fixedTime);
     std::string format = testLogger.GetFormatLog(rLoggerSeverity::Trace, "This is a trace level");
     EXPECT_EQ(format, tester);
 }
