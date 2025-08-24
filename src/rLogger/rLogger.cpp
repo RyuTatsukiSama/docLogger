@@ -19,13 +19,13 @@ const std::unordered_map<rLoggerSeverity, std::string> &rLogger::getSeverityText
 const std::unordered_map<rLoggerSeverity, std::string> &rLogger::getSeverityColor()
 {
 	static const std::unordered_map<rLoggerSeverity, std::string> sc = {
-		{rLoggerSeverity::Trace, " \033[35m "},		  // Purple
-		{rLoggerSeverity::Debug, " \033[34m "},		  // Blue
-		{rLoggerSeverity::Info, " \033[32m "},		  // Green
-		{rLoggerSeverity::Warning, " \033[33m "},	  // Yellow
-		{rLoggerSeverity::Error, " \033[31m "},		  // Red
-		{rLoggerSeverity::Critical, " \033[97;41m "}, // 244 Red on white or 79 White on Red
-		{rLoggerSeverity::None, " \033[0m "}		  // White
+		{rLoggerSeverity::Trace, "\033[35m"},		 // Purple
+		{rLoggerSeverity::Debug, "\033[34m"},		 // Blue
+		{rLoggerSeverity::Info, "\033[32m"},		 // Green
+		{rLoggerSeverity::Warning, "\033[33m"},		 // Yellow
+		{rLoggerSeverity::Error, "\033[31m"},		 // Red
+		{rLoggerSeverity::Critical, " \033[97;41m"}, // 244 Red on white or 79 White on Red
+		{rLoggerSeverity::None, "\033[0m"}			 // White
 	};
 
 	return sc;
@@ -33,7 +33,7 @@ const std::unordered_map<rLoggerSeverity, std::string> &rLogger::getSeverityColo
 
 std::string rLogger::FormatLog(const rLoggerSeverity &_severity, const std::string _message)
 {
-	return std::format("[{}] [{:%Y-%m-%d %H:%M:%S}] [{}] {}",
+	return std::format("| [{}] [{:%Y-%m-%d %H:%M:%S}] [{}] {} |",
 					   getSeverityText().at(_severity),
 					   timeProvider(),
 					   r::threadName,
