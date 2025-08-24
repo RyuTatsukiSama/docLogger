@@ -28,6 +28,8 @@ protected:
 	rLoggerSeverity severityThreshdold = rLoggerSeverity::Trace;
 	std::vector<std::ostream *> outputStreams;
 
+	std::function<std::chrono::system_clock::time_point()> timeProvider;
+
 	static const std::unordered_map<rLoggerSeverity, std::string> &getSeverityText();
 	static const std::unordered_map<rLoggerSeverity, std::string> &getSeverityColor();
 
