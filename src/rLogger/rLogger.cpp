@@ -110,5 +110,10 @@ void rLogger::RegisterOutputStream(std::ostream *_stream)
 	outputStreams.push_back(_stream);
 }
 
+void rLogger::Caller(const std::source_location &where)
+{
+	Log(rLoggerSeverity::Debug, std::format("Called by {}", where.function_name()));
+}
+
 #pragma endregion
 #pragma endregion
