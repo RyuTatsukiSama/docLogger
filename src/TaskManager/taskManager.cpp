@@ -15,6 +15,8 @@ int main()
 {
 	rLogger log(rLoggerOptions::defaults);
 
+	log.Caller();
+
 	log.Log(rLoggerSeverity::Trace, "This is a Trace test");
 	log.Log(rLoggerSeverity::Debug, "This is a Debug test");
 	log.Log(rLoggerSeverity::Info, "This is a Info test");

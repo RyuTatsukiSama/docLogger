@@ -13,13 +13,14 @@
 #include <chrono>
 #include <Windows.h>
 #include <filesystem>
+#include <source_location>
 
 #include "rLoggerOptions.h"
 #include "rLoggerSeverity.h"
 
 namespace r
 {
-	thread_local static std::string threadName; // ! rename this variable
+	thread_local static std::string threadName;
 };
 
 class rLogger
@@ -42,6 +43,8 @@ public:
 	void Log(const rLoggerSeverity &_severity, const std::string &_message);
 	void RegisterOutputStream(std::ostream *_stream);
 
+	void Caller(const std::source_location &where = std::source_location::current());
+
 #pragma region Severity Functions
 
 	void Trace(const std::string &_message);
@@ -57,6 +60,9 @@ public:
 	std::string GetFormatLog(const rLoggerSeverity &_severity, const std::string _message)
 	{
 		return FormatLog(_severity, _message);
+	}
+	std::string GetLastLog()
+	{
 	}
 #endif
 };
