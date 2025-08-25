@@ -8,4 +8,5 @@ TEST(optionsTest, defaultsTest)
     EXPECT_EQ(opts.outputConsole, true);
     EXPECT_EQ(opts.outputFile, true);
     EXPECT_EQ(opts.fileName, "");
+    // ! need to add one for the timeProvider
 }

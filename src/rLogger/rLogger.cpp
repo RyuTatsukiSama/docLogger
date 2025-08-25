@@ -103,11 +103,21 @@ void rLogger::Log(const rLoggerSeverity &_severity, const std::string &_message)
 	{
 		(*stream) << getSeverityColor().at(_severity) << formattedMessage << getSeverityColor().at(rLoggerSeverity::None) << std::endl;
 	}
+
+	for (const auto callback : logCallbacks)
+	{
+		callback(formattedMessage);
+	}
 }
 
 void rLogger::RegisterOutputStream(std::ostream *_stream)
 {
 	outputStreams.push_back(_stream);
+}
+
+void rLogger::RegisterLogCallback(std::function<void(const std::string)> _callback)
+{
+	logCallbacks.push_back(_callback);
 }
 
 void rLogger::Caller(const std::source_location &where)
