@@ -11,7 +11,9 @@ void FormatLogTester(std::string _formatedMessage)
 TEST(rLoggerTest, FormatLogTest)
 {
     std::chrono::system_clock::time_point fixedTime = std::chrono::system_clock::from_time_t(0);
-    rLogger testLogger(rLoggerOptions::make({.timeProvider = [=]
+    rLogger testLogger(rLoggerOptions::make({.outputConsole = false,
+                                             .outputFile = false,
+                                             .timeProvider = [=]
                                              { return fixedTime; }}));
     testLogger.RegisterLogCallback(FormatLogTester);
 
@@ -22,7 +24,8 @@ TEST(rLoggerTest, FormatLogTest)
 
 TEST(rLoggerTest, CallerTest)
 {
-    rLogger logger{rLoggerOptions::defaults};
+    rLogger logger{rLoggerOptions::make({.outputConsole = false,
+                                         .outputFile = false})};
 
     logger.Caller();
 }
@@ -30,7 +33,9 @@ TEST(rLoggerTest, CallerTest)
 TEST(rLoggerTest, SeverityFuncTest)
 {
     std::chrono::system_clock::time_point fixedTime = std::chrono::system_clock::from_time_t(0);
-    rLogger logger{rLoggerOptions::make({.timeProvider = [=]
+    rLogger logger{rLoggerOptions::make({.outputConsole = false,
+                                         .outputFile = false,
+                                         .timeProvider = [=]
                                          { return fixedTime; }})};
     logger.RegisterLogCallback(FormatLogTester);
 
