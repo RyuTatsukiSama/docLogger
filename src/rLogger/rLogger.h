@@ -57,15 +57,5 @@ public:
 	void Critical(const std::string &_message);
 
 #pragma endregion
-
-#ifdef RTESTING
-	std::string GetFormatLog(const rLoggerSeverity &_severity, const std::string _message)
-	{
-		return FormatLog(_severity, _message);
-	}
-	std::string GetLastLog()
-	{
-	}
-#endif
 };
 #endif // !RLOGGER_H
