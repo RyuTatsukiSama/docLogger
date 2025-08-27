@@ -2,15 +2,25 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Debug App (MSVC)",
+      "name": "Debug",
       "type": "cppvsdbg",
       "request": "launch",
-      "program": "${command:cmake.launchTargetPath}",
-      "args": [],
-      "stopAtEntry": false,
+      "program": "${input:pickProgram}",
       "cwd": "${workspaceFolder}",
-      "environment": [],
-      "console": "integratedTerminal"
+      "console": "externalTerminal",
+      "preLaunchTask": "CMake: build"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "pickProgram",
+      "type": "pickString",
+      "description": "Choisis l’exécutable à lancer",
+      "options": [
+        "${workspaceFolder}/build/Debug/rViewerLog.exe",
+        "${workspaceFolder}/build/Debug/TaskManagerApp.exe",
+        "${workspaceFolder}/build/Debug/UnitTests.exe"
+      ]
     }
   ]
 }
