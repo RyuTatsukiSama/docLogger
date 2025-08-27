@@ -70,6 +70,12 @@ rLogger::rLogger(rLoggerOptions _options)
 		}
 
 		std::string fileName = std::format("rLogs/{}.log", _options.fileName);
+
+		if (std::filesystem::exists(fileName))
+		{
+			std::filesystem::rename(fileName, std::format("rLogs/{}-previous.log", _options.fileName));
+		}
+
 		std::fstream *logFile = new std::fstream(fileName, std::ios::out);
 
 		if (logFile->is_open())
