@@ -5,7 +5,7 @@
       "name": "Debug",
       "type": "cppvsdbg",
       "request": "launch",
-      "program": "${input:pickProgram}",
+      "program": "${workspaceFolder}/build/Debug/${input:pickProgram}.exe",
       "cwd": "${workspaceFolder}",
       "console": "externalTerminal",
       "preLaunchTask": "CMake: build"
@@ -17,9 +17,9 @@
       "type": "pickString",
       "description": "Choisis l’exécutable à lancer",
       "options": [
-        "${workspaceFolder}/build/Debug/rViewerLog.exe",
-        "${workspaceFolder}/build/Debug/TaskManagerApp.exe",
-        "${workspaceFolder}/build/Debug/UnitTests.exe"
+        "rViewerLog",
+        "TaskManagerApp",
+        "UnitTests"
       ]
     }
   ]
