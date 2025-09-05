@@ -76,7 +76,7 @@ rLogger::rLogger(rLoggerOptions _options)
 			std::filesystem::rename(fileName, std::format("rLogs/{}-previous.log", _options.fileName));
 		}
 
-		std::fstream *logFile = new std::fstream(fileName, std::ios::out);
+		std::fstream *logFile = new std::fstream(fileName, std::ios::out | std::ios::app);
 
 		if (logFile->is_open())
 			RegisterOutputStream(logFile);
@@ -100,6 +100,7 @@ rLogger::~rLogger()
 
 void rLogger::Log(const rLoggerSeverity &_severity, const std::string &_message) // Color change can be optimise
 {
+	std::lock_guard guard(r::lock);
 	if (_severity.value < severityThreshdold.value)
 		return;
 
