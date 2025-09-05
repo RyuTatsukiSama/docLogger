@@ -1,9 +1,21 @@
 #include "taskManager.h"
 
-void threadFunc(const std::string _threadName)
+void debugThread(const std::string _threadName)
 {
-	r::threadName = _threadName;
-	std::cout << "Hi to " << _threadName << std::endl;
+	rLogger logger(rLoggerOptions::make({
+		.threadName = _threadName,
+	}));
+
+	logger.Debug("Test log from another thread");
+}
+
+void errorThread(const std::string _threadName)
+{
+	rLogger logger(rLoggerOptions::make({
+		.threadName = _threadName,
+	}));
+
+	logger.Error("Test log from another thread");
 }
 
 void anotherFunc(void)
@@ -34,7 +46,7 @@ int main()
 			std::cout << line << " and [35m| [TRACE] [1970-01-01 00:00:00.0000000] [Main] Log |[0m" << std::endl;
 			std::cout << (line == "[35m| [TRACE] [1970-01-01 00:00:00.0000000] [Main] Log |[0m") << std::endl;
 		}
-	}*/
+	}
 
 	rLogger log(rLoggerOptions::defaults);
 
@@ -45,14 +57,16 @@ int main()
 	log.Log(rLoggerSeverity::Info, "This is a Info test");
 	log.Log(rLoggerSeverity::Warning, "This is a Warning test");
 	log.Log(rLoggerSeverity::Error, "This is a Error test");
-	log.Log(rLoggerSeverity::Critical, "This is a Critical test");
+	log.Log(rLoggerSeverity::Critical, "This is a Critical test");*/
 
-	/*std::thread t1(threadFunc, "t1");
+	std::thread t1(debugThread, "Debug");
+
+	Sleep(10000);
+
+	std::thread t2(errorThread, "Error");
+
 	t1.join();
-
-	std::thread t2(threadFunc, "t2");
 	t2.join();
-	*/
 
 	system("pause");
 

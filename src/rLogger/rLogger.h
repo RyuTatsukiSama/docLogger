@@ -14,6 +14,7 @@
 #include <Windows.h>
 #include <filesystem>
 #include <source_location>
+#include <mutex>
 
 #include "rLoggerOptions.h"
 #include "rLoggerSeverity.h"
@@ -21,6 +22,7 @@
 namespace r
 {
 	thread_local static std::string threadName;
+	static std::mutex lock;
 };
 
 class rLogger
