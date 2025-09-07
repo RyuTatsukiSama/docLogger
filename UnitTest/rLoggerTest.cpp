@@ -11,10 +11,14 @@ void FormatLogTester(std::string _formatedMessage)
 TEST(rLoggerTest, FormatLogTest)
 {
     std::chrono::system_clock::time_point fixedTime = std::chrono::system_clock::from_time_t(0);
-    rLogger testLogger(rLoggerOptions::make({.outputConsole = false,
-                                             .outputFile = false,
-                                             .timeProvider = [=]
-                                             { return fixedTime; }}));
+    rLoggerOptions opts = rLoggerOptions::Builder()
+                              .setOutputConsole(false)
+                              .setOutputFile(false)
+                              .setTimeProvider([=]
+                                               { return fixedTime; })
+                              .build();
+    gOpts = &opts;
+    rLogger testLogger{};
     testLogger.RegisterLogCallback(FormatLogTester);
 
     std::string tester = std::format("| [TRACE] [{:%Y-%m-%d %H:%M:%S}] [Main] This is a trace level |", fixedTime);
@@ -24,8 +28,16 @@ TEST(rLoggerTest, FormatLogTest)
 
 TEST(rLoggerTest, CallerTest)
 {
-    rLogger logger{rLoggerOptions::make({.outputConsole = false,
-                                         .outputFile = false})};
+    // TODO : need to complete this test using the same method as the previous test
+    std::chrono::system_clock::time_point fixedTime = std::chrono::system_clock::from_time_t(0);
+    rLoggerOptions opts = rLoggerOptions::Builder()
+                              .setOutputConsole(false)
+                              .setOutputFile(false)
+                              .setTimeProvider([=]
+                                               { return fixedTime; })
+                              .build();
+    gOpts = &opts;
+    rLogger logger{};
 
     logger.Caller();
 }
@@ -33,10 +45,14 @@ TEST(rLoggerTest, CallerTest)
 TEST(rLoggerTest, SeverityFuncTest)
 {
     std::chrono::system_clock::time_point fixedTime = std::chrono::system_clock::from_time_t(0);
-    rLogger logger{rLoggerOptions::make({.outputConsole = false,
-                                         .outputFile = false,
-                                         .timeProvider = [=]
-                                         { return fixedTime; }})};
+    rLoggerOptions opts = rLoggerOptions::Builder()
+                              .setOutputConsole(false)
+                              .setOutputFile(false)
+                              .setTimeProvider([=]
+                                               { return fixedTime; })
+                              .build();
+    gOpts = &opts;
+    rLogger logger{};
     logger.RegisterLogCallback(FormatLogTester);
 
     std::string tester = std::format("| [TRACE] [{:%Y-%m-%d %H:%M:%S}] [Main] Log |", fixedTime);
@@ -62,10 +78,14 @@ TEST(rLoggerTest, SeverityFuncTest)
 TEST(rLoggertest, WriteFileTest)
 {
     std::chrono::system_clock::time_point fixedTime = std::chrono::system_clock::from_time_t(0);
-    rLogger logger(rLoggerOptions::make({.outputConsole = false,
-                                         .fileName = "unit_test",
-                                         .timeProvider = [=]
-                                         { return fixedTime; }}));
+    rLoggerOptions opts = rLoggerOptions::Builder()
+                              .setOutputConsole(false)
+                              .setFileName("unit_test")
+                              .setTimeProvider([=]
+                                               { return fixedTime; })
+                              .build();
+    gOpts = &opts;
+    rLogger logger{};
 
     logger.Trace("Log");
     logger.Debug("Log");

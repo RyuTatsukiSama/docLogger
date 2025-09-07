@@ -2,20 +2,16 @@
 
 void debugThread(const std::string _threadName)
 {
-	rLogger logger(rLoggerOptions::make({
-		.threadName = _threadName,
-	}));
+	rLogger logger(_threadName);
 
-	logger.Debug("Test log from another thread");
+	logger.Debug("From Debug thread");
 }
 
 void errorThread(const std::string _threadName)
 {
-	rLogger logger(rLoggerOptions::make({
-		.threadName = _threadName,
-	}));
+	rLogger logger(_threadName);
 
-	logger.Error("Test log from another thread");
+	logger.Error("From Error thread");
 }
 
 void anotherFunc(void)
@@ -26,7 +22,7 @@ void anotherFunc(void)
 int main()
 {
 	/*std::chrono::system_clock::time_point fixedTime = std::chrono::system_clock::from_time_t(0);
-	rLogger logger(rLoggerOptions::make({.outputConsole = true,
+	rLogger logger(rLoggerOptionsOld::make({.outputConsole = true,
 										 .fileName = "unit_test",
 										 .timeProvider = [=]
 										 { return fixedTime; }}));
@@ -48,7 +44,7 @@ int main()
 		}
 	}
 
-	rLogger log(rLoggerOptions::defaults);
+	rLogger log(rLoggerOptionsOld::defaults);
 
 	log.Caller();
 
@@ -59,9 +55,9 @@ int main()
 	log.Log(rLoggerSeverity::Error, "This is a Error test");
 	log.Log(rLoggerSeverity::Critical, "This is a Critical test");*/
 
+	rLoggerOptions opts = rLoggerOptions::Builder().build();
+	gOpts = &opts;
 	std::thread t1(debugThread, "Debug");
-
-	Sleep(10000);
 
 	std::thread t2(errorThread, "Error");
 

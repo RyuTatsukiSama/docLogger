@@ -40,8 +40,8 @@ protected:
 	std::string FormatLog(const rLoggerSeverity &_severity, const std::string _message);
 
 public:
-	rLogger(rLoggerOptions _options);
-	~rLogger();
+	rLogger(std::string _threadName = "Main");
+	~rLogger() = default;
 
 	void Log(const rLoggerSeverity &_severity, const std::string &_message);
 	void RegisterOutputStream(std::ostream *_stream);

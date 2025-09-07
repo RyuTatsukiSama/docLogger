@@ -45,58 +45,27 @@ std::string rLogger::FormatLog(const rLoggerSeverity &_severity, const std::stri
 #pragma region Public
 #pragma region Constructor
 
-rLogger::rLogger(rLoggerOptions _options)
+rLogger::rLogger(std::string _threadName)
 {
-	r::threadName = _options.threadName;
+	r::threadName = _threadName;
 
-	timeProvider = _options.timeProvider;
+	timeProvider = gOpts->getTimeProvider();
 
-	if (_options.outputConsole)
+	if (gOpts->isOutputConsole())
 	{
 		RegisterOutputStream(&std::cout);
 	}
 
-	if (_options.outputFile)
+	if (gOpts->isOutputFile())
 	{
-		if (_options.fileName == "")
-		{
-			std::chrono::time_point now = std::chrono::floor<std::chrono::seconds>(timeProvider());
-			_options.fileName = std::format("{:%Y-%m-%d_%H-%M-%S}", now);
-		}
-
-		if (!std::filesystem::exists("rLogs"))
-		{
-			std::filesystem::create_directory("rLogs");
-		}
-
-		std::string fileName = std::format("rLogs/{}.log", _options.fileName);
-
-		if (std::filesystem::exists(fileName))
-		{
-			std::filesystem::rename(fileName, std::format("rLogs/{}-previous.log", _options.fileName));
-		}
-
-		std::fstream *logFile = new std::fstream(fileName, std::ios::out | std::ios::app);
-
-		if (logFile->is_open())
-			RegisterOutputStream(logFile);
+		if (gOpts->getFileStream()->is_open())
+			RegisterOutputStream(gOpts->getFileStream());
 		else
-			std::cout << FormatLog(rLoggerSeverity::Warning, std::format("The file {} can't be open.", fileName)) << std::endl;
+			std::cout << FormatLog(rLoggerSeverity::Warning, std::format("The file {} can't be open.", gOpts->getFileName())) << std::endl;
 	}
 }
 
 #pragma endregion
-
-rLogger::~rLogger()
-{
-	for (const auto stream : outputStreams)
-	{
-		if (stream != &std::cout)
-		{
-			delete stream;
-		}
-	}
-}
 
 void rLogger::Log(const rLoggerSeverity &_severity, const std::string &_message) // Color change can be optimise
 {
