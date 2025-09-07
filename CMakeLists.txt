@@ -8,6 +8,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_library(LoggerLib
     "./src/rLogger/rLoggerSeverity.cpp"
     "./src/rLogger/rLoggerSeverity.h"
+    "./src/rLogger/rLoggerOptions.cpp"
     "./src/rLogger/rLoggerOptions.h"
     "./src/rLogger/rLogger.cpp"
     "./src/rLogger/rLogger_severityFunc.cpp"

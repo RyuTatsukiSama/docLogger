@@ -3,10 +3,9 @@
 
 TEST(optionsTest, defaultsTest)
 {
-    rLoggerOptions opts = rLoggerOptions::defaults;
-    EXPECT_EQ(opts.threadName, "Main");
-    EXPECT_EQ(opts.outputConsole, true);
-    EXPECT_EQ(opts.outputFile, true);
-    EXPECT_EQ(opts.fileName, "");
-    // ! need to add one for the timeProvider
+    rLoggerOptions opts = rLoggerOptions::Builder().build();
+    EXPECT_EQ(opts.isOutputConsole(), true);
+    EXPECT_EQ(opts.isOutputFile(), true);
+    EXPECT_EQ(opts.getFileName(), "");
+    // TODO : need to add one for the timeProvider
 }
