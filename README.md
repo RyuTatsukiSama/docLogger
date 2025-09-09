@@ -10,7 +10,7 @@ For now if you want to use it import the files of the " src/rLogger " folder in 
 
 In this project there is 3 .exe that are created with CMake :
 
-1. The TaskManagerApp.exe : Use to make free test with the rLogger
+1. The TaskManagerApp.exe : Actually use to make free test with the rLogger. But in the end it will be a little application to test the logger.
 
 2. Unit_Test.exe : Run all the unit tests of the logger.
 
