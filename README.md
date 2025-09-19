@@ -20,13 +20,13 @@ Whith that you have also the clearLog.bat. It simply delete of the .log file in 
 
 ## Futures Update
 
-- Finish Task Manager App
-- Writing all the unit test
-- Documentations ( will be available [here](https://github.com/RyuTatsukiSama/rLogger/blob/main/Documentation.md) )
-- Commentary in the code
-- Rename the project docLogger
-- Make a realease to make it easy to download it
-- Make it a .dll instead of a .lib
-- Export the rLogger in other languages
-- Multi os support
-- Stacktrace when c++ 23 will be available
+- [ ] Finish Task Manager App
+- [ ] Writing all the unit test
+- [ ] Documentations ( will be available [here](https://github.com/RyuTatsukiSama/rLogger/blob/main/Documentation.md) )
+- [ ] Commentary in the code
+- [ ] Rename the project
+- [ ] Make a realease to make it easy to download it
+- [ ] Make it a .dll instead of a .lib
+- [ ] Export the rLogger in other languages
+- [ ] Multi os support
+- [ ] Stacktrace when c++ 23 will be available
