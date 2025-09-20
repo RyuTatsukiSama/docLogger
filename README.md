@@ -25,6 +25,7 @@ Whith that you have also the clearLog.bat. It simply delete of the .log file in 
 - [ ] Documentations ( will be available [here](https://github.com/RyuTatsukiSama/rLogger/blob/main/Documentation.md) )
 - [ ] Commentary in the code
 - [ ] Rename the project
+- [ ] Put all the code in a namespace
 - [ ] Make a realease to make it easy to download it
 - [ ] Make it a .dll instead of a .lib
 - [ ] Export the rLogger in other languages
