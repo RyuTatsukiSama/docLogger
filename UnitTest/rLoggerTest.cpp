@@ -116,16 +116,6 @@ TEST(rLoggerTest, WriteFileTest)
     EXPECT_EQ(line, "\033[97;41m| [CRITICAL] [1970-01-01 00:00:00.0000000] [Main] Log |\033[0m");
 }
 
-TEST(rLoggerTest, severityText)
-{
-    // TODO : try make a test for severityText ( maybe with the register callback ? )
-}
-
-TEST(rLoggerTest, severityColor)
-{
-    // TODO : try make a test for severityColor ( maybe with the register callback ? )
-}
-
 #pragma region Multithreading test
 
 void debugThread(const std::string _threadName)
