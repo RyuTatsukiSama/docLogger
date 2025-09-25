@@ -32,7 +32,7 @@ FetchContent_MakeAvailable(googletest)
 enable_testing()
 
 add_executable(UnitTests "UnitTest/unitTest.cpp" "UnitTest/logSeverityTest.cpp" "UnitTest/rLoggerTest.cpp" "UnitTest/optionsTest.cpp")
-target_link_libraries(UnitTests PRIVATE LoggerLib gtest_main)
+target_link_libraries(UnitTests PRIVATE LoggerLib gtest gmock gtest_main gmock_main)
 
 include(GoogleTest)
 gtest_discover_tests(UnitTests)
