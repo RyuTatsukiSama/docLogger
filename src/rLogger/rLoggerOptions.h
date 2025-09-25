@@ -54,9 +54,9 @@ public:
 
 #pragma endregion
 
-    struct Builder
+    class Builder
     {
-        // TODO : find a way to avoid direct access from user to the members
+    private:
         bool outputConsole = true;
         bool outputFile = true;
         std::string fileName = "";
@@ -67,6 +67,7 @@ public:
                 std::chrono::system_clock::now()};
         };
 
+    public:
 #pragma region Set methods
 
         Builder &setOutputConsole(bool _oc)

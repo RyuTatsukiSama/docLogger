@@ -28,7 +28,6 @@ TEST(rLoggerTest, FormatLogTest)
 
 TEST(rLoggerTest, CallerTest)
 {
-    // TODO : need to complete this test using the same method as the previous test
     std::chrono::system_clock::time_point fixedTime = std::chrono::system_clock::from_time_t(0);
     rLoggerOptions opts = rLoggerOptions::Builder()
                               .setOutputConsole(false)
@@ -78,7 +77,7 @@ TEST(rLoggerTest, SeverityFuncTest)
     EXPECT_EQ(tester, formatedMessage);
 }
 
-TEST(rLoggertest, WriteFileTest)
+TEST(rLoggerTest, WriteFileTest)
 {
     std::chrono::system_clock::time_point fixedTime = std::chrono::system_clock::from_time_t(0);
     rLoggerOptions opts = rLoggerOptions::Builder()
@@ -112,4 +111,8 @@ TEST(rLoggertest, WriteFileTest)
     EXPECT_EQ(line, "\033[31m| [ERROR] [1970-01-01 00:00:00.0000000] [Main] Log |\033[0m");
     std::getline(file, line);
     EXPECT_EQ(line, "\033[97;41m| [CRITICAL] [1970-01-01 00:00:00.0000000] [Main] Log |\033[0m");
+}
+
+TEST(rLoggerTest, multithreadTest)
+{
 }

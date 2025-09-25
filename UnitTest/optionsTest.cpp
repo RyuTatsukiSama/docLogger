@@ -52,30 +52,30 @@ TEST(optionsTest, previousLogTest)
         std::filesystem::create_directory("rLogs");
     }
 
-    std::ofstream previousLog("rLogs/previous_test.log");
+    std::ofstream previousTest("rLogs/previous_test.log");
 
-    EXPECT_EQ(previousLog.is_open(), true);
-    if (previousLog.is_open())
+    EXPECT_EQ(previousTest.is_open(), true);
+    if (previousTest.is_open())
     {
-        previousLog << previousLogContent << std::endl;
+        previousTest << previousLogContent << std::endl;
     }
     else
     {
         std::cout << "rLogs/previous_test.log is not open" << std::endl;
     }
 
-    previousLog.close();
+    previousTest.close();
 
     rLoggerOptions opts = rLoggerOptions::Builder().setOutputConsole(false).setFileName("previous_test").build();
 
-    std::ifstream newPreviousLog("rLogs/previous_test-previous.log"); // TODO : find a better name
+    std::ifstream previousTestPrevious("rLogs/previous_test-previous.log");
 
-    EXPECT_EQ(newPreviousLog.is_open(), true);
-    if (newPreviousLog.is_open())
+    EXPECT_EQ(previousTestPrevious.is_open(), true);
+    if (previousTestPrevious.is_open())
     {
         std::string reader;
 
-        std::getline(newPreviousLog, reader);
+        std::getline(previousTestPrevious, reader);
 
         EXPECT_EQ(previousLogContent, reader);
     }
