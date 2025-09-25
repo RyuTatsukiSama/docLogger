@@ -38,8 +38,11 @@ TEST(rLoggerTest, CallerTest)
                               .build();
     gOpts = &opts;
     rLogger logger{};
+    logger.RegisterLogCallback(FormatLogTester);
 
+    std::string tester = std::format("| [DEBUG] [{:%Y-%m-%d %H:%M:%S}] [Main] void __cdecl rLoggerTest_CallerTest_Test::TestBody(void) is called |", fixedTime);
     logger.Caller();
+    EXPECT_EQ(formatedMessage, tester);
 }
 
 TEST(rLoggerTest, SeverityFuncTest)
