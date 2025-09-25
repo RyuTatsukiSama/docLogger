@@ -16,7 +16,7 @@ In this project there is 3 .exe that are created with CMake :
 
 3. rViewerLog.exe : The rLogger use ANSI color system, this make the .log file that come out of it a little ugly. But with this no problem since it display the file content into a console window.
 
-Whith that you have also the clearLog.bat. It simply delete of the .log file in his folder and the subfolder, if you don't want to have an excess amount of .log file when you are running test in your code.
+With all of this, you have also the clearLog.bat. It simply delete of the .log file in his folder and the subfolder, if you don't want to have an excess amount of .log file when you are running test in your code.
 
 ## Futures Update
 
