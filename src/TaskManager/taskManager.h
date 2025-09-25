@@ -6,4 +6,13 @@
 #include <thread>
 #include <string>
 
+class TaskManager
+{
+private:
+    /* data */
+public:
+    TaskManager(/* args */);
+    ~TaskManager();
+};
+
 #endif // !TASKMANAGER_H

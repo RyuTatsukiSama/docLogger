@@ -17,7 +17,7 @@ add_library(LoggerLib
     "./src/TaskManager/taskManager.h")
 
 # Task Manager Executable
-add_executable(TaskManagerApp "./src/TaskManager/taskManager.cpp")
+add_executable(TaskManagerApp "./src/TaskManager/taskManager.cpp" "./src/TaskManager/main.cpp")
 target_link_libraries(TaskManagerApp PRIVATE LoggerLib)
 
 # Unit Test Executable
