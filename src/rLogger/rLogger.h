@@ -49,7 +49,7 @@ public:
 
 	void Caller(const std::source_location &where = std::source_location::current());
 
-#pragma region Severity Functions
+#pragma region Severity Methods
 
 	/// @brief Make a log with the severity " Trace " automatically
 	/// @param _message The message you want in your log
