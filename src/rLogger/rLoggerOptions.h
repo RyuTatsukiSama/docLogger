@@ -21,9 +21,10 @@ private:
     std::string m_fileName;
     std::ofstream *m_fileStream;
     std::function<std::chrono::system_clock::time_point()> m_timeProvider;
-    ~rLoggerOptions(); // TODO : rule of five (https://en.cppreference.com/w/cpp/language/rule_of_three.html)
 
 public:
+    ~rLoggerOptions(); // TODO : rule of five (https://en.cppreference.com/w/cpp/language/rule_of_three.html)
+
 #pragma region Get methods
 
     bool isOutputConsole(void) const
