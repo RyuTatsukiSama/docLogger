@@ -1,11 +1,27 @@
 #include <gtest/gtest.h>
 #include "../src/rLogger/rLoggerOptions.h"
 
+// Check if the default value or the options are the good ones
 TEST(optionsTest, defaultsTest)
 {
     rLoggerOptions opts = rLoggerOptions::Builder().build();
     EXPECT_EQ(opts.isOutputConsole(), true);
     EXPECT_EQ(opts.isOutputFile(), true);
-    EXPECT_EQ(opts.getFileName(), "");
-    // TODO : need to add one for the timeProvider
+
+    // Recreate the name of the file, like in the builder
+    std::chrono::time_point now = std::chrono::floor<std::chrono::seconds>(opts.getTimeProvider()());
+    std::string fileName = std::format("{:%Y-%m-%d_%H-%M-%S}", now);
+    EXPECT_EQ(opts.getFileName(), fileName);
+
+    // Check if timeProvider is coherent, with checking if it is in the good range
+    std::chrono::system_clock::time_point before = std::chrono::zoned_time{
+        std::chrono::current_zone(),
+        std::chrono::system_clock::now()};
+    std::chrono::system_clock::time_point timeProvider = opts.getTimeProvider()();
+    std::chrono::system_clock::time_point after = std::chrono::zoned_time{
+        std::chrono::current_zone(),
+        std::chrono::system_clock::now()};
+
+    EXPECT_GE(timeProvider, before);
+    EXPECT_LE(timeProvider, after);
 }
