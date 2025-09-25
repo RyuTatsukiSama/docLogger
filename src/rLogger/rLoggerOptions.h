@@ -100,6 +100,9 @@ public:
     };
 };
 
-extern const rLoggerOptions *gOpts;
+namespace doc
+{
+    extern const rLoggerOptions *gOpts;
+}
 
 #endif // !RLOGGEROPTIONS_H

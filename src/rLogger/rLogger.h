@@ -19,7 +19,7 @@
 #include "rLoggerOptions.h"
 #include "rLoggerSeverity.h"
 
-namespace r
+namespace doc
 {
 	thread_local static std::string threadName;
 	static std::mutex lock;
