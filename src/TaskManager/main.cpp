@@ -11,7 +11,7 @@ void debugThread(const std::string _threadName)
 {
     rLogger logger(_threadName);
 
-    logger.Debug("From debug thread");
+    logger.Critical("From debug thread");
     anotherFunc();
 }
 
