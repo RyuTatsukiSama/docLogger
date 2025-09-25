@@ -98,7 +98,7 @@ void rLogger::RegisterLogCallback(std::function<void(const std::string)> _callba
 
 void rLogger::Caller(const std::source_location &where)
 {
-	Log(rLoggerSeverity::Debug, std::format("Called by {}", where.function_name()));
+	Log(rLoggerSeverity::Debug, std::format("{} is called", where.function_name()));
 }
 
 #pragma endregion
