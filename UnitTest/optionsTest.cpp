@@ -42,3 +42,45 @@ TEST(optionsTest, builderTest)
     EXPECT_EQ(opts.getFileName(), "builder_test");
     EXPECT_EQ(opts.getTimeProvider()(), fixedTime);
 }
+
+TEST(optionsTest, previousLogTest)
+{
+    std::string previousLogContent = "This is the previous log";
+
+    if (!std::filesystem::exists("rLogs"))
+    {
+        std::filesystem::create_directory("rLogs");
+    }
+
+    std::ofstream previousLog("rLogs/previous_test.log");
+
+    EXPECT_EQ(previousLog.is_open(), true);
+    if (previousLog.is_open())
+    {
+        previousLog << previousLogContent << std::endl;
+    }
+    else
+    {
+        std::cout << "rLogs/previous_test.log is not open" << std::endl;
+    }
+
+    previousLog.close();
+
+    rLoggerOptions opts = rLoggerOptions::Builder().setOutputConsole(false).setFileName("previous_test").build();
+
+    std::ifstream newPreviousLog("rLogs/previous_test-previous.log"); // TODO : find a better name
+
+    EXPECT_EQ(newPreviousLog.is_open(), true);
+    if (newPreviousLog.is_open())
+    {
+        std::string reader;
+
+        std::getline(newPreviousLog, reader);
+
+        EXPECT_EQ(previousLogContent, reader);
+    }
+    else
+    {
+        std::cout << "rLogs/previous_test-previous.log is not open" << std::endl;
+    }
+}
