@@ -37,4 +37,5 @@ target_link_libraries(UnitTests PRIVATE LoggerLib gtest gmock gtest_main gmock_m
 include(GoogleTest)
 gtest_discover_tests(UnitTests)
 
+# rViewerLog Executable
 add_executable(rViewerLog "./rViewerLog/rViewerLog.cpp" "./rViewerLog/icon.rc")

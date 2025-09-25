@@ -21,33 +21,61 @@
 
 namespace doc
 {
-	thread_local static std::string threadName;
+	extern thread_local std::string threadName;
 	static std::mutex lock;
 };
 
 class rLogger
 {
 protected:
+	/// @brief Use to prevent log with a severity below to be register
 	rLoggerSeverity severityThreshdold = rLoggerSeverity::Trace;
+
+	/// @brief Vector of the streams the log message are sent
 	std::vector<std::ostream *> outputStreams;
+
+	/// @brief Vector of the callbacks with the formatted message
 	std::vector<std::function<void(const std::string)>> logCallbacks;
 
+	/// @brief The function wich return the time stamp
 	std::function<std::chrono::system_clock::time_point()> timeProvider;
 
+	/// @brief Use to access the unordered_map wich contain the text link to loggerSeverity
 	static const std::unordered_map<rLoggerSeverity, std::string> &getSeverityText();
+
+	/// @brief Use to access the unordered_map wich contain the color link to loggerSeverity
 	static const std::unordered_map<rLoggerSeverity, std::string> &getSeverityColor();
 
+	/// @brief Create the clean formated log message with severity, timestamp, thread name and message
+	/// @param _severity Severity of the log
+	/// @param _message Message you want to be in the log
+	/// @return The clean log message in a std::string
 	std::string FormatLog(const rLoggerSeverity &_severity, const std::string _message);
 
 public:
+	/// @brief Call it to instantiate the logger where you want it
+	/// @param _threadName Main by default, change it if you are not in the Main thread,
+	/// or use doc::threadName if you already create a instance of the logger in this thread
 	rLogger(std::string _threadName = "Main");
 	~rLogger() = default;
 
+	/// @brief The standard method to create a log
+	/// @param _severity Severity of the log
+	/// @param _message Message you want to be in the log
 	void Log(const rLoggerSeverity &_severity, const std::string &_message);
+
+	/// @brief Add a stream where the log will be sent to
+	/// @param _stream The stream you want to add
 	void RegisterOutputStream(std::ostream *_stream);
+
+	/// @brief Use it if you want to display the formatted message, but not with a stream
+	/// Warning the ANSI code for the color are not present in this string
+	/// @param _callback The function/lambda/method that will use the formatted message, with a std::string parameters
 	void RegisterLogCallback(std::function<void(const std::string)> _callback);
 
-	void Caller(const std::source_location &where = std::source_location::current());
+	/// @brief Create a Debug severity Log whith the name of the function which call this method
+	/// @param _where No need to touch it, if you do the method risk to not work properly
+	void Caller(const std::source_location &_where = std::source_location::current());
 
 #pragma region Severity Methods
 
