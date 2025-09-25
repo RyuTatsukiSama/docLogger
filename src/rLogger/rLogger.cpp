@@ -30,7 +30,7 @@ const std::unordered_map<rLoggerSeverity, std::string> &rLogger::getSeverityColo
 		{rLoggerSeverity::Info, "\033[32m"},		// Green
 		{rLoggerSeverity::Warning, "\033[33m"},		// Yellow
 		{rLoggerSeverity::Error, "\033[31m"},		// Red
-		{rLoggerSeverity::Critical, "\033[97;41m"}, // 244 Red on white or 79 White on Red
+		{rLoggerSeverity::Critical, "\033[97;41m"}, // White on Red
 		{rLoggerSeverity::None, "\033[0m"}			// White
 	};
 
@@ -40,10 +40,10 @@ const std::unordered_map<rLoggerSeverity, std::string> &rLogger::getSeverityColo
 std::string rLogger::FormatLog(const rLoggerSeverity &_severity, const std::string _message)
 {
 	return std::format("| [{}] [{:%Y-%m-%d %H:%M:%S}] [{}] {} |",
-					   getSeverityText().at(_severity),
-					   timeProvider(),
-					   doc::threadName,
-					   _message);
+					   getSeverityText().at(_severity), // Put the severity Name
+					   timeProvider(),					// Put the time stamp in this format (YYYY-mm-dd HH:MM:SS)
+					   doc::threadName,					// Put the thread Name
+					   _message);						// Put the message
 }
 
 #pragma endregion
@@ -53,41 +53,45 @@ std::string rLogger::FormatLog(const rLoggerSeverity &_severity, const std::stri
 
 rLogger::rLogger(std::string _threadName)
 {
-	doc::threadName = _threadName;
+	if (doc::threadName == "") // assign the thread name if it's empty
+		doc::threadName = _threadName;
 
-	timeProvider = gOpts->getTimeProvider();
+	timeProvider = gOpts->getTimeProvider(); // get the time provider from the options
 
-	if (gOpts->isOutputConsole())
+	if (gOpts->isOutputConsole()) // Check if the output in the console is asked
 	{
-		RegisterOutputStream(&std::cout);
+		RegisterOutputStream(&std::cout); // Push it into the vector
 	}
 
-	if (gOpts->isOutputFile())
+	if (gOpts->isOutputFile()) // Check if the output in the file is asked
 	{
-		if (gOpts->getFileStream()->is_open())
-			RegisterOutputStream(gOpts->getFileStream());
+		if (gOpts->getFileStream()->is_open())			  // check if the file is open
+			RegisterOutputStream(gOpts->getFileStream()); // if yes, push it into the vector
 		else
-			std::cout << FormatLog(rLoggerSeverity::Warning, std::format("The file {} can't be open.", gOpts->getFileName())) << std::endl;
+			std::cout << FormatLog(rLoggerSeverity::Warning, std::format("The file {} can't be open.", gOpts->getFileName())) << std::endl; // Log a warning if the file can't be open
 	}
 }
 
 #pragma endregion
 
-void rLogger::Log(const rLoggerSeverity &_severity, const std::string &_message) // Color change can be optimise
+void rLogger::Log(const rLoggerSeverity &_severity, const std::string &_message)
 {
-	std::lock_guard guard(doc::lock);
-	if (_severity.value < severityThreshdold.value)
+	std::lock_guard guard(doc::lock); // lock for avoid access from other thread
+
+	if (_severity.value < severityThreshdold.value) // Check if the severity is beyond the threshold
 		return;
 
-	std::string formattedMessage = FormatLog(_severity, _message);
+	std::string formattedMessage = FormatLog(_severity, _message); // get the message formatted
 
-	for (const auto stream : outputStreams)
+	for (const auto stream : outputStreams) // browse all the stream
 	{
+		// send the message, with its ANSI code for the color, into each stream
 		(*stream) << getSeverityColor().at(_severity) << formattedMessage << getSeverityColor().at(rLoggerSeverity::None) << std::endl;
 	}
 
-	for (const auto callback : logCallbacks)
+	for (const auto callback : logCallbacks) // browse all the callbacks
 	{
+		// call each one of them and give them the formattedMessage
 		callback(formattedMessage);
 	}
 }
