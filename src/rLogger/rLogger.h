@@ -51,11 +51,28 @@ public:
 
 #pragma region Severity Functions
 
+	/// @brief Make a log with the severity " Trace " automatically
+	/// @param _message The message you want in your log
 	void Trace(const std::string &_message);
+
+	/// @brief Make a log with the severity " Debug " automatically
+	/// @param _message The message you want in your log
 	void Debug(const std::string &_message);
+
+	/// @brief Make a log with the severity " Info " automatically
+	/// @param _message The message you want in your log
 	void Info(const std::string &_message);
+
+	/// @brief Make a log with the severity " Warning " automatically
+	/// @param _message The message you want in your log
 	void Warning(const std::string &_message);
+
+	/// @brief Make a log with the severity " Error " automatically
+	/// @param _message The message you want in your log
 	void Error(const std::string &_message);
+
+	/// @brief Make a log with the severity " Critical " automatically
+	/// @param _message The message you want in your log
 	void Critical(const std::string &_message);
 
 #pragma endregion
