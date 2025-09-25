@@ -36,6 +36,7 @@ rLoggerOptions::rLoggerOptions(const bool _outputConsole,
 
 rLoggerOptions::~rLoggerOptions()
 {
-    delete m_fileStream;
-    m_fileStream = nullptr;
+    // TODO : The m_fileStream destroy multiple times
+    // delete m_fileStream;
+    // m_fileStream = nullptr;
 }
