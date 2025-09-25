@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include "../src/rLogger/rLogger.h"
+#include <thread>
 
 static std::string formatedMessage;
 
@@ -17,7 +18,7 @@ TEST(rLoggerTest, FormatLogTest)
                               .setTimeProvider([=]
                                                { return fixedTime; })
                               .build();
-    gOpts = &opts;
+    doc::gOpts = &opts;
     rLogger testLogger{};
     testLogger.RegisterLogCallback(FormatLogTester);
 
@@ -35,7 +36,7 @@ TEST(rLoggerTest, CallerTest)
                               .setTimeProvider([=]
                                                { return fixedTime; })
                               .build();
-    gOpts = &opts;
+    doc::gOpts = &opts;
     rLogger logger{};
     logger.RegisterLogCallback(FormatLogTester);
 
@@ -53,7 +54,7 @@ TEST(rLoggerTest, SeverityFuncTest)
                               .setTimeProvider([=]
                                                { return fixedTime; })
                               .build();
-    gOpts = &opts;
+    doc::gOpts = &opts;
     rLogger logger{};
     logger.RegisterLogCallback(FormatLogTester);
 
@@ -86,7 +87,7 @@ TEST(rLoggerTest, WriteFileTest)
                               .setTimeProvider([=]
                                                { return fixedTime; })
                               .build();
-    gOpts = &opts;
+    doc::gOpts = &opts;
     rLogger logger{};
 
     logger.Trace("Log");
@@ -115,4 +116,13 @@ TEST(rLoggerTest, WriteFileTest)
 
 TEST(rLoggerTest, multithreadTest)
 {
+    std::chrono::system_clock::time_point fixedTime = std::chrono::system_clock::from_time_t(0);
+    rLoggerOptions opts = rLoggerOptions::Builder()
+                              .setOutputConsole(false)
+                              .setFileName("unit_test")
+                              .setTimeProvider([=]
+                                               { return fixedTime; })
+                              .build();
+    doc::gOpts = &opts;
+    rLogger logger{};
 }

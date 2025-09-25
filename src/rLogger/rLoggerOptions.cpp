@@ -1,6 +1,9 @@
 #include "rLoggerOptions.h"
 
-const rLoggerOptions *gOpts = nullptr;
+namespace doc
+{
+    const rLoggerOptions *gOpts = nullptr;
+}
 
 rLoggerOptions::rLoggerOptions(const bool _outputConsole,
                                const bool _outputFile,

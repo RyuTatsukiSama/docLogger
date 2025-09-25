@@ -74,6 +74,10 @@
         "filesystem": "cpp",
         "algorithm": "cpp",
         "source_location": "cpp",
-        "stacktrace": "cpp"
+        "stacktrace": "cpp",
+        "array": "cpp",
+        "csignal": "cpp",
+        "deque": "cpp",
+        "unordered_set": "cpp"
     }
 }

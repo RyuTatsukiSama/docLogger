@@ -16,7 +16,7 @@ void errorThread(const std::string _threadName)
 
 void anotherFunc(void)
 {
-	std::cout << "Another func says hi to " << r::threadName << std::endl;
+	std::cout << "Another func says hi to " << doc::threadName << std::endl;
 }
 
 int main()
@@ -56,7 +56,7 @@ int main()
 	log.Log(rLoggerSeverity::Critical, "This is a Critical test");*/
 
 	rLoggerOptions opts = rLoggerOptions::Builder().build();
-	gOpts = &opts;
+	doc::gOpts = &opts;
 	std::thread t1(debugThread, "Debug");
 
 	std::thread t2(errorThread, "Error");

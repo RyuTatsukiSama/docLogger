@@ -1,4 +1,5 @@
 #include "rLogger.h"
+using namespace doc; // TODO : delete it when all the logger will be in the namespace
 
 #pragma region rLogger Class
 #pragma region Protected
@@ -36,7 +37,7 @@ std::string rLogger::FormatLog(const rLoggerSeverity &_severity, const std::stri
 	return std::format("| [{}] [{:%Y-%m-%d %H:%M:%S}] [{}] {} |",
 					   getSeverityText().at(_severity),
 					   timeProvider(),
-					   r::threadName,
+					   doc::threadName,
 					   _message);
 }
 
@@ -47,7 +48,7 @@ std::string rLogger::FormatLog(const rLoggerSeverity &_severity, const std::stri
 
 rLogger::rLogger(std::string _threadName)
 {
-	r::threadName = _threadName;
+	doc::threadName = _threadName;
 
 	timeProvider = gOpts->getTimeProvider();
 
@@ -69,7 +70,7 @@ rLogger::rLogger(std::string _threadName)
 
 void rLogger::Log(const rLoggerSeverity &_severity, const std::string &_message) // Color change can be optimise
 {
-	std::lock_guard guard(r::lock);
+	std::lock_guard guard(doc::lock);
 	if (_severity.value < severityThreshdold.value)
 		return;
 
