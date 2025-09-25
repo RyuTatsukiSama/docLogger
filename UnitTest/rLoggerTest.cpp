@@ -1,4 +1,6 @@
 #include <gtest/gtest.h>
+#include <gmock/gmock.h>
+#include <gmock/gmock-matchers.h>
 #include "../src/rLogger/rLogger.h"
 #include <thread>
 
@@ -114,15 +116,54 @@ TEST(rLoggerTest, WriteFileTest)
     EXPECT_EQ(line, "\033[97;41m| [CRITICAL] [1970-01-01 00:00:00.0000000] [Main] Log |\033[0m");
 }
 
+void debugThread(const std::string _threadName)
+{
+    rLogger logger(_threadName);
+
+    logger.Debug("From Debug thread");
+}
+
+void errorThread(const std::string _threadName)
+{
+    rLogger logger(_threadName);
+
+    logger.Error("From Error thread");
+}
+
 TEST(rLoggerTest, multithreadTest)
 {
     std::chrono::system_clock::time_point fixedTime = std::chrono::system_clock::from_time_t(0);
     rLoggerOptions opts = rLoggerOptions::Builder()
                               .setOutputConsole(false)
-                              .setFileName("unit_test")
+                              .setFileName("multithread_test")
                               .setTimeProvider([=]
                                                { return fixedTime; })
                               .build();
     doc::gOpts = &opts;
     rLogger logger{};
+
+    std::thread t1(debugThread, "Debug");
+
+    std::thread t2(errorThread, "Error");
+
+    t1.join();
+    t2.join();
+
+    std::ifstream mtTestLog("rLogs/multithread_test.log");
+
+    EXPECT_EQ(mtTestLog.is_open(), true);
+    if (mtTestLog.is_open())
+    {
+        std::vector<std::string> readers;
+        std::string reader;
+
+        std::getline(mtTestLog, reader);
+        readers.push_back(reader);
+        std::getline(mtTestLog, reader);
+        readers.push_back(reader);
+
+        EXPECT_THAT(readers, testing::UnorderedElementsAre(
+                                 std::format("\x1B[31m| [ERROR] [{:%Y-%m-%d %H:%M:%S}] [Error] From Error thread |\x1B[0m", fixedTime),
+                                 std::format("\x1B[34m| [DEBUG] [{:%Y-%m-%d %H:%M:%S}] [Debug] From Debug thread |\x1B[0m", fixedTime)));
+    }
 }
