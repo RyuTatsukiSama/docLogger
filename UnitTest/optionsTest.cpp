@@ -25,3 +25,20 @@ TEST(optionsTest, defaultsTest)
     EXPECT_GE(timeProvider, before);
     EXPECT_LE(timeProvider, after);
 }
+
+TEST(optionsTest, builderTest)
+{
+    std::chrono::system_clock::time_point fixedTime = std::chrono::system_clock::from_time_t(0);
+    rLoggerOptions opts = rLoggerOptions::Builder()
+                              .setOutputConsole(false)
+                              .setOutputFile(false)
+                              .setFileName("builder_test")
+                              .setTimeProvider([=]
+                                               { return fixedTime; })
+                              .build();
+
+    EXPECT_EQ(opts.isOutputConsole(), false);
+    EXPECT_EQ(opts.isOutputFile(), false);
+    EXPECT_EQ(opts.getFileName(), "builder_test");
+    EXPECT_EQ(opts.getTimeProvider()(), fixedTime);
+}
