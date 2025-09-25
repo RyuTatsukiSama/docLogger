@@ -1,6 +1,11 @@
 #include "rLogger.h"
 using namespace doc; // TODO : delete it when all the logger will be in the namespace
 
+namespace doc
+{
+	thread_local std::string threadName;
+};
+
 #pragma region rLogger Class
 #pragma region Protected
 

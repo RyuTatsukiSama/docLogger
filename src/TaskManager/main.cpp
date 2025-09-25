@@ -1,22 +1,26 @@
 #include "taskManager.h"
 
+void anotherFunc(void)
+{
+    rLogger logger(doc::threadName);
+
+    logger.Trace(std::format("Hello from another func in this {} thread", doc::threadName));
+}
+
 void debugThread(const std::string _threadName)
 {
     rLogger logger(_threadName);
 
-    logger.Debug("From Debug thread");
+    logger.Debug("From debug thread");
+    anotherFunc();
 }
 
 void errorThread(const std::string _threadName)
 {
     rLogger logger(_threadName);
 
-    logger.Error("From Error thread");
-}
-
-void anotherFunc(void)
-{
-    std::cout << "Another func says hi to " << doc::threadName << std::endl;
+    logger.Error("From error thread");
+    anotherFunc();
 }
 
 int main()
