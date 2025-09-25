@@ -21,7 +21,7 @@ Whith that you have also the clearLog.bat. It simply delete of the .log file in 
 ## Futures Update
 
 - [ ] Finish Task Manager App
-- [ ] Writing all the unit test
+- [x] Writing all the unit test
 - [ ] Documentations ( will be available [here](https://github.com/RyuTatsukiSama/rLogger/blob/main/Documentation.md) )
 - [ ] Commentary in the code
 - [ ] Rename the project
