@@ -4,7 +4,7 @@
 // Check if the default value or the options are the good ones
 TEST(optionsTest, defaultsTest)
 {
-    rLoggerOptions opts = rLoggerOptions::Builder().build();
+    rLoggerOptions opts = rLoggerOptions::OptionsBuilder().build();
     EXPECT_EQ(opts.isOutputConsole(), true);
     EXPECT_EQ(opts.isOutputFile(), true);
 
@@ -29,7 +29,7 @@ TEST(optionsTest, defaultsTest)
 TEST(optionsTest, builderTest)
 {
     std::chrono::system_clock::time_point fixedTime = std::chrono::system_clock::from_time_t(0);
-    rLoggerOptions opts = rLoggerOptions::Builder()
+    rLoggerOptions opts = rLoggerOptions::OptionsBuilder()
                               .setOutputConsole(false)
                               .setOutputFile(false)
                               .setFileName("builder_test")
@@ -66,7 +66,7 @@ TEST(optionsTest, previousLogTest)
 
     previousTest.close();
 
-    rLoggerOptions opts = rLoggerOptions::Builder().setOutputConsole(false).setFileName("previous_test").build();
+    rLoggerOptions opts = rLoggerOptions::OptionsBuilder().setOutputConsole(false).setFileName("previous_test").build();
 
     std::ifstream previousTestPrevious("rLogs/previous_test-previous.log");
 

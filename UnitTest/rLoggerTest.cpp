@@ -14,7 +14,7 @@ void FormatLogTester(std::string _formatedMessage)
 TEST(rLoggerTest, FormatLogTest)
 {
     std::chrono::system_clock::time_point fixedTime = std::chrono::system_clock::from_time_t(0);
-    rLoggerOptions opts = rLoggerOptions::Builder()
+    rLoggerOptions opts = rLoggerOptions::OptionsBuilder()
                               .setOutputConsole(false)
                               .setOutputFile(false)
                               .setTimeProvider([=]
@@ -32,7 +32,7 @@ TEST(rLoggerTest, FormatLogTest)
 TEST(rLoggerTest, CallerTest)
 {
     std::chrono::system_clock::time_point fixedTime = std::chrono::system_clock::from_time_t(0);
-    rLoggerOptions opts = rLoggerOptions::Builder()
+    rLoggerOptions opts = rLoggerOptions::OptionsBuilder()
                               .setOutputConsole(false)
                               .setOutputFile(false)
                               .setTimeProvider([=]
@@ -50,7 +50,7 @@ TEST(rLoggerTest, CallerTest)
 TEST(rLoggerTest, SeverityFuncTest)
 {
     std::chrono::system_clock::time_point fixedTime = std::chrono::system_clock::from_time_t(0);
-    rLoggerOptions opts = rLoggerOptions::Builder()
+    rLoggerOptions opts = rLoggerOptions::OptionsBuilder()
                               .setOutputConsole(false)
                               .setOutputFile(false)
                               .setTimeProvider([=]
@@ -83,7 +83,7 @@ TEST(rLoggerTest, SeverityFuncTest)
 TEST(rLoggerTest, WriteFileTest)
 {
     std::chrono::system_clock::time_point fixedTime = std::chrono::system_clock::from_time_t(0);
-    rLoggerOptions opts = rLoggerOptions::Builder()
+    rLoggerOptions opts = rLoggerOptions::OptionsBuilder()
                               .setOutputConsole(false)
                               .setFileName("unit_test")
                               .setTimeProvider([=]
@@ -135,7 +135,7 @@ void errorThread(const std::string _threadName)
 TEST(rLoggerTest, multithreadTest)
 {
     std::chrono::system_clock::time_point fixedTime = std::chrono::system_clock::from_time_t(0);
-    rLoggerOptions opts = rLoggerOptions::Builder()
+    rLoggerOptions opts = rLoggerOptions::OptionsBuilder()
                               .setOutputConsole(false)
                               .setFileName("multithread_test")
                               .setTimeProvider([=]
