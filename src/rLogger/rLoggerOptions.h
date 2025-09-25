@@ -8,6 +8,8 @@
 #include <format>
 #include <fstream>
 
+/// @brief This class is used to give some parameter to the logger for a more quick configuration of it.
+/// Work with the OptionsBuilder class. For more explanation https://github.com/RyuTatsukiSama/rLogger/blob/main/Documentation.md
 class rLoggerOptions
 {
 private:
@@ -54,7 +56,9 @@ public:
 
 #pragma endregion
 
-    class Builder
+    /// @brief This class is use to have default member for the option.
+    /// For more explanation https://github.com/RyuTatsukiSama/rLogger/blob/main/Documentation.md
+    class OptionsBuilder
     {
     private:
         bool outputConsole = true;
@@ -70,22 +74,38 @@ public:
     public:
 #pragma region Set methods
 
-        Builder &setOutputConsole(bool _oc)
+        /// @brief Set if you want your log to be display automaticaly in the console
+        /// If you want the default parameter ( true ), no need to call this method
+        /// @return Instance of the builder, with that you can call the set methods and th build methods on the same line
+        OptionsBuilder &setOutputConsole(bool _oc)
         {
             outputConsole = _oc;
             return *this;
         }
-        Builder &setOutputFile(bool _of)
+
+        /// @brief Set if you want your log to be display automaticaly in the file
+        /// If you want the default parameter ( true ), no need to call this method
+        /// @return Instance of the builder, with that you can call the set methods and th build methods on the same line
+        OptionsBuilder &setOutputFile(bool _of)
         {
             outputFile = _of;
             return *this;
         }
-        Builder &setFileName(std::string _name)
+
+        /// @brief Set if you want a specific name for your log file
+        /// If you want the default parameter ( YYYY-mm-dd_HH-MM-SS ), from the timeProvider, no need to call this method
+        /// @return Instance of the builder, with that you can call the set methods and th build methods on the same line
+        OptionsBuilder &setFileName(std::string _name)
         {
             fileName = _name;
             return *this;
         }
-        Builder &setTimeProvider(std::function<std::chrono::system_clock::time_point()> _tp)
+
+        /// @brief Set if you want your log to have a specific timeProvider ( use mainly for test )
+        /// If you want the default parameter ( now of your time zone ), no need to call this method
+        /// @param _tp A function or lambda that return a std::chrono::system_clock::time_point()
+        /// @return Instance of the builder, with that you can call the set methods and th build methods on the same line
+        OptionsBuilder &setTimeProvider(std::function<std::chrono::system_clock::time_point()> _tp)
         {
             timeProvider = std::move(_tp);
             return *this;
@@ -93,6 +113,8 @@ public:
 
 #pragma endregion
 
+        /// @brief Create a instance of LoggerOptions with the members in the instance of OptionsBuilder
+        /// @return The created instance of LoggerOptions
         rLoggerOptions build()
         {
             return rLoggerOptions(outputConsole, outputFile, fileName, timeProvider);
@@ -102,6 +124,7 @@ public:
 
 namespace doc
 {
+    /// @brief Options of the logger, need to be declare before any instantiation of the logger
     extern const rLoggerOptions *gOpts;
 }
 

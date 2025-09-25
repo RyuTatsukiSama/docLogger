@@ -55,7 +55,7 @@ int main()
     log.Log(rLoggerSeverity::Error, "This is a Error test");
     log.Log(rLoggerSeverity::Critical, "This is a Critical test");*/
 
-    rLoggerOptions opts = rLoggerOptions::Builder().build();
+    rLoggerOptions opts = rLoggerOptions::OptionsBuilder().build();
     doc::gOpts = &opts;
     std::thread t1(debugThread, "Debug");
 
