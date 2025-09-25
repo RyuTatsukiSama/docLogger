@@ -8,7 +8,8 @@ rLoggerOptions::rLoggerOptions(const bool _outputConsole,
                                std::function<std::chrono::system_clock::time_point()> _timeProvider) : m_outputConsole(_outputConsole),
                                                                                                        m_outputFile(_outputFile),
                                                                                                        m_fileName(_fileName),
-                                                                                                       m_timeProvider(_timeProvider)
+                                                                                                       m_timeProvider(_timeProvider),
+                                                                                                       m_fileStream(nullptr)
 {
     if (_outputFile)
     {
@@ -36,7 +37,9 @@ rLoggerOptions::rLoggerOptions(const bool _outputConsole,
 
 rLoggerOptions::~rLoggerOptions()
 {
-    // TODO : The m_fileStream destroy multiple times
-    // delete m_fileStream;
-    // m_fileStream = nullptr;
+    if (m_fileStream)
+    {
+        delete m_fileStream;
+        m_fileStream = nullptr;
+    }
 }
