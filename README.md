@@ -23,7 +23,9 @@ With all of this, you have also the clearLog.bat. It simply delete of the .log f
 - [ ] Finish Task Manager App
 - [x] Writing all the unit test
 - [ ] Documentations ( will be available [here](https://github.com/RyuTatsukiSama/rLogger/blob/main/Documentation.md) )
-- [ ] Commentary in the code
+- [x] Commentary in the code in logger
+- [ ] Commentary in the code in Task Manager App
+- [ ] Commentary in the code in Unit Test
 - [ ] Rename the project
 - [ ] Put all the code in a namespace
 - [ ] Make a realease to make it easy to download it
