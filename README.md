@@ -21,6 +21,7 @@ With all of this, you have also the clearLog.bat. It simply delete of the .log f
 ## Futures Update
 
 - [ ] Finish Task Manager App
+- [ ] Add it to Unreal Engine 5
 - [x] Writing all the unit test
 - [ ] Documentations ( will be available [here](https://github.com/RyuTatsukiSama/rLogger/blob/main/Documentation.md) )
 - [x] Commentary in the code in logger
