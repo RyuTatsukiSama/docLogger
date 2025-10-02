@@ -4,16 +4,16 @@
 
 int main(int argc, char *argv[])
 {
-    if (argc < 2) // Make sur there is only on parameter
+    if (argc < 2) // Make sure there is only on parameter
     {
-        std::cerr << "Usage: cat <fichier>\n";
+        std::cerr << "Usage: "<< argv[0] <<" <fichier>\n";
         return 1;
     }
 
     std::ifstream file(argv[1]);
-    if (!file) // make sure the argument is a file, and try to pen it
+    if (!file) // make sure the argument is a file, and try to open it
     {
-        std::cerr << "Impossible d'ouvrir : " << argv[1] << "\n";
+        std::cerr << "Can't open : " << argv[1] << "\n";
         return 1;
     }
 
