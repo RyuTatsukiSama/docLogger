@@ -76,10 +76,10 @@ rLogger::rLogger(std::string _threadName)
 
 void rLogger::Log(const rLoggerSeverity &_severity, const std::string &_message)
 {
-	std::lock_guard guard(doc::lock); // lock for avoid access from other thread
-
 	if (_severity.value < severityThreshdold.value) // Check if the severity is beyond the threshold
 		return;
+
+	std::lock_guard guard(doc::lock); // lock for avoid access from other thread
 
 	std::string formattedMessage = FormatLog(_severity, _message); // get the message formatted
 
