@@ -3,8 +3,6 @@
 
 #include <iostream>
 #include "../rLogger/rLogger.h"
-#undef DOC_LOG_THRESHOLD
-#define DOC_LOG_THRESHOLD rLoggerSeverity::Info
 #include <thread>
 #include <string>
 

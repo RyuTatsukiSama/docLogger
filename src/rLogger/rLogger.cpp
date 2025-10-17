@@ -111,5 +111,10 @@ void rLogger::Caller(const std::source_location &where)
 	Log(rLoggerSeverity::Debug, std::format("{} is called", where.function_name()));
 }
 
+void rLogger::setSeverityThreshdold(const rLoggerSeverity& _severity)
+{
+	severityThreshdold = _severity;
+}
+
 #pragma endregion
 #pragma endregion

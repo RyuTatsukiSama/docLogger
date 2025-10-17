@@ -29,7 +29,7 @@ class rLogger
 {
 protected:
 	/// @brief Use to prevent log with a severity below to be register
-	rLoggerSeverity severityThreshdold = DOC_LOG_THRESHOLD;
+	rLoggerSeverity severityThreshdold = rLoggerSeverity::Trace;
 
 	/// @brief Vector of the streams the log message are sent
 	std::vector<std::ostream *> outputStreams;
@@ -77,6 +77,8 @@ public:
 	/// @param _where No need to touch it, if you do the method risk to not work properly
 	void Caller(const std::source_location &_where = std::source_location::current());
 
+	void setSeverityThreshdold(const rLoggerSeverity& _severity);
+
 #pragma region Severity Methods
 
 	/// @brief Make a log with the severity " Trace " automatically
@@ -104,5 +106,6 @@ public:
 	void Critical(const std::string &_message);
 
 #pragma endregion
+
 };
 #endif // !RLOGGER_H
