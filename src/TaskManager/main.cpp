@@ -56,6 +56,7 @@ int main()
     doc::gOpts = &opts;
 
     rLogger log("Main");
+    log.setSeverityThreshdold(rLoggerSeverity::Warning);
 
     log.Log(rLoggerSeverity::Trace, "This is a Trace test");
     log.Log(rLoggerSeverity::Debug, "This is a Debug test");

@@ -1,10 +1,6 @@
 #ifndef RLOGGERSEVERITY_H
 #define RLOGGERSEVERITY_H
 
-#ifndef DOC_LOG_THRESHOLD
-#define DOC_LOG_THRESHOLD rLoggerSeverity::Trace
-#endif
-
 #include <iostream>
 
 struct rLoggerSeverity
