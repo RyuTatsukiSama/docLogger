@@ -2,7 +2,7 @@
 #include "../src/rLogger/rLoggerOptions.h"
 using namespace doc;
 
-// Check if the default value or the options are the good ones
+/// @brief Check if the default value or the options are the good ones
 TEST(optionsTest, defaultsTest)
 {
     LoggerOptions opts = LoggerOptions::OptionsBuilder().build();
@@ -31,12 +31,12 @@ TEST(optionsTest, builderTest)
 {
     std::chrono::system_clock::time_point fixedTime = std::chrono::system_clock::from_time_t(0);
     LoggerOptions opts = LoggerOptions::OptionsBuilder()
-                              .setOutputConsole(false)
-                              .setOutputFile(false)
-                              .setFileName("builder_test")
-                              .setTimeProvider([=]
-                                               { return fixedTime; })
-                              .build();
+                             .setOutputConsole(false)
+                             .setOutputFile(false)
+                             .setFileName("builder_test")
+                             .setTimeProvider([=]
+                                              { return fixedTime; })
+                             .build();
 
     EXPECT_EQ(opts.isOutputConsole(), false);
     EXPECT_EQ(opts.isOutputFile(), false);
