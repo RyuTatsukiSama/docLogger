@@ -3,6 +3,7 @@
 #include <gmock/gmock-matchers.h>
 #include "../src/rLogger/rLogger.h"
 #include <thread>
+using namespace doc;
 
 static std::string formatedMessage;
 
@@ -14,32 +15,32 @@ void FormatLogTester(std::string _formatedMessage)
 TEST(rLoggerTest, FormatLogTest)
 {
     std::chrono::system_clock::time_point fixedTime = std::chrono::system_clock::from_time_t(0);
-    rLoggerOptions opts = rLoggerOptions::OptionsBuilder()
+    LoggerOptions opts = LoggerOptions::OptionsBuilder()
                               .setOutputConsole(false)
                               .setOutputFile(false)
                               .setTimeProvider([=]
                                                { return fixedTime; })
                               .build();
     doc::gOpts = &opts;
-    rLogger testLogger{};
+    Logger testLogger{};
     testLogger.RegisterLogCallback(FormatLogTester);
 
     std::string tester = std::format("| [TRACE] [{:%Y-%m-%d %H:%M:%S}] [Main] This is a trace level |", fixedTime);
-    testLogger.Log(rLoggerSeverity::Trace, "This is a trace level");
+    testLogger.Log(LoggerSeverity::Trace, "This is a trace level");
     EXPECT_EQ(formatedMessage, tester);
 }
 
 TEST(rLoggerTest, CallerTest)
 {
     std::chrono::system_clock::time_point fixedTime = std::chrono::system_clock::from_time_t(0);
-    rLoggerOptions opts = rLoggerOptions::OptionsBuilder()
+    LoggerOptions opts = LoggerOptions::OptionsBuilder()
                               .setOutputConsole(false)
                               .setOutputFile(false)
                               .setTimeProvider([=]
                                                { return fixedTime; })
                               .build();
     doc::gOpts = &opts;
-    rLogger logger{};
+    Logger logger{};
     logger.RegisterLogCallback(FormatLogTester);
 
     std::string tester = std::format("| [DEBUG] [{:%Y-%m-%d %H:%M:%S}] [Main] void __cdecl rLoggerTest_CallerTest_Test::TestBody(void) is called |", fixedTime);
@@ -50,14 +51,14 @@ TEST(rLoggerTest, CallerTest)
 TEST(rLoggerTest, SeverityFuncTest)
 {
     std::chrono::system_clock::time_point fixedTime = std::chrono::system_clock::from_time_t(0);
-    rLoggerOptions opts = rLoggerOptions::OptionsBuilder()
+    LoggerOptions opts = LoggerOptions::OptionsBuilder()
                               .setOutputConsole(false)
                               .setOutputFile(false)
                               .setTimeProvider([=]
                                                { return fixedTime; })
                               .build();
     doc::gOpts = &opts;
-    rLogger logger{};
+    Logger logger{};
     logger.RegisterLogCallback(FormatLogTester);
 
     std::string tester = std::format("| [TRACE] [{:%Y-%m-%d %H:%M:%S}] [Main] Log |", fixedTime);
@@ -83,14 +84,14 @@ TEST(rLoggerTest, SeverityFuncTest)
 TEST(rLoggerTest, WriteFileTest)
 {
     std::chrono::system_clock::time_point fixedTime = std::chrono::system_clock::from_time_t(0);
-    rLoggerOptions opts = rLoggerOptions::OptionsBuilder()
+    LoggerOptions opts = LoggerOptions::OptionsBuilder()
                               .setOutputConsole(false)
                               .setFileName("unit_test")
                               .setTimeProvider([=]
                                                { return fixedTime; })
                               .build();
     doc::gOpts = &opts;
-    rLogger logger{};
+    Logger logger{};
 
     logger.Trace("Log");
     logger.Debug("Log");
@@ -120,14 +121,14 @@ TEST(rLoggerTest, WriteFileTest)
 
 void debugThread(const std::string _threadName)
 {
-    rLogger logger(_threadName);
+    Logger logger(_threadName);
 
     logger.Debug("From Debug thread");
 }
 
 void errorThread(const std::string _threadName)
 {
-    rLogger logger(_threadName);
+    Logger logger(_threadName);
 
     logger.Error("From Error thread");
 }
@@ -135,14 +136,14 @@ void errorThread(const std::string _threadName)
 TEST(rLoggerTest, multithreadTest)
 {
     std::chrono::system_clock::time_point fixedTime = std::chrono::system_clock::from_time_t(0);
-    rLoggerOptions opts = rLoggerOptions::OptionsBuilder()
+    LoggerOptions opts = LoggerOptions::OptionsBuilder()
                               .setOutputConsole(false)
                               .setFileName("multithread_test")
                               .setTimeProvider([=]
                                                { return fixedTime; })
                               .build();
     doc::gOpts = &opts;
-    rLogger logger{};
+    Logger logger{};
 
     std::thread t1(debugThread, "Debug");
 

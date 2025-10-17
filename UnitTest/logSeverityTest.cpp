@@ -1,37 +1,38 @@
 #include <gtest/gtest.h>
 #include "../src/rLogger/rLogger.h"
+using namespace doc;
 
 TEST(rLogSeverityTest, LogTest)
 {
-	EXPECT_EQ(rLoggerSeverity::Trace.value, 0);
+	EXPECT_EQ(LoggerSeverity::Trace.value, 0);
 }
 
 TEST(rLogSeverityTest, DebugTest)
 {
-	EXPECT_EQ(rLoggerSeverity::Debug.value, 1);
+	EXPECT_EQ(LoggerSeverity::Debug.value, 1);
 }
 
 TEST(rLogSeverityTest, InfoTest)
 {
-	EXPECT_EQ(rLoggerSeverity::Info.value, 2);
+	EXPECT_EQ(LoggerSeverity::Info.value, 2);
 }
 
 TEST(rLogSeverityTest, WarningTest)
 {
-	EXPECT_EQ(rLoggerSeverity::Warning.value, 3);
+	EXPECT_EQ(LoggerSeverity::Warning.value, 3);
 }
 
 TEST(rLogSeverityTest, ErrorTest)
 {
-	EXPECT_EQ(rLoggerSeverity::Error.value, 4);
+	EXPECT_EQ(LoggerSeverity::Error.value, 4);
 }
 
 TEST(rLogSeverityTest, CriticalTest)
 {
-	EXPECT_EQ(rLoggerSeverity::Critical.value, 5);
+	EXPECT_EQ(LoggerSeverity::Critical.value, 5);
 }
 
 TEST(rLogSeverityTest, NoneTest)
 {
-	EXPECT_EQ(rLoggerSeverity::None.value, 6);
+	EXPECT_EQ(LoggerSeverity::None.value, 6);
 }

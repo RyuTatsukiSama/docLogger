@@ -1,15 +1,16 @@
 #include "taskManager.h"
+using namespace doc;
 
 void anotherFunc(void)
 {
-    rLogger logger(doc::threadName);
+    Logger logger(threadName);
 
-    logger.Trace(std::format("Hello from another func in this {} thread", doc::threadName));
+    logger.Trace(std::format("Hello from another func in this {} thread", threadName));
 }
 
 void debugThread(const std::string _threadName)
 {
-    rLogger logger(_threadName);
+    Logger logger(_threadName);
 
     logger.Debug("From debug thread");
     anotherFunc();
@@ -17,7 +18,7 @@ void debugThread(const std::string _threadName)
 
 void errorThread(const std::string _threadName)
 {
-    rLogger logger(_threadName);
+    Logger logger(_threadName);
 
     logger.Error("From error thread");
     anotherFunc();
@@ -26,7 +27,7 @@ void errorThread(const std::string _threadName)
 int main()
 {
     /*std::chrono::system_clock::time_point fixedTime = std::chrono::system_clock::from_time_t(0);
-    rLogger logger(rLoggerOptionsOld::make({.outputConsole = true,
+    Logger logger(rLoggerOptionsOld::make({.outputConsole = true,
                                          .fileName = "unit_test",
                                          .timeProvider = [=]
                                          { return fixedTime; }}));
@@ -48,30 +49,28 @@ int main()
         }
     }
 
-    rLogger log(rLoggerOptionsOld::defaults);
+    Logger log(rLoggerOptionsOld::defaults);
 
     log.Caller();*/
 
-    rLoggerOptions opts = rLoggerOptions::OptionsBuilder().build();
-    doc::gOpts = &opts;
+    LoggerOptions opts = LoggerOptions::OptionsBuilder().build();
+    gOpts = &opts;
 
-    rLogger log("Main");
-    log.setSeverityThreshdold(rLoggerSeverity::Warning);
+    Logger log("Main");
+    log.setSeverityThreshdold(LoggerSeverity::Warning);
 
-    log.Log(rLoggerSeverity::Trace, "This is a Trace test");
-    log.Log(rLoggerSeverity::Debug, "This is a Debug test");
-    log.Log(rLoggerSeverity::Info, "This is a Info test");
-    log.Log(rLoggerSeverity::Warning, "This is a Warning test");
-    log.Log(rLoggerSeverity::Error, "This is a Error test");
-    log.Log(rLoggerSeverity::Critical, "This is a Critical test");
+    log.Log(LoggerSeverity::Trace, "This is a Trace test");
+    log.Log(LoggerSeverity::Debug, "This is a Debug test");
+    log.Log(LoggerSeverity::Info, "This is a Info test");
+    log.Log(LoggerSeverity::Warning, "This is a Warning test");
+    log.Log(LoggerSeverity::Error, "This is a Error test");
+    log.Log(LoggerSeverity::Critical, "This is a Critical test");
     std::thread t1(debugThread, "Debug");
 
     std::thread t2(errorThread, "Error");
 
     t1.join();
     t2.join();
-
-    std::cout << rLoggerSeverity::Info.value << std::endl;
 
     system("pause");
 
