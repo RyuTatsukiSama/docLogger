@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Common Library
-add_library(LoggerLib
+add_library(docLoggerLib
     "./src/rLogger/rLoggerSeverity.cpp"
     "./src/rLogger/rLoggerSeverity.h"
     "./src/rLogger/rLoggerOptions.cpp"
@@ -18,7 +18,7 @@ add_library(LoggerLib
 
 # Task Manager Executable
 add_executable(TaskManagerApp "./src/TaskManager/taskManager.cpp" "./src/TaskManager/main.cpp")
-target_link_libraries(TaskManagerApp PRIVATE LoggerLib)
+target_link_libraries(TaskManagerApp PRIVATE docLoggerLib)
 
 # Unit Test Executable
 include(FetchContent)
@@ -32,7 +32,7 @@ FetchContent_MakeAvailable(googletest)
 enable_testing()
 
 add_executable(UnitTests "UnitTest/unitTest.cpp" "UnitTest/logSeverityTest.cpp" "UnitTest/docLoggerTest.cpp" "UnitTest/optionsTest.cpp")
-target_link_libraries(UnitTests PRIVATE LoggerLib gtest gmock gtest_main gmock_main)
+target_link_libraries(UnitTests PRIVATE docLoggerLib gtest gmock gtest_main gmock_main)
 
 include(GoogleTest)
 gtest_discover_tests(UnitTests)
