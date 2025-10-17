@@ -2,25 +2,27 @@
 #define RLOGGERSEVERITY_H
 
 #include <iostream>
-
-struct rLoggerSeverity
+namespace doc
 {
-    int value;
+    struct LoggerSeverity
+    {
+        int value;
 
-    static const rLoggerSeverity Trace, Debug, Info, Warning, Error, Critical, None;
-};
+        static const LoggerSeverity Trace, Debug, Info, Warning, Error, Critical, None;
+    };
 
-inline bool operator==(const rLoggerSeverity& _s1, const rLoggerSeverity& _s2)
-{
-    return _s1.value == _s2.value;
+    inline bool operator==(const LoggerSeverity &_s1, const LoggerSeverity &_s2)
+    {
+        return _s1.value == _s2.value;
+    }
+
 }
-
 namespace std
 {
     template <>
-    struct hash<rLoggerSeverity>
+    struct hash<doc::LoggerSeverity>
     {
-        size_t operator()(const rLoggerSeverity& _severity) const
+        size_t operator()(const doc::LoggerSeverity &_severity) const
         {
             return hash<int>{}(_severity.value);
         }
