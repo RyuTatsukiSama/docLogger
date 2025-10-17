@@ -11,7 +11,7 @@ void debugThread(const std::string _threadName)
 {
     rLogger logger(_threadName);
 
-    logger.Critical("From debug thread");
+    logger.Debug("From debug thread");
     anotherFunc();
 }
 
@@ -50,23 +50,27 @@ int main()
 
     rLogger log(rLoggerOptionsOld::defaults);
 
-    log.Caller();
+    log.Caller();*/
+
+    rLoggerOptions opts = rLoggerOptions::OptionsBuilder().build();
+    doc::gOpts = &opts;
+
+    rLogger log("Main");
 
     log.Log(rLoggerSeverity::Trace, "This is a Trace test");
     log.Log(rLoggerSeverity::Debug, "This is a Debug test");
     log.Log(rLoggerSeverity::Info, "This is a Info test");
     log.Log(rLoggerSeverity::Warning, "This is a Warning test");
     log.Log(rLoggerSeverity::Error, "This is a Error test");
-    log.Log(rLoggerSeverity::Critical, "This is a Critical test");*/
-
-    rLoggerOptions opts = rLoggerOptions::OptionsBuilder().build();
-    doc::gOpts = &opts;
+    log.Log(rLoggerSeverity::Critical, "This is a Critical test");
     std::thread t1(debugThread, "Debug");
 
     std::thread t2(errorThread, "Error");
 
     t1.join();
     t2.join();
+
+    std::cout << rLoggerSeverity::Info.value << std::endl;
 
     system("pause");
 

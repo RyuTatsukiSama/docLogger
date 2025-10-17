@@ -29,7 +29,7 @@ class rLogger
 {
 protected:
 	/// @brief Use to prevent log with a severity below to be register
-	rLoggerSeverity severityThreshdold = rLoggerSeverity::Trace;
+	rLoggerSeverity severityThreshdold = DOC_LOG_THRESHOLD;
 
 	/// @brief Vector of the streams the log message are sent
 	std::vector<std::ostream *> outputStreams;
