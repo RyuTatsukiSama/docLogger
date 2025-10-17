@@ -14,13 +14,14 @@ void FormatLogTester(std::string _formatedMessage)
 
 TEST(rLoggerTest, FormatLogTest)
 {
+    // Create a logger with a fixed time provider to have a predictable output
     std::chrono::system_clock::time_point fixedTime = std::chrono::system_clock::from_time_t(0);
     LoggerOptions opts = LoggerOptions::OptionsBuilder()
-                              .setOutputConsole(false)
-                              .setOutputFile(false)
-                              .setTimeProvider([=]
-                                               { return fixedTime; })
-                              .build();
+                             .setOutputConsole(false)
+                             .setOutputFile(false)
+                             .setTimeProvider([=]
+                                              { return fixedTime; })
+                             .build();
     doc::gOpts = &opts;
     Logger testLogger{};
     testLogger.RegisterLogCallback(FormatLogTester);
@@ -32,13 +33,14 @@ TEST(rLoggerTest, FormatLogTest)
 
 TEST(rLoggerTest, CallerTest)
 {
+    // Create a logger with a fixed time provider to have a predictable output
     std::chrono::system_clock::time_point fixedTime = std::chrono::system_clock::from_time_t(0);
     LoggerOptions opts = LoggerOptions::OptionsBuilder()
-                              .setOutputConsole(false)
-                              .setOutputFile(false)
-                              .setTimeProvider([=]
-                                               { return fixedTime; })
-                              .build();
+                             .setOutputConsole(false)
+                             .setOutputFile(false)
+                             .setTimeProvider([=]
+                                              { return fixedTime; })
+                             .build();
     doc::gOpts = &opts;
     Logger logger{};
     logger.RegisterLogCallback(FormatLogTester);
@@ -50,13 +52,14 @@ TEST(rLoggerTest, CallerTest)
 
 TEST(rLoggerTest, SeverityFuncTest)
 {
+    // Create a logger with a fixed time provider to have a predictable output
     std::chrono::system_clock::time_point fixedTime = std::chrono::system_clock::from_time_t(0);
     LoggerOptions opts = LoggerOptions::OptionsBuilder()
-                              .setOutputConsole(false)
-                              .setOutputFile(false)
-                              .setTimeProvider([=]
-                                               { return fixedTime; })
-                              .build();
+                             .setOutputConsole(false)
+                             .setOutputFile(false)
+                             .setTimeProvider([=]
+                                              { return fixedTime; })
+                             .build();
     doc::gOpts = &opts;
     Logger logger{};
     logger.RegisterLogCallback(FormatLogTester);
@@ -83,13 +86,14 @@ TEST(rLoggerTest, SeverityFuncTest)
 
 TEST(rLoggerTest, WriteFileTest)
 {
+    // Create a logger with a fixed time provider to have a predictable output
     std::chrono::system_clock::time_point fixedTime = std::chrono::system_clock::from_time_t(0);
     LoggerOptions opts = LoggerOptions::OptionsBuilder()
-                              .setOutputConsole(false)
-                              .setFileName("unit_test")
-                              .setTimeProvider([=]
-                                               { return fixedTime; })
-                              .build();
+                             .setOutputConsole(false)
+                             .setFileName("unit_test")
+                             .setTimeProvider([=]
+                                              { return fixedTime; })
+                             .build();
     doc::gOpts = &opts;
     Logger logger{};
 
@@ -135,13 +139,14 @@ void errorThread(const std::string _threadName)
 
 TEST(rLoggerTest, multithreadTest)
 {
+    // Create a logger with a fixed time provider to have a predictable output
     std::chrono::system_clock::time_point fixedTime = std::chrono::system_clock::from_time_t(0);
     LoggerOptions opts = LoggerOptions::OptionsBuilder()
-                              .setOutputConsole(false)
-                              .setFileName("multithread_test")
-                              .setTimeProvider([=]
-                                               { return fixedTime; })
-                              .build();
+                             .setOutputConsole(false)
+                             .setFileName("multithread_test")
+                             .setTimeProvider([=]
+                                              { return fixedTime; })
+                             .build();
     doc::gOpts = &opts;
     Logger logger{};
 

@@ -4,6 +4,7 @@
 #include <iostream>
 namespace doc
 {
+    /// @brief Severity levels for the logger
     struct LoggerSeverity
     {
         int value;
@@ -11,6 +12,7 @@ namespace doc
         static const LoggerSeverity Trace, Debug, Info, Warning, Error, Critical, None;
     };
 
+    /// @brief Compare two LoggerSeverity
     inline bool operator==(const LoggerSeverity &_s1, const LoggerSeverity &_s2)
     {
         return _s1.value == _s2.value;
@@ -19,6 +21,7 @@ namespace doc
 }
 namespace std
 {
+    /// @brief Hash function for LoggerSeverity to use it in unordered_map
     template <>
     struct hash<doc::LoggerSeverity>
     {

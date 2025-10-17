@@ -2,6 +2,8 @@
 #include "../src/rLogger/rLogger.h"
 using namespace doc;
 
+///@brief Unit tests for LoggerSeverity struct
+
 TEST(rLogSeverityTest, LogTest)
 {
 	EXPECT_EQ(LoggerSeverity::Trace.value, 0);
