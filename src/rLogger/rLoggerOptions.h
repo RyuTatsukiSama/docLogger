@@ -27,7 +27,15 @@ namespace doc
         std::function<std::chrono::system_clock::time_point()> m_timeProvider;
 
     public:
-        ~LoggerOptions(); // TODO : rule of five (https://en.cppreference.com/w/cpp/language/rule_of_three.html)
+        LoggerOptions() = default;
+        ~LoggerOptions();
+
+		LoggerOptions(const LoggerOptions& other); // copy constructor
+		LoggerOptions& operator=(const LoggerOptions& other); // copy assignment
+
+		LoggerOptions(LoggerOptions&& other) noexcept; // move constructor
+		LoggerOptions& operator=(LoggerOptions&& other) noexcept; // move assignment
+
 
 #pragma region Get methods
 

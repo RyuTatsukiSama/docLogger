@@ -2,7 +2,7 @@
 
 namespace doc
 {
-	thread_local std::string threadName;
+	thread_local std::string threadName = "";
 
 #pragma region rLogger Class
 #pragma region Protected
@@ -23,13 +23,13 @@ namespace doc
 	const std::unordered_map<LoggerSeverity, std::string> &Logger::getSeverityColor()
 	{
 		static const std::unordered_map<LoggerSeverity, std::string> sc = {
-			{LoggerSeverity::Trace, "\033[35m"},		// Purple
-			{LoggerSeverity::Debug, "\033[34m"},		// Blue
-			{LoggerSeverity::Info, "\033[32m"},		// Green
-			{LoggerSeverity::Warning, "\033[33m"},		// Yellow
-			{LoggerSeverity::Error, "\033[31m"},		// Red
+			{LoggerSeverity::Trace, "\033[35m"},	   // Purple
+			{LoggerSeverity::Debug, "\033[34m"},	   // Blue
+			{LoggerSeverity::Info, "\033[32m"},		   // Green
+			{LoggerSeverity::Warning, "\033[33m"},	   // Yellow
+			{LoggerSeverity::Error, "\033[31m"},	   // Red
 			{LoggerSeverity::Critical, "\033[97;41m"}, // White on Red
-			{LoggerSeverity::None, "\033[0m"}			// White
+			{LoggerSeverity::None, "\033[0m"}		   // White
 		};
 
 		return sc;
@@ -49,26 +49,36 @@ namespace doc
 #pragma region Public
 #pragma region Constructor
 
-	Logger::Logger(std::string _threadName)
+	Logger::Logger(const std::string &_threadName, const LoggerOptions &_options)
 	{
-		if (doc::threadName == "") // assign the thread name if it's empty
+		if (doc::threadName.empty())
 			doc::threadName = _threadName;
 
-		timeProvider = gOpts->getTimeProvider(); // get the time provider from the options
+		// some dead code for have the thread id in the thread name
+		// doc::threadName = std::format("{} ( id : {})", _threadName, std::hash<std::thread::id>{}(std::this_thread::get_id()));
 
-		if (gOpts->isOutputConsole()) // Check if the output in the console is asked
+		lOpts = _options;						// assign the options
+		timeProvider = lOpts.getTimeProvider(); // get the time provider from the options
+
+		if (lOpts.isOutputConsole()) // Check if the output in the console is asked
 		{
 			RegisterOutputStream(&std::cout); // Push it into the vector
 		}
 
-		if (gOpts->isOutputFile()) // Check if the output in the file is asked
+		if (lOpts.isOutputFile()) // Check if the output in the file is asked
 		{
-			if (gOpts->getFileStream()->is_open())			  // check if the file is open
-				RegisterOutputStream(gOpts->getFileStream()); // if yes, push it into the vector
+			if (lOpts.getFileStream()->is_open())			 // check if the file is open
+				RegisterOutputStream(lOpts.getFileStream()); // if yes, push it into the vector
 			else
-				std::cout << FormatLog(LoggerSeverity::Warning, std::format("The file {} can't be open.", gOpts->getFileName())) << std::endl; // Log a warning if the file can't be open
+				std::cout << FormatLog(LoggerSeverity::Warning, std::format("The file {} can't be open.", lOpts.getFileName())) << std::endl; // Log a warning if the file can't be open
 		}
 	}
+
+	Logger::Logger(const std::string &_threadName) : Logger(_threadName, *gOpts) {}
+
+	Logger::Logger(const LoggerOptions &_options) : Logger("Main", _options) {}
+
+	Logger::Logger() : Logger("Main", *gOpts) {}
 
 #pragma endregion
 
