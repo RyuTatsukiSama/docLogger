@@ -56,7 +56,7 @@ int main()
     LoggerOptions opts = LoggerOptions::OptionsBuilder().build();
     gOpts = &opts;
 
-    Logger log("Main");
+    Logger log;
     log.setSeverityThreshdold(LoggerSeverity::Warning);
 
     log.Log(LoggerSeverity::Trace, "This is a Trace test");
@@ -65,9 +65,9 @@ int main()
     log.Log(LoggerSeverity::Warning, "This is a Warning test");
     log.Log(LoggerSeverity::Error, "This is a Error test");
     log.Log(LoggerSeverity::Critical, "This is a Critical test");
-    std::thread t1(debugThread, "Debug");
+    std::thread t1(debugThread, "Main");
 
-    std::thread t2(errorThread, "Error");
+    std::thread t2(errorThread, "Main");
 
     t1.join();
     t2.join();

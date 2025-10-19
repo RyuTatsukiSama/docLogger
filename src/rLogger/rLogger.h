@@ -50,11 +50,27 @@ namespace doc
 		/// @return The clean log message in a std::string
 		std::string FormatLog(const LoggerSeverity &_severity, const std::string _message);
 
+		/// @brief The options of the logger
+		LoggerOptions lOpts;
+
 	public:
-		/// @brief Call it to instantiate the logger where you want it
-		/// @param _threadName Main by default, change it if you are not in the Main thread,
-		/// or use doc::threadName if you already create a instance of the logger in this thread
-		Logger(std::string _threadName = "Main");
+		/// @brief Constructor with thread name and options
+		/// @param _threadName The name of the thread where this logger is used
+		/// @param _options The options you want to use for this logger
+		Logger(const std::string &_threadName, const LoggerOptions &_options);
+
+		/// @brief Constructor with only thread name, use the gOpts as options
+		/// @param _threadName The name of the thread where this logger is used
+		Logger(const std::string &_threadName);
+
+		/// @brief Constructor with only options, use " Main " as thread name
+		/// @param _options The options you want to use for this logger
+		Logger(const LoggerOptions &_options);
+
+		/// @brief Default constructor, use the gOpts as options and " Main " as thread name
+		Logger();
+
+		/// @brief Default destructor, close all the streams
 		~Logger() = default;
 
 		/// @brief The standard method to create a log
