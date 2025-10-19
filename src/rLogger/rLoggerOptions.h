@@ -30,12 +30,11 @@ namespace doc
         LoggerOptions() = default;
         ~LoggerOptions();
 
-		LoggerOptions(const LoggerOptions& other); // copy constructor
-		LoggerOptions& operator=(const LoggerOptions& other); // copy assignment
+        LoggerOptions(const LoggerOptions &other);            // copy constructor
+        LoggerOptions &operator=(const LoggerOptions &other); // copy assignment
 
-		LoggerOptions(LoggerOptions&& other) noexcept; // move constructor
-		LoggerOptions& operator=(LoggerOptions&& other) noexcept; // move assignment
-
+        LoggerOptions(LoggerOptions &&other) noexcept;            // move constructor
+        LoggerOptions &operator=(LoggerOptions &&other) noexcept; // move assignment
 
 #pragma region Get methods
 
@@ -132,7 +131,7 @@ namespace doc
         };
     };
 
-    /// @brief Options of the logger, need to be declare before any instantiation of the logger
+    /// @brief It is the value by default of the LoggerOptions used by the Logger if no LoggerOptions is given, instantiate it before using the Logger. It is like the default configuration you want for your logger instances
     extern const LoggerOptions *gOpts;
 }
 #endif // !RLOGGEROPTIONS_H
