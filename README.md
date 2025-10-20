@@ -29,6 +29,7 @@ With all of this, you have also the clearLog.bat. It simply delete of the .log f
 - [x] Commentary in the code in Unit Test
 - [x] Rename the project
 - [x] Put all the code in a namespace
+- [ ] Rename the output folder docLogs
 - [x] Make a realease to make it easy to download it
 - [ ] Make it a .dll instead of a .lib
 - [ ] Export the docLogger in other languages
