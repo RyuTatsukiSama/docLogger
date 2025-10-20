@@ -2,7 +2,7 @@
 #define TASKMANAGER_H
 
 #include <iostream>
-#include "../rLogger/rLogger.h"
+#include "../Logger/Logger.h"
 #include <thread>
 #include <string>
 

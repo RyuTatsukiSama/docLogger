@@ -16,8 +16,8 @@
 #include <source_location>
 #include <mutex>
 
-#include "rLoggerOptions.h"
-#include "rLoggerSeverity.h"
+#include "LoggerOptions.h"
+#include "LoggerSeverity.h"
 #include "../Profiler/ProfillerTimer.h"
 
 #define PROFILE_TIMER_SCOPE(_name) ProfilerTime profileTimer##__LINE__(_name)
