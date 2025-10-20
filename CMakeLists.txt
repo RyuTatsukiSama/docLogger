@@ -14,13 +14,13 @@ add_library(docProfiler
 
 # static library logger
 add_library(docLoggerLib
-    "./src/rLogger/rLoggerSeverity.cpp"
-    "./src/rLogger/rLoggerSeverity.h"
-    "./src/rLogger/rLoggerOptions.cpp"
-    "./src/rLogger/rLoggerOptions.h"
-    "./src/rLogger/rLogger.cpp"
-    "./src/rLogger/rLogger_severityMethods.cpp"
-    "./src/rLogger/rLogger.h"
+    "./src/Logger/LoggerSeverity.cpp"
+    "./src/Logger/LoggerSeverity.h"
+    "./src/Logger/LoggerOptions.cpp"
+    "./src/Logger/LoggerOptions.h"
+    "./src/Logger/Logger.cpp"
+    "./src/Logger/Logger_severityMethods.cpp"
+    "./src/Logger/Logger.h"
     "./src/TaskManager/taskManager.cpp"
     "./src/TaskManager/taskManager.h")
     
