@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 #include <gmock/gmock-matchers.h>
-#include "../src/Logger/Logger.h"
+#include "../src/Logger/Include/Logger.h"
 #include <thread>
 using namespace doc;
 

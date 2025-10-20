@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "../src/Logger/Logger.h"
+#include "../src/Logger/Include/Logger.h"
 using namespace doc;
 
 ///@brief Unit tests for LoggerSeverity struct
