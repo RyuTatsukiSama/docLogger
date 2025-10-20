@@ -15,12 +15,12 @@ add_library(docProfiler
 # static library logger
 add_library(docLoggerLib
     "./src/Logger/LoggerSeverity.cpp"
-    "./src/Logger/LoggerSeverity.h"
+    "./src/Logger/Include/LoggerSeverity.h"
     "./src/Logger/LoggerOptions.cpp"
-    "./src/Logger/LoggerOptions.h"
+    "./src/Logger/Include/LoggerOptions.h"
     "./src/Logger/Logger.cpp"
     "./src/Logger/Logger_severityMethods.cpp"
-    "./src/Logger/Logger.h"
+    "./src/Logger/Include/Logger.h"
     "./src/TaskManager/taskManager.cpp"
     "./src/TaskManager/taskManager.h")
     
