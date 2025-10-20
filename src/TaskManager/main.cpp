@@ -1,16 +1,15 @@
 #include "taskManager.h"
-using namespace doc;
 
 void anotherFunc(void)
 {
-    Logger logger(threadName);
+    doc::Logger logger(doc::threadName);
 
-    logger.Trace(std::format("Hello from another func in this {} thread", threadName));
+    logger.Trace(std::format("Hello from another func in this {} thread", doc::threadName));
 }
 
 void debugThread(const std::string _threadName)
 {
-    Logger logger(_threadName);
+    doc::Logger logger(_threadName);
 
     logger.Debug("From debug thread");
     anotherFunc();
@@ -18,7 +17,7 @@ void debugThread(const std::string _threadName)
 
 void errorThread(const std::string _threadName)
 {
-    Logger logger(_threadName);
+    doc::Logger logger(_threadName);
 
     logger.Error("From error thread");
     anotherFunc();
@@ -53,21 +52,21 @@ int main()
 
     log.Caller();*/
 
-    LoggerOptions opts = LoggerOptions::OptionsBuilder().build();
-    gOpts = &opts;
+    doc::LoggerOptions opts = doc::LoggerOptions::OptionsBuilder().build();
+    doc::gOpts = &opts;
 
-    Logger log;
-    log.setSeverityThreshdold(LoggerSeverity::Warning);
+    doc::Logger log;
+    log.setSeverityThreshdold(doc::LoggerSeverity::None);
 
-    log.Log(LoggerSeverity::Trace, "This is a Trace test");
-    log.Log(LoggerSeverity::Debug, "This is a Debug test");
-    log.Log(LoggerSeverity::Info, "This is a Info test");
-    log.Log(LoggerSeverity::Warning, "This is a Warning test");
-    log.Log(LoggerSeverity::Error, "This is a Error test");
-    log.Log(LoggerSeverity::Critical, "This is a Critical test");
-    std::thread t1(debugThread, "Main");
+    log.Log(doc::LoggerSeverity::Trace, "This is a Trace test");
+    log.Log(doc::LoggerSeverity::Debug, "This is a Debug test");
+    log.Log(doc::LoggerSeverity::Info, "This is a Info test");
+    log.Log(doc::LoggerSeverity::Warning, "This is a Warning test");
+    log.Log(doc::LoggerSeverity::Error, "This is a Error test");
+    log.Log(doc::LoggerSeverity::Critical, "This is a Critical test");
+    std::thread t1(debugThread, "Debug");
 
-    std::thread t2(errorThread, "Main");
+    std::thread t2(errorThread, "Error");
 
     t1.join();
     t2.join();

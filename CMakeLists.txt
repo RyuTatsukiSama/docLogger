@@ -4,7 +4,15 @@ project(rLogger_cpp LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Common Library
+# static library profiler
+add_library(docProfiler
+    "./src/Profiler/Profiler.cpp"
+    "./src/Profiler/Profiler.h"
+    "./src/Profiler/ProfilerTimer.cpp"
+    "./src/Profiler/ProfillerTimer.h"
+    "./src/Profiler/TraceEvent.h")
+
+# static library logger
 add_library(docLoggerLib
     "./src/rLogger/rLoggerSeverity.cpp"
     "./src/rLogger/rLoggerSeverity.h"
@@ -15,6 +23,8 @@ add_library(docLoggerLib
     "./src/rLogger/rLogger.h"
     "./src/TaskManager/taskManager.cpp"
     "./src/TaskManager/taskManager.h")
+    
+target_link_libraries(docLoggerLib PRIVATE docProfiler)
 
 # Task Manager Executable
 add_executable(TaskManagerApp "./src/TaskManager/taskManager.cpp" "./src/TaskManager/main.cpp")
