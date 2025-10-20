@@ -22,16 +22,16 @@ namespace doc
                 m_fileName = std::format("{:%Y-%m-%d_%H-%M-%S}", now);
             }
 
-            if (!std::filesystem::exists("rLogs")) // If the directory "rLogs" don't exist create it
+            if (!std::filesystem::exists("docLogs")) // If the directory "docLogs" don't exist create it
             {
-                std::filesystem::create_directory("rLogs");
+                std::filesystem::create_directory("docLogs");
             }
 
-            std::string pathFile = std::format("rLogs/{}.log", m_fileName);
+            std::string pathFile = std::format("docLogs/{}.log", m_fileName);
 
             if (std::filesystem::exists(pathFile)) // if a file with this name already exist, add "-previous" at the end of the old one
             {
-                std::filesystem::rename(pathFile, std::format("rlogs/{}-previous.log", m_fileName));
+                std::filesystem::rename(pathFile, std::format("docLogs/{}-previous.log", m_fileName));
             }
 
             m_fileStream = new std::ofstream(pathFile); // open a stream to the file
@@ -47,11 +47,11 @@ namespace doc
         }
     }
 
-	LoggerOptions::LoggerOptions(const LoggerOptions& other) : m_outputConsole(other.m_outputConsole),
-		m_outputFile(other.m_outputFile),
-		m_fileName(other.m_fileName),
-		m_timeProvider(other.m_timeProvider),
-		m_fileStream(other.m_fileStream)
+    LoggerOptions::LoggerOptions(const LoggerOptions &other) : m_outputConsole(other.m_outputConsole),
+                                                               m_outputFile(other.m_outputFile),
+                                                               m_fileName(other.m_fileName),
+                                                               m_timeProvider(other.m_timeProvider),
+                                                               m_fileStream(other.m_fileStream)
     {
     }
 
