@@ -18,8 +18,7 @@
       "description": "Choisis l’exécutable à lancer",
       "options": [
         "rViewerLog",
-        "TaskManagerApp",
-        "TaskManagerAppDll",
+        "TaskManager",
         "UnitTests"
       ]
     }
