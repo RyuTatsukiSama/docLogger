@@ -18,10 +18,6 @@
 
 #include "LoggerOptions.h"
 #include "LoggerSeverity.h"
-#include "../../Profiler/ProfillerTimer.h"
-
-#define PROFILE_TIMER_SCOPE(_name) ProfilerTime profileTimer##__LINE__(_name)
-#define PROFILER_TIMER_FUNCTION PROFILE_TIMER_SCOPE(__func__)
 
 namespace doc
 {

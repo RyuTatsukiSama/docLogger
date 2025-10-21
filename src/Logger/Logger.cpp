@@ -84,7 +84,6 @@ namespace doc
 
 	void Logger::Log(const LoggerSeverity &_severity, const std::string &_message)
 	{
-		PROFILER_TIMER_FUNCTION;
 
 		if (_severity.value < severityThreshdold.value) // Check if the severity is beyond the threshold
 			return;
