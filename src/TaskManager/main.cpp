@@ -2,9 +2,9 @@
 
 void anotherFunc(void)
 {
-    doc::Logger logger(doc::threadName);
+    doc::Logger logger(doc::getThreadName());
 
-    logger.Trace(std::format("Hello from another func in this {} thread", doc::threadName));
+    logger.Trace(std::format("Hello from another func in this {} thread", doc::getThreadName()));
 }
 
 void debugThread(const std::string _threadName)
@@ -53,7 +53,7 @@ int main()
     log.Caller();*/
 
     doc::LoggerOptions opts = doc::LoggerOptions::OptionsBuilder().build();
-    doc::gOpts = &opts;
+	doc::setGlobalLoggerOptions(opts);
 
     doc::Logger log;
     log.setSeverityThreshdold(doc::LoggerSeverity::None);

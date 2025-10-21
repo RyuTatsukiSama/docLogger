@@ -79,4 +79,12 @@ namespace doc
         std::swap(m_fileStream, other.m_fileStream);
         return *this;
     }
+
+    void setGlobalLoggerOptions(const LoggerOptions& _options)
+    {
+        if (!gOpts)
+        {
+			gOpts = new LoggerOptions(_options);
+        }
+    }
 }

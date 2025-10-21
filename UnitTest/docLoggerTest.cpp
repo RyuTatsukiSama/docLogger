@@ -22,7 +22,7 @@ TEST(rLoggerTest, FormatLogTest)
                              .setTimeProvider([=]
                                               { return fixedTime; })
                              .build();
-    doc::gOpts = &opts;
+	doc::setGlobalLoggerOptions(opts);
     Logger testLogger{};
     testLogger.RegisterLogCallback(FormatLogTester);
 
@@ -41,7 +41,7 @@ TEST(rLoggerTest, CallerTest)
                              .setTimeProvider([=]
                                               { return fixedTime; })
                              .build();
-    doc::gOpts = &opts;
+    doc::setGlobalLoggerOptions(opts);
     Logger logger{};
     logger.RegisterLogCallback(FormatLogTester);
 
@@ -60,7 +60,7 @@ TEST(rLoggerTest, SeverityFuncTest)
                              .setTimeProvider([=]
                                               { return fixedTime; })
                              .build();
-    doc::gOpts = &opts;
+    doc::setGlobalLoggerOptions(opts);
     Logger logger{};
     logger.RegisterLogCallback(FormatLogTester);
 
@@ -94,7 +94,7 @@ TEST(rLoggerTest, WriteFileTest)
                              .setTimeProvider([=]
                                               { return fixedTime; })
                              .build();
-    doc::gOpts = &opts;
+    doc::setGlobalLoggerOptions(opts);
     Logger logger{};
 
     logger.Trace("Log");
@@ -147,7 +147,7 @@ TEST(rLoggerTest, multithreadTest)
                              .setTimeProvider([=]
                                               { return fixedTime; })
                              .build();
-    doc::gOpts = &opts;
+    doc::setGlobalLoggerOptions(opts);
     Logger logger{};
 
     std::thread t1(debugThread, "Debug");

@@ -22,7 +22,12 @@
 
 namespace doc
 {
-	extern thread_local DLL_API std::string threadName;
+#pragma region ThreadName
+
+	extern thread_local std::string threadName;
+
+	DLL_API const std::string &getThreadName();
+#pragma endregion
 	static std::mutex lock;
 
 	class DLL_API Logger
