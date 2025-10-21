@@ -23,7 +23,7 @@ TEST(docLoggerTest, FormatLogTest)
                                               { return fixedTime; })
                              .build();
     doc::setGlobalLoggerOptions(opts);
-    Logger testLogger{};
+    Logger testLogger;
     testLogger.RegisterLogCallback(FormatLogTester);
 
     std::string tester = std::format("| [TRACE] [{:%Y-%m-%d %H:%M:%S}] [Main] This is a trace level |", fixedTime);
@@ -42,7 +42,7 @@ TEST(docLoggerTest, CallerTest)
                                               { return fixedTime; })
                              .build();
     doc::setGlobalLoggerOptions(opts);
-    Logger logger{};
+    Logger logger;
     logger.RegisterLogCallback(FormatLogTester);
 
     std::string tester = std::format("| [DEBUG] [{:%Y-%m-%d %H:%M:%S}] [Main] void __cdecl docLoggerTest_CallerTest_Test::TestBody(void) is called |", fixedTime);
@@ -61,7 +61,7 @@ TEST(docLoggerTest, SeverityFuncTest)
                                               { return fixedTime; })
                              .build();
     doc::setGlobalLoggerOptions(opts);
-    Logger logger{};
+    Logger logger;
     logger.RegisterLogCallback(FormatLogTester);
 
     std::string tester = std::format("| [TRACE] [{:%Y-%m-%d %H:%M:%S}] [Main] Log |", fixedTime);
@@ -95,7 +95,7 @@ TEST(docLoggerTest, WriteFileTest)
                                               { return fixedTime; })
                              .build();
     doc::setGlobalLoggerOptions(opts);
-    Logger logger{};
+    Logger logger;
 
     logger.Trace("Log");
     logger.Debug("Log");
@@ -148,7 +148,7 @@ TEST(docLoggerTest, multithreadTest)
                                               { return fixedTime; })
                              .build();
     doc::setGlobalLoggerOptions(opts);
-    Logger logger{};
+    Logger logger;
 
     std::thread t1(debugThread, "Debug");
 
