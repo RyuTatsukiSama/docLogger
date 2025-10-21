@@ -134,5 +134,7 @@ namespace doc
 
     /// @brief It is the value by default of the LoggerOptions used by the Logger if no LoggerOptions is given, instantiate it before using the Logger. It is like the default configuration you want for your logger instances
     extern const LoggerOptions *gOpts;
+
+	DLL_API void setGlobalLoggerOptions(const LoggerOptions& _options);
 }
 #endif // !RLOGGEROPTIONS_H

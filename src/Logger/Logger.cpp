@@ -4,6 +4,11 @@ namespace doc
 {
 	thread_local std::string threadName = "";
 
+	DLL_API const std::string &getThreadName()
+	{
+		return threadName;
+	}
+
 #pragma region rLogger Class
 #pragma region Protected
 

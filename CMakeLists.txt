@@ -4,22 +4,6 @@ project(rLogger_cpp LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# static library logger
-add_library(docLoggerLib
-    "./src/Logger/LoggerSeverity.cpp"
-    "./src/Logger/include/LoggerSeverity.h"
-    "./src/Logger/LoggerOptions.cpp"
-    "./src/Logger/include/LoggerOptions.h"
-    "./src/Logger/Logger.cpp"
-    "./src/Logger/Logger_severityMethods.cpp"
-    "./src/Logger/include/Logger.h"
-    "./src/TaskManager/taskManager.cpp"
-    "./src/TaskManager/taskManager.h")
-
-# Task Manager Executable with static lib
-add_executable(TaskManagerApp "./src/TaskManager/taskManager.cpp" "./src/TaskManager/main.cpp")
-target_link_libraries(TaskManagerApp PRIVATE docLoggerLib)
-
 # dynamic libray logger
 add_library(docLoggerDll SHARED
     "./src/Logger/LoggerSeverity.cpp"
@@ -53,7 +37,7 @@ FetchContent_MakeAvailable(googletest)
 enable_testing()
 
 add_executable(UnitTests "UnitTest/unitTest.cpp" "UnitTest/logSeverityTest.cpp" "UnitTest/docLoggerTest.cpp" "UnitTest/optionsTest.cpp")
-target_link_libraries(UnitTests PRIVATE docLoggerLib gtest gmock gtest_main gmock_main)
+target_link_libraries(UnitTests PRIVATE docLoggerDll gtest gmock gtest_main gmock_main)
 
 include(GoogleTest)
 gtest_discover_tests(UnitTests)

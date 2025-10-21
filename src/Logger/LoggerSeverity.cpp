@@ -8,4 +8,4 @@ namespace doc
     const LoggerSeverity LoggerSeverity::Error = LoggerSeverity{4};
     const LoggerSeverity LoggerSeverity::Critical = LoggerSeverity{5};
     const LoggerSeverity LoggerSeverity::None = LoggerSeverity{6};
-} 
+}
