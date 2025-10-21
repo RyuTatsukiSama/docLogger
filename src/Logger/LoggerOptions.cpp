@@ -80,11 +80,8 @@ namespace doc
         return *this;
     }
 
-    void setGlobalLoggerOptions(const LoggerOptions& _options)
+    void setGlobalLoggerOptions(const LoggerOptions &_options)
     {
-        if (!gOpts)
-        {
-			gOpts = new LoggerOptions(_options);
-        }
+        gOpts = new LoggerOptions(_options);
     }
 }
