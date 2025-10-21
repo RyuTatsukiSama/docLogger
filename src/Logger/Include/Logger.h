@@ -18,13 +18,14 @@
 
 #include "LoggerOptions.h"
 #include "LoggerSeverity.h"
+#include "DLL_API.h"
 
 namespace doc
 {
-	extern thread_local std::string threadName;
+	extern thread_local DLL_API std::string threadName;
 	static std::mutex lock;
 
-	class Logger
+	class DLL_API Logger
 	{
 	protected:
 		/// @brief Use to prevent log with a severity below to be register

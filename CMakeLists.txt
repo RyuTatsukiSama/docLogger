@@ -16,6 +16,11 @@ add_library(docLoggerLib
     "./src/TaskManager/taskManager.cpp"
     "./src/TaskManager/taskManager.h")
 
+# Task Manager Executable with static lib
+add_executable(TaskManagerApp "./src/TaskManager/taskManager.cpp" "./src/TaskManager/main.cpp")
+target_link_libraries(TaskManagerApp PRIVATE docLoggerLib)
+
+# dynamic libray logger
 add_library(docLoggerDll SHARED
     "./src/Logger/LoggerSeverity.cpp"
     "./src/Logger/include/LoggerSeverity.h"
@@ -26,11 +31,15 @@ add_library(docLoggerDll SHARED
     "./src/Logger/include/Logger.h"
     "./src/TaskManager/taskManager.cpp"
     "./src/TaskManager/taskManager.h"
+    "./src/Logger/include/DLL_API.h"
 )
 
-# Task Manager Executable
-add_executable(TaskManagerApp "./src/TaskManager/taskManager.cpp" "./src/TaskManager/main.cpp")
-target_link_libraries(TaskManagerApp PRIVATE docLoggerLib)
+target_include_directories(docLoggerDll PUBLIC "./src/Logger/include")
+
+target_compile_definitions(docLoggerDll PRIVATE CMAKEDLL_EXPORTS)
+
+add_executable(TaskManagerAppDll "./src/TaskManager/taskManager.cpp" "./src/TaskManager/main.cpp")
+target_link_libraries(TaskManagerAppDll PRIVATE docLoggerDll)
 
 # Unit Test Executable
 include(FetchContent)
