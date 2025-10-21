@@ -12,7 +12,7 @@ void FormatLogTester(std::string _formatedMessage)
     formatedMessage = _formatedMessage;
 }
 
-TEST(rLoggerTest, FormatLogTest)
+TEST(docLoggerTest, FormatLogTest)
 {
     // Create a logger with a fixed time provider to have a predictable output
     std::chrono::system_clock::time_point fixedTime = std::chrono::system_clock::from_time_t(0);
@@ -22,7 +22,7 @@ TEST(rLoggerTest, FormatLogTest)
                              .setTimeProvider([=]
                                               { return fixedTime; })
                              .build();
-	doc::setGlobalLoggerOptions(opts);
+    doc::setGlobalLoggerOptions(opts);
     Logger testLogger{};
     testLogger.RegisterLogCallback(FormatLogTester);
 
@@ -31,7 +31,7 @@ TEST(rLoggerTest, FormatLogTest)
     EXPECT_EQ(formatedMessage, tester);
 }
 
-TEST(rLoggerTest, CallerTest)
+TEST(docLoggerTest, CallerTest)
 {
     // Create a logger with a fixed time provider to have a predictable output
     std::chrono::system_clock::time_point fixedTime = std::chrono::system_clock::from_time_t(0);
@@ -45,12 +45,12 @@ TEST(rLoggerTest, CallerTest)
     Logger logger{};
     logger.RegisterLogCallback(FormatLogTester);
 
-    std::string tester = std::format("| [DEBUG] [{:%Y-%m-%d %H:%M:%S}] [Main] void __cdecl rLoggerTest_CallerTest_Test::TestBody(void) is called |", fixedTime);
+    std::string tester = std::format("| [DEBUG] [{:%Y-%m-%d %H:%M:%S}] [Main] void __cdecl docLoggerTest_CallerTest_Test::TestBody(void) is called |", fixedTime);
     logger.Caller();
     EXPECT_EQ(formatedMessage, tester);
 }
 
-TEST(rLoggerTest, SeverityFuncTest)
+TEST(docLoggerTest, SeverityFuncTest)
 {
     // Create a logger with a fixed time provider to have a predictable output
     std::chrono::system_clock::time_point fixedTime = std::chrono::system_clock::from_time_t(0);
@@ -84,7 +84,7 @@ TEST(rLoggerTest, SeverityFuncTest)
     EXPECT_EQ(tester, formatedMessage);
 }
 
-TEST(rLoggerTest, WriteFileTest)
+TEST(docLoggerTest, WriteFileTest)
 {
     // Create a logger with a fixed time provider to have a predictable output
     std::chrono::system_clock::time_point fixedTime = std::chrono::system_clock::from_time_t(0);
@@ -104,7 +104,7 @@ TEST(rLoggerTest, WriteFileTest)
     logger.Error("Log");
     logger.Critical("Log");
 
-    std::fstream file("rLogs/unit_test.log", std::ios::in);
+    std::fstream file("docLogs/unit_test.log", std::ios::in);
 
     std::string line = "";
     std::getline(file, line);
@@ -137,7 +137,7 @@ void errorThread(const std::string _threadName)
     logger.Error("From Error thread");
 }
 
-TEST(rLoggerTest, multithreadTest)
+TEST(docLoggerTest, multithreadTest)
 {
     // Create a logger with a fixed time provider to have a predictable output
     std::chrono::system_clock::time_point fixedTime = std::chrono::system_clock::from_time_t(0);
@@ -157,7 +157,7 @@ TEST(rLoggerTest, multithreadTest)
     t1.join();
     t2.join();
 
-    std::ifstream mtTestLog("rLogs/multithread_test.log");
+    std::ifstream mtTestLog("docLogs/multithread_test.log");
 
     EXPECT_EQ(mtTestLog.is_open(), true);
     if (mtTestLog.is_open())

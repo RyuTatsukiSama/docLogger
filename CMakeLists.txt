@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # dynamic libray logger
-add_library(docLoggerDll SHARED
+add_library(docLogger SHARED
     "./src/Logger/LoggerSeverity.cpp"
     "./src/Logger/include/LoggerSeverity.h"
     "./src/Logger/LoggerOptions.cpp"
@@ -18,12 +18,12 @@ add_library(docLoggerDll SHARED
     "./src/Logger/include/DLL_API.h"
 )
 
-target_include_directories(docLoggerDll PUBLIC "./src/Logger/include")
+target_include_directories(docLogger PUBLIC "./src/Logger/include")
 
-target_compile_definitions(docLoggerDll PRIVATE CMAKEDLL_EXPORTS)
+target_compile_definitions(docLogger PRIVATE CMAKEDLL_EXPORTS)
 
-add_executable(TaskManagerAppDll "./src/TaskManager/taskManager.cpp" "./src/TaskManager/main.cpp")
-target_link_libraries(TaskManagerAppDll PRIVATE docLoggerDll)
+add_executable(TaskManager "./src/TaskManager/taskManager.cpp" "./src/TaskManager/main.cpp")
+target_link_libraries(TaskManager PRIVATE docLogger)
 
 # Unit Test Executable
 include(FetchContent)
@@ -37,7 +37,7 @@ FetchContent_MakeAvailable(googletest)
 enable_testing()
 
 add_executable(UnitTests "UnitTest/unitTest.cpp" "UnitTest/logSeverityTest.cpp" "UnitTest/docLoggerTest.cpp" "UnitTest/optionsTest.cpp")
-target_link_libraries(UnitTests PRIVATE docLoggerDll gtest gmock gtest_main gmock_main)
+target_link_libraries(UnitTests PRIVATE docLogger gtest gmock gtest_main gmock_main)
 
 include(GoogleTest)
 gtest_discover_tests(UnitTests)

@@ -53,7 +53,7 @@ TEST(optionsTest, previousLogTest)
         std::filesystem::create_directory("rLogs");
     }
 
-    std::ofstream previousTest("rLogs/previous_test.log");
+    std::ofstream previousTest("docLogs/previous_test.log");
 
     EXPECT_EQ(previousTest.is_open(), true);
     if (previousTest.is_open())
@@ -69,7 +69,7 @@ TEST(optionsTest, previousLogTest)
 
     LoggerOptions opts = LoggerOptions::OptionsBuilder().setOutputConsole(false).setFileName("previous_test").build();
 
-    std::ifstream previousTestPrevious("rLogs/previous_test-previous.log");
+    std::ifstream previousTestPrevious("docLogs/previous_test-previous.log");
 
     EXPECT_EQ(previousTestPrevious.is_open(), true);
     if (previousTestPrevious.is_open())
