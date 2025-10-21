@@ -1,4 +1,4 @@
-#include "./Include/LoggerOptions.h"
+#include "./include/LoggerOptions.h"
 #include <iostream>
 
 namespace doc

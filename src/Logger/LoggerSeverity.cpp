@@ -1,4 +1,4 @@
-#include "./Include/LoggerSeverity.h"
+#include "./include/LoggerSeverity.h"
 namespace doc
 {
     const LoggerSeverity LoggerSeverity::Trace = LoggerSeverity{0};
