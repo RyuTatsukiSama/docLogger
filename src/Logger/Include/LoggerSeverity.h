@@ -2,18 +2,26 @@
 #define RLOGGERSEVERITY_H
 
 #include <iostream>
+#include "DLL_API.h"
+
 namespace doc
 {
     /// @brief Severity levels for the logger
-    struct LoggerSeverity
+    struct DLL_API LoggerSeverity
     {
         int value;
 
-        static const LoggerSeverity Trace, Debug, Info, Warning, Error, Critical, None;
+        static const LoggerSeverity Trace;
+        static const LoggerSeverity Debug;
+        static const LoggerSeverity Info;
+        static const LoggerSeverity Warning;
+        static const LoggerSeverity Error;
+        static const LoggerSeverity Critical;
+        static const LoggerSeverity None;
     };
 
     /// @brief Compare two LoggerSeverity
-    inline bool operator==(const LoggerSeverity &_s1, const LoggerSeverity &_s2)
+    inline DLL_API bool operator==(const LoggerSeverity &_s1, const LoggerSeverity &_s2)
     {
         return _s1.value == _s2.value;
     }

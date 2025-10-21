@@ -7,12 +7,13 @@
 #include <filesystem>
 #include <format>
 #include <fstream>
+#include "DLL_API.h"
 
 namespace doc
 {
     /// @brief This class is used to give some parameter to the logger for a more quick configuration of it.
     /// Work with the OptionsBuilder class. For more explanation https://github.com/RyuTatsukiSama/docLogger/blob/main/Documentation.md
-    class LoggerOptions
+    class DLL_API LoggerOptions
     {
     private:
         LoggerOptions(const bool _outputConsole,
