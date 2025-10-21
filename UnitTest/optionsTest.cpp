@@ -48,9 +48,9 @@ TEST(optionsTest, previousLogTest)
 {
     std::string previousLogContent = "This is the previous log";
 
-    if (!std::filesystem::exists("rLogs"))
+    if (!std::filesystem::exists("docLogs"))
     {
-        std::filesystem::create_directory("rLogs");
+        std::filesystem::create_directory("docLogs");
     }
 
     std::ofstream previousTest("docLogs/previous_test.log");
@@ -62,7 +62,7 @@ TEST(optionsTest, previousLogTest)
     }
     else
     {
-        std::cout << "rLogs/previous_test.log is not open" << std::endl;
+        std::cout << "docLogs/previous_test.log is not open" << std::endl;
     }
 
     previousTest.close();
@@ -82,6 +82,6 @@ TEST(optionsTest, previousLogTest)
     }
     else
     {
-        std::cout << "rLogs/previous_test-previous.log is not open" << std::endl;
+        std::cout << "docLogs/previous_test-previous.log is not open" << std::endl;
     }
 }

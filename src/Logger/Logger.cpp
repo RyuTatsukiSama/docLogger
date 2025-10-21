@@ -9,7 +9,7 @@ namespace doc
 		return threadName;
 	}
 
-#pragma region rLogger Class
+#pragma region docLogger Class
 #pragma region Protected
 
 	const std::unordered_map<LoggerSeverity, std::string> &Logger::getSeverityText()

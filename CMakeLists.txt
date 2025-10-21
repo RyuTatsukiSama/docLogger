@@ -23,6 +23,7 @@ target_include_directories(docLogger PUBLIC "./src/Logger/include")
 target_compile_definitions(docLogger PRIVATE CMAKEDLL_EXPORTS)
 
 add_executable(TaskManager "./src/TaskManager/taskManager.cpp" "./src/TaskManager/main.cpp")
+target_include_directories(TaskManager PUBLIC "./src/Logger/include")
 target_link_libraries(TaskManager PRIVATE docLogger)
 
 # Unit Test Executable
