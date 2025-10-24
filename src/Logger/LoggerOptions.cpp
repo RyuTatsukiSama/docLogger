@@ -82,6 +82,11 @@ namespace doc
 
     void setGlobalLoggerOptions(const LoggerOptions &_options)
     {
-        gOpts = new LoggerOptions(_options);
+        if (!gOpts)
+            gOpts = new LoggerOptions(_options);
+        else
+        {
+            std::cerr << "gOpts is already set" << std::endl;
+        }
     }
 }

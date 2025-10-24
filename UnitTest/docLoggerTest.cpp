@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 #include <gmock/gmock-matchers.h>
-#include "../src/Logger/include/Logger.h"
+#include <Logger.h>
 #include <thread>
 using namespace doc;
 
@@ -22,8 +22,7 @@ TEST(docLoggerTest, FormatLogTest)
                              .setTimeProvider([=]
                                               { return fixedTime; })
                              .build();
-    doc::setGlobalLoggerOptions(opts);
-    Logger testLogger;
+    Logger testLogger(opts);
     testLogger.RegisterLogCallback(FormatLogTester);
 
     std::string tester = std::format("| [TRACE] [{:%Y-%m-%d %H:%M:%S}] [Main] This is a trace level |", fixedTime);
@@ -41,8 +40,7 @@ TEST(docLoggerTest, CallerTest)
                              .setTimeProvider([=]
                                               { return fixedTime; })
                              .build();
-    doc::setGlobalLoggerOptions(opts);
-    Logger logger;
+    Logger logger(opts);
     logger.RegisterLogCallback(FormatLogTester);
 
     std::string tester = std::format("| [DEBUG] [{:%Y-%m-%d %H:%M:%S}] [Main] void __cdecl docLoggerTest_CallerTest_Test::TestBody(void) is called |", fixedTime);
@@ -60,8 +58,7 @@ TEST(docLoggerTest, SeverityFuncTest)
                              .setTimeProvider([=]
                                               { return fixedTime; })
                              .build();
-    doc::setGlobalLoggerOptions(opts);
-    Logger logger;
+    Logger logger(opts);
     logger.RegisterLogCallback(FormatLogTester);
 
     std::string tester = std::format("| [TRACE] [{:%Y-%m-%d %H:%M:%S}] [Main] Log |", fixedTime);
@@ -94,8 +91,7 @@ TEST(docLoggerTest, WriteFileTest)
                              .setTimeProvider([=]
                                               { return fixedTime; })
                              .build();
-    doc::setGlobalLoggerOptions(opts);
-    Logger logger;
+    Logger logger(opts);
 
     logger.Trace("Log");
     logger.Debug("Log");
@@ -147,8 +143,7 @@ TEST(docLoggerTest, multithreadTest)
                              .setTimeProvider([=]
                                               { return fixedTime; })
                              .build();
-    doc::setGlobalLoggerOptions(opts);
-    Logger logger;
+    Logger logger(opts);
 
     std::thread t1(debugThread, "Debug");
 
