@@ -81,9 +81,9 @@ namespace doc
 
 	Logger::Logger(const std::string &_threadName) : Logger(_threadName, *gOpts) {}
 
-	Logger::Logger(const LoggerOptions &_options) : Logger("Main", _options) {}
+	Logger::Logger(const LoggerOptions &_options) : Logger(std::format("{}", std::this_thread::get_id()), _options) {}
 
-	Logger::Logger() : Logger("Main", *gOpts) {}
+	Logger::Logger() : Logger(std::format("{}", std::this_thread::get_id()), *gOpts) {}
 
 #pragma endregion
 
