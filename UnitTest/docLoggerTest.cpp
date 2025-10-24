@@ -143,7 +143,8 @@ TEST(docLoggerTest, multithreadTest)
                              .setTimeProvider([=]
                                               { return fixedTime; })
                              .build();
-    Logger logger(opts);
+    setGlobalLoggerOptions(opts);
+    Logger logger;
 
     std::thread t1(debugThread, "Debug");
 
