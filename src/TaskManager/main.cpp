@@ -56,7 +56,6 @@ int main()
 	doc::setGlobalLoggerOptions(opts);
 
     doc::Logger log;
-    log.setSeverityThreshdold(doc::LoggerSeverity::None);
 
     log.Log(doc::LoggerSeverity::Trace, "This is a Trace test");
     log.Log(doc::LoggerSeverity::Debug, "This is a Debug test");
