@@ -23,7 +23,7 @@ With all of this, you have also the clearLog.bat. It simply delete of the .log f
 - [ ] Finish Task Manager App
 - [ ] Add it to Unreal Engine 5
 - [x] Writing all the unit test
-- [ ] Documentations ( will be available [here](https://github.com/RyuTatsukiSama/docLogger/blob/main/Documentation.md) )
+- [ ] Documentations ( will be available [here](https://github.com/RyuTatsukiSama/docLogger/blob/main/Documentation/TableOfContent.md) )
 - [x] Commentary in the code in logger
 - [ ] Commentary in the code in Task Manager App
 - [x] Commentary in the code in Unit Test
