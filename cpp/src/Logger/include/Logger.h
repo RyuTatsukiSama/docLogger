@@ -19,6 +19,7 @@
 #include "LoggerOptions.h"
 #include "LoggerSeverity.h"
 #include "DLL_API.h"
+#include "ThreadIDFormatter.h"
 
 namespace doc
 {
