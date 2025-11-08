@@ -12,9 +12,19 @@ namespace doc
 #pragma region docLogger Class
 #pragma region Protected
 
-	const std::unordered_map<LoggerSeverity, std::string> &Logger::getSeverityText()
+	const std::string Logger::getSeverityTextAt(const LoggerSeverity &_severity)
 	{
-		static const std::unordered_map<LoggerSeverity, std::string> st = {
+		return severityText.at(_severity);
+	}
+
+	const std::string Logger::getSeverityColorAt(const LoggerSeverity &_severity)
+	{
+		return severityColor.at(_severity);
+	}
+
+	void Logger::initSeverityMap()
+	{
+		severityText = {
 			{LoggerSeverity::Trace, "TRACE"},
 			{LoggerSeverity::Debug, "DEBUG"},
 			{LoggerSeverity::Info, "INFO"},
@@ -22,12 +32,7 @@ namespace doc
 			{LoggerSeverity::Error, "ERROR"},
 			{LoggerSeverity::Critical, "CRITICAL"}};
 
-		return st;
-	}
-
-	const std::unordered_map<LoggerSeverity, std::string> &Logger::getSeverityColor()
-	{
-		static const std::unordered_map<LoggerSeverity, std::string> sc = {
+		severityColor = {
 			{LoggerSeverity::Trace, "\033[35m"},	   // Purple
 			{LoggerSeverity::Debug, "\033[34m"},	   // Blue
 			{LoggerSeverity::Info, "\033[32m"},		   // Green
@@ -36,17 +41,15 @@ namespace doc
 			{LoggerSeverity::Critical, "\033[97;41m"}, // White on Red
 			{LoggerSeverity::None, "\033[0m"}		   // White
 		};
-
-		return sc;
 	}
 
 	std::string Logger::FormatLog(const LoggerSeverity &_severity, const std::string _message)
 	{
 		return std::format("| [{}] [{:%Y-%m-%d %H:%M:%S}] [{}] {} |",
-						   getSeverityText().at(_severity), // Put the severity Name
-						   timeProvider(),					// Put the time stamp in this format (YYYY-mm-dd HH:MM:SS)
-						   doc::threadName,					// Put the thread Name
-						   _message);						// Put the message
+						   getSeverityTextAt(_severity), // Put the severity Name
+						   timeProvider(),				 // Put the time stamp in this format (YYYY-mm-dd HH:MM:SS)
+						   doc::threadName,				 // Put the thread Name
+						   _message);					 // Put the message
 	}
 
 #pragma endregion
@@ -56,11 +59,10 @@ namespace doc
 
 	Logger::Logger(const std::string &_threadName, const LoggerOptions &_options)
 	{
+		initSeverityMap();
+
 		if (doc::threadName.empty())
 			doc::threadName = _threadName;
-
-		// some dead code for have the thread id in the thread name
-		// doc::threadName = std::format("{} ( id : {})", _threadName, std::hash<std::thread::id>{}(std::this_thread::get_id()));
 
 		lOpts = _options;						// assign the options
 		timeProvider = lOpts.getTimeProvider(); // get the time provider from the options
@@ -90,7 +92,7 @@ namespace doc
 	void Logger::Log(const LoggerSeverity &_severity, const std::string &_message)
 	{
 
-		if (_severity.value < severityThreshdold.value) // Check if the severity is beyond the threshold
+		if (_severity.value < severityThreshold.value) // Check if the severity is beyond the threshold
 			return;
 
 		std::lock_guard guard(doc::lock); // lock for avoid access from other thread
@@ -100,7 +102,7 @@ namespace doc
 		for (const auto stream : outputStreams) // browse all the stream
 		{
 			// send the message, with its ANSI code for the color, into each stream
-			(*stream) << getSeverityColor().at(_severity) << formattedMessage << getSeverityColor().at(LoggerSeverity::None) << std::endl;
+			(*stream) << getSeverityColorAt(_severity) << formattedMessage << getSeverityColorAt(LoggerSeverity::None) << std::endl;
 		}
 
 		for (const auto callback : logCallbacks) // browse all the callbacks
@@ -127,7 +129,7 @@ namespace doc
 
 	void Logger::setSeverityThreshdold(const LoggerSeverity &_severity)
 	{
-		severityThreshdold = _severity;
+		severityThreshold = _severity;
 	}
 
 #pragma endregion

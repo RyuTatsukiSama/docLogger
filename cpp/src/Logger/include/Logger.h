@@ -35,7 +35,7 @@ namespace doc
 	{
 	protected:
 		/// @brief Use to prevent log with a severity below to be register
-		LoggerSeverity severityThreshdold = LoggerSeverity::Trace;
+		LoggerSeverity severityThreshold = LoggerSeverity::Trace;
 
 		/// @brief Vector of the streams the log message are sent
 		std::vector<std::ostream *> outputStreams;
@@ -46,11 +46,21 @@ namespace doc
 		/// @brief The function wich return the time stamp
 		std::function<std::chrono::system_clock::time_point()> timeProvider;
 
+		/// @brief Map with loggerSeverity as key and their name has value
+		std::unordered_map<LoggerSeverity, std::string> severityText;
+
 		/// @brief Use to access the unordered_map wich contain the text link to loggerSeverity
-		static const std::unordered_map<LoggerSeverity, std::string> &getSeverityText();
+		const std::string getSeverityTextAt(const LoggerSeverity &_severity);
+
+		/// @brief Map with loggerSeverity as key and their ANSI color has value
+		std::unordered_map<LoggerSeverity, std::string> severityColor;
 
 		/// @brief Use to access the unordered_map wich contain the color link to loggerSeverity
-		static const std::unordered_map<LoggerSeverity, std::string> &getSeverityColor();
+		const std::string getSeverityColorAt(const LoggerSeverity &_severity);
+
+		/// @brief Use in the constructor of the Logger to init the Severity map
+		// TODO : Check if they can be made static
+		void initSeverityMap();
 
 		/// @brief Create the clean formated log message with severity, timestamp, thread name and message
 		/// @param _severity Severity of the log
