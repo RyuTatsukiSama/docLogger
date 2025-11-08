@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # dynamic libray logger
 add_library(docLogger SHARED
+    "./src/Logger/include/ThreadIDFormatter.h"
     "./src/Logger/LoggerSeverity.cpp"
     "./src/Logger/include/LoggerSeverity.h"
     "./src/Logger/LoggerOptions.cpp"
