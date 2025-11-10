@@ -1,3 +1,6 @@
+#ifndef THREAD_ID_FORMATTER
+#define THREAD_ID_FORMATTER
+
 #include <iostream>
 #include <format>
 #include <thread>
@@ -18,3 +21,5 @@ struct std::formatter<std::thread::id>
         return std::format_to(ctx.out(), "{}", oss.str());
     }
 };
+
+#endif
