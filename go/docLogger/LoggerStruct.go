@@ -2,7 +2,13 @@ package docLogger
 
 import (
 	"io"
+	"sync"
 	"time"
+)
+
+var (
+	lock       sync.Mutex
+	threadName string
 )
 
 type Logger struct {
