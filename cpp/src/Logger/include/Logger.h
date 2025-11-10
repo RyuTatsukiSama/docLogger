@@ -81,11 +81,11 @@ namespace doc
 		/// @param _threadName The name of the thread where this logger is used
 		Logger(const std::string &_threadName);
 
-		/// @brief Constructor with only options, use " Main " as thread name
+		/// @brief Constructor with only options, use the thread ID as thread name
 		/// @param _options The options you want to use for this logger
 		Logger(const LoggerOptions &_options);
 
-		/// @brief Default constructor, use the gOpts as options and " Main " as thread name
+		/// @brief Default constructor, use the gOpts as options and the thread ID as thread name
 		Logger();
 
 		/// @brief Default destructor, close all the streams

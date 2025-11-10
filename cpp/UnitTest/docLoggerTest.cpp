@@ -3,6 +3,7 @@
 #include <gmock/gmock-matchers.h>
 #include <Logger.h>
 #include <thread>
+#include "ThreadIDFormatter.h"
 using namespace doc;
 
 static std::string formatedMessage;
@@ -25,7 +26,7 @@ TEST(docLoggerTest, FormatLogTest)
     Logger testLogger(opts);
     testLogger.RegisterLogCallback(FormatLogTester);
 
-    std::string tester = std::format("| [TRACE] [{:%Y-%m-%d %H:%M:%S}] [Main] This is a trace level |", fixedTime);
+    std::string tester = std::format("| [TRACE] [{:%Y-%m-%d %H:%M:%S}] [{}] This is a trace level |", fixedTime, std::this_thread::get_id());
     testLogger.Log(LoggerSeverity::Trace, "This is a trace level");
     EXPECT_EQ(formatedMessage, tester);
 }
@@ -43,7 +44,7 @@ TEST(docLoggerTest, CallerTest)
     Logger logger(opts);
     logger.RegisterLogCallback(FormatLogTester);
 
-    std::string tester = std::format("| [DEBUG] [{:%Y-%m-%d %H:%M:%S}] [Main] void __cdecl docLoggerTest_CallerTest_Test::TestBody(void) is called |", fixedTime);
+    std::string tester = std::format("| [DEBUG] [{:%Y-%m-%d %H:%M:%S}] [{}] void __thiscall docLoggerTest_CallerTest_Test::TestBody(void) is called |", fixedTime, std::this_thread::get_id());
     logger.Caller();
     EXPECT_EQ(formatedMessage, tester);
 }
@@ -61,22 +62,22 @@ TEST(docLoggerTest, SeverityFuncTest)
     Logger logger(opts);
     logger.RegisterLogCallback(FormatLogTester);
 
-    std::string tester = std::format("| [TRACE] [{:%Y-%m-%d %H:%M:%S}] [Main] Log |", fixedTime);
+    std::string tester = std::format("| [TRACE] [{:%Y-%m-%d %H:%M:%S}] [{}] Log |", fixedTime, std::this_thread::get_id());
     logger.Trace("Log");
     EXPECT_EQ(tester, formatedMessage);
-    tester = std::format("| [DEBUG] [{:%Y-%m-%d %H:%M:%S}] [Main] Log |", fixedTime);
+    tester = std::format("| [DEBUG] [{:%Y-%m-%d %H:%M:%S}] [{}] Log |", fixedTime, std::this_thread::get_id());
     logger.Debug("Log");
     EXPECT_EQ(tester, formatedMessage);
-    tester = std::format("| [INFO] [{:%Y-%m-%d %H:%M:%S}] [Main] Log |", fixedTime);
+    tester = std::format("| [INFO] [{:%Y-%m-%d %H:%M:%S}] [{}] Log |", fixedTime, std::this_thread::get_id());
     logger.Info("Log");
     EXPECT_EQ(tester, formatedMessage);
-    tester = std::format("| [WARNING] [{:%Y-%m-%d %H:%M:%S}] [Main] Log |", fixedTime);
+    tester = std::format("| [WARNING] [{:%Y-%m-%d %H:%M:%S}] [{}] Log |", fixedTime, std::this_thread::get_id());
     logger.Warning("Log");
     EXPECT_EQ(tester, formatedMessage);
-    tester = std::format("| [ERROR] [{:%Y-%m-%d %H:%M:%S}] [Main] Log |", fixedTime);
+    tester = std::format("| [ERROR] [{:%Y-%m-%d %H:%M:%S}] [{}] Log |", fixedTime, std::this_thread::get_id());
     logger.Error("Log");
     EXPECT_EQ(tester, formatedMessage);
-    tester = std::format("| [CRITICAL] [{:%Y-%m-%d %H:%M:%S}] [Main] Log |", fixedTime);
+    tester = std::format("| [CRITICAL] [{:%Y-%m-%d %H:%M:%S}] [{}] Log |", fixedTime, std::this_thread::get_id());
     logger.Critical("Log");
     EXPECT_EQ(tester, formatedMessage);
 }
@@ -91,6 +92,7 @@ TEST(docLoggerTest, WriteFileTest)
                              .setTimeProvider([=]
                                               { return fixedTime; })
                              .build();
+                             
     Logger logger(opts);
 
     logger.Trace("Log");
@@ -104,17 +106,23 @@ TEST(docLoggerTest, WriteFileTest)
 
     std::string line = "";
     std::getline(file, line);
-    EXPECT_EQ(line, "\033[35m| [TRACE] [1970-01-01 00:00:00.0000000] [Main] Log |\033[0m");
+    std::string tester = std::format("\033[35m| [TRACE] [1970-01-01 00:00:00.0000000] [{}] Log |\033[0m",std::this_thread::get_id());
+    EXPECT_EQ(line, tester);
     std::getline(file, line);
-    EXPECT_EQ(line, "\033[34m| [DEBUG] [1970-01-01 00:00:00.0000000] [Main] Log |\033[0m");
+    tester = std::format("\033[34m| [DEBUG] [1970-01-01 00:00:00.0000000] [{}] Log |\033[0m",std::this_thread::get_id());
+    EXPECT_EQ(line, tester);
     std::getline(file, line);
-    EXPECT_EQ(line, "\033[32m| [INFO] [1970-01-01 00:00:00.0000000] [Main] Log |\033[0m");
+    tester = std::format("\033[32m| [INFO] [1970-01-01 00:00:00.0000000] [{}] Log |\033[0m",std::this_thread::get_id());
+    EXPECT_EQ(line, tester);
     std::getline(file, line);
-    EXPECT_EQ(line, "\033[33m| [WARNING] [1970-01-01 00:00:00.0000000] [Main] Log |\033[0m");
+    tester = std::format("\033[33m| [WARNING] [1970-01-01 00:00:00.0000000] [{}] Log |\033[0m",std::this_thread::get_id());
+    EXPECT_EQ(line, tester);
     std::getline(file, line);
-    EXPECT_EQ(line, "\033[31m| [ERROR] [1970-01-01 00:00:00.0000000] [Main] Log |\033[0m");
+    tester = std::format("\033[31m| [ERROR] [1970-01-01 00:00:00.0000000] [{}] Log |\033[0m",std::this_thread::get_id());
+    EXPECT_EQ(line, tester);
     std::getline(file, line);
-    EXPECT_EQ(line, "\033[97;41m| [CRITICAL] [1970-01-01 00:00:00.0000000] [Main] Log |\033[0m");
+    tester = std::format("\033[97;41m| [CRITICAL] [1970-01-01 00:00:00.0000000] [{}] Log |\033[0m",std::this_thread::get_id());
+    EXPECT_EQ(line, tester);
 }
 
 #pragma region Multithreading test
