@@ -2,7 +2,7 @@
 
 ## Description
 
-This is a logger project made by RyuTatsukiSama ( and a lot of help from Epharos 🙏 ) made for C++ with CMake.
+This is a logger project made by RyuTatsukiSama ( and a lot of help from [Epharos](README.md###Epharos) 🙏 ) made for C++ with CMake.
 
 For now if you want to use it import the files of the " src/docLogger " folder in your project, or you can open the project with CMake to compile the files into a .lib file and add it to your project.
 
@@ -35,3 +35,10 @@ With all of this, you have also the clearLog.bat. It simply delete of the .log f
 - [ ] Export the docLogger in other languages
 - [ ] Multi os support
 - [ ] Stacktrace when c++ 23 will be available
+
+## Special Thanks
+
+### Epharos
+- [His Site](http://www.epharos.fr)
+- [His Github](https://github.com/Epharos)
+- [His Linkedin](https://www.linkedin.com/in/aurelien-rey)
