@@ -1,4 +1,6 @@
-#include "LoggerOptions.h"
+#include "doc/LoggerOptions.h"
+#include <format>
+#include <filesystem>
 
 namespace doc
 {
