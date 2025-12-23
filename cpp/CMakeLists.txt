@@ -4,6 +4,8 @@ project(rLogger_cpp LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+set(FETCHCONTENT_BASE_DIR "${CMAKE_SOURCE_DIR}/.cache" CACHE PATH "FetchContent base dir")
+
 # dynamic libray logger
 add_library(docLogger SHARED
     "./src/Logger/include/doc/ThreadIDFormatter.h"
@@ -28,12 +30,17 @@ target_include_directories(TaskManager PUBLIC "./src/Logger/include")
 target_link_libraries(TaskManager PRIVATE docLogger)
 
 # Unit Test Executable
+
 include(FetchContent)
 FetchContent_Declare(
     googletest
     GIT_REPOSITORY https://github.com/google/googletest.git
     GIT_TAG v1.15.0
+    SOURCE_DIR "${CMAKE_SOURCE_DIR}/.cache/googletest-src"
 )
+
+set(FETCHCONTENT_UPDATE_DISCONNECTED ON)
+
 FetchContent_MakeAvailable(googletest)
 
 enable_testing()
@@ -46,3 +53,5 @@ gtest_discover_tests(UnitTests)
 
 # rViewerLog Executable
 add_executable(docViewerLog "./docViewerLog/docViewerLog.cpp" "./docViewerLog/icon.rc")
+
+set(POUELT "aheh")
