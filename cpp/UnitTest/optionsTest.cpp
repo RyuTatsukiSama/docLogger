@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
-#include <LoggerOptions.h>
+#include <doc/LoggerOptions.h>
+#include <filesystem>
 using namespace doc;
 
 /// @brief Check if the default value or the options are the good ones

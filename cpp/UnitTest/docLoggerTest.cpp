@@ -1,9 +1,10 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 #include <gmock/gmock-matchers.h>
-#include <Logger.h>
+#include <doc/Logger.h>
 #include <thread>
-#include "ThreadIDFormatter.h"
+#include <doc/ThreadIDFormatter.h>
+
 using namespace doc;
 
 static std::string formatedMessage;
