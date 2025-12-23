@@ -6,17 +6,17 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # dynamic libray logger
 add_library(docLogger SHARED
-    "./src/Logger/include/ThreadIDFormatter.h"
+    "./src/Logger/include/doc/ThreadIDFormatter.h"
     "./src/Logger/LoggerSeverity.cpp"
-    "./src/Logger/include/LoggerSeverity.h"
+    "./src/Logger/include/doc/LoggerSeverity.h"
     "./src/Logger/LoggerOptions.cpp"
-    "./src/Logger/include/LoggerOptions.h"
+    "./src/Logger/include/doc/LoggerOptions.h"
     "./src/Logger/Logger.cpp"
     "./src/Logger/Logger_severityMethods.cpp"
-    "./src/Logger/include/Logger.h"
+    "./src/Logger/include/doc/Logger.h"
     "./src/TaskManager/taskManager.cpp"
     "./src/TaskManager/taskManager.h"
-    "./src/Logger/include/DLL_API.h"
+    "./src/Logger/include/doc/DLL_API.h"
 )
 
 target_include_directories(docLogger PUBLIC "./src/Logger/include")

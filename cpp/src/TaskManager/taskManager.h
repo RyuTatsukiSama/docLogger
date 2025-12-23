@@ -2,7 +2,7 @@
 #define TASKMANAGER_H
 
 #include <iostream>
-#include <Logger.h>
+#include <docLogger>
 #include <thread>
 #include <string>
 
