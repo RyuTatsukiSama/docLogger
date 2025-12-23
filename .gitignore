@@ -43,6 +43,7 @@
 # CMake cache
 CMakeCache.txt
 CMakeFiles/
+.cache/
 
 # Build folders
 build/
