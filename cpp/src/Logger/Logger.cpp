@@ -19,35 +19,20 @@ namespace doc
 		return severityText.at(_severity);
 	}
 
-	const std::string Logger::getSeverityColorAt(const LoggerSeverity &_severity)
-	{
-		return severityColor.at(_severity);
-	}
-
 	void Logger::initSeverityMap()
 	{
 		severityText = {
-			{LoggerSeverity::Trace, "TRACE"},
-			{LoggerSeverity::Debug, "DEBUG"},
-			{LoggerSeverity::Info, "INFO"},
-			{LoggerSeverity::Warning, "WARNING"},
-			{LoggerSeverity::Error, "ERROR"},
-			{LoggerSeverity::Critical, "CRITICAL"}};
-
-		severityColor = {
-			{LoggerSeverity::Trace, "\033[35m"},	   // Purple
-			{LoggerSeverity::Debug, "\033[34m"},	   // Blue
-			{LoggerSeverity::Info, "\033[32m"},		   // Green
-			{LoggerSeverity::Warning, "\033[33m"},	   // Yellow
-			{LoggerSeverity::Error, "\033[31m"},	   // Red
-			{LoggerSeverity::Critical, "\033[97;41m"}, // White on Red
-			{LoggerSeverity::None, "\033[0m"}		   // White
-		};
+			{LoggerSeverity::Trace, "\033[45mTRACE\033[0m"},
+			{LoggerSeverity::Debug, "\033[44mDEBUG\033[0m"},
+			{LoggerSeverity::Info, "\033[42mINFO\033[0m"},
+			{LoggerSeverity::Warning, "\033[43mWARNING\033[0m"},
+			{LoggerSeverity::Error, "\033[41mERROR\033[0m"},
+			{LoggerSeverity::Critical, "\033[31;47mCRITICAL\033[0m"}};
 	}
 
 	std::string Logger::FormatLog(const LoggerSeverity &_severity, const std::string _message)
 	{
-		return std::format("| [{}] [{:%Y-%m-%d %H:%M:%S}] [{}] {} |",
+		return std::format("[{}] [{:%Y-%m-%d %H:%M:%S}] [\033[30;47m{}\033[0m] {}",
 						   getSeverityTextAt(_severity), // Put the severity Name
 						   timeProvider(),				 // Put the time stamp in this format (YYYY-mm-dd HH:MM:SS)
 						   doc::threadName,				 // Put the thread Name
@@ -104,7 +89,7 @@ namespace doc
 		for (const auto stream : outputStreams) // browse all the stream
 		{
 			// send the message, with its ANSI code for the color, into each stream
-			(*stream) << getSeverityColorAt(_severity) << formattedMessage << getSeverityColorAt(LoggerSeverity::None) << std::endl;
+			(*stream) << formattedMessage << std::endl;
 		}
 
 		for (const auto callback : logCallbacks) // browse all the callbacks

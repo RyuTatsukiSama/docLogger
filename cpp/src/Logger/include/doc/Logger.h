@@ -48,12 +48,6 @@ namespace doc
 		/// @brief Use to access the unordered_map wich contain the text link to loggerSeverity
 		const std::string getSeverityTextAt(const LoggerSeverity &_severity);
 
-		/// @brief Map with loggerSeverity as key and their ANSI color has value
-		std::unordered_map<LoggerSeverity, std::string> severityColor;
-
-		/// @brief Use to access the unordered_map wich contain the color link to loggerSeverity
-		const std::string getSeverityColorAt(const LoggerSeverity &_severity);
-
 		/// @brief Use in the constructor of the Logger to init the Severity map
 		// TODO : Check if they can be made static
 		void initSeverityMap();
