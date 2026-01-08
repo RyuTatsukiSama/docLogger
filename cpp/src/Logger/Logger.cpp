@@ -114,9 +114,9 @@ namespace doc
 		Log(LoggerSeverity::Debug, std::format("{} is called", where.function_name()));
 	}
 
-	void Logger::setSeverityThreshdold(const LoggerSeverity &_severity)
+	void Logger::setSeverityThreshdold(const LoggerSeverity &_threshdold)
 	{
-		severityThreshold = _severity;
+		severityThreshold = _threshdold;
 	}
 
 #pragma endregion
