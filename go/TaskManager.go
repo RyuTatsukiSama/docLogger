@@ -3,8 +3,6 @@ package main
 import (
 	"context"
 	"log"
-	"os"
-	"time"
 
 	"github.com/RyuTatsukiSama/docLogger/docLogger"
 )
@@ -16,9 +14,6 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	dlog.RegisterOutputStream(os.Stdout)
-	dlog.RegisterTimeProvider(func() time.Time { return time.Now() })
 
 	dlog.Log(docLogger.Trace, "This is a trace")
 	dlog.Log(docLogger.Debug, "This is a debug")

@@ -1,0 +1,6 @@
+[[45mTRACE[0m] [[30;47mMain[0m] [2026-01-08 20:14:13] This is a trace
+[[44mDEBUG[0m] [[30;47mMain[0m] [2026-01-08 20:14:13] This is a debug
+[[42mINFO[0m] [[30;47mMain[0m] [2026-01-08 20:14:13] This is a info
+[[43mWARNING[0m] [[30;47mMain[0m] [2026-01-08 20:14:13] This is a warning
+[[41mERROR[0m] [[30;47mMain[0m] [2026-01-08 20:14:13] This is a error
+[[31;47mCRITICAL[0m] [[30;47mMain[0m] [2026-01-08 20:14:13] This is a critical

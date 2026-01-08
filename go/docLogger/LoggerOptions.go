@@ -25,16 +25,13 @@ func newLoggerOptions(oc bool, of bool, fName string, tp func() time.Time) *Logg
 
 	if oc {
 		if fName == "" {
-			fName = time.Now().Format("1970-30-12 00:00:00")
+			fName = time.Now().Format("2006-01-02_15-04-05")
 		}
 
 		// check if the docLogs dir exist, if not create it
-		info, err := os.Stat("/docLogs")
-		if err != nil {
-			log.Fatal(err)
-			return &LoggerOptions{}
-		} else if !info.IsDir() {
-			err = os.MkdirAll("/docLogs/", 0700)
+		info, err := os.Stat("./docLogs")
+		if err != nil || !info.IsDir() {
+			err = os.MkdirAll("./docLogs/", 0700)
 			if err != nil {
 				log.Fatal(err)
 				return &LoggerOptions{}
@@ -43,7 +40,7 @@ func newLoggerOptions(oc bool, of bool, fName string, tp func() time.Time) *Logg
 
 		// TODO : manage previous log
 
-		fs, err = os.Create(fmt.Sprintf("/docLogs/%s.log", fName))
+		fs, err = os.Create(fmt.Sprintf("./docLogs/%s.log", fName))
 		if err != nil {
 			log.Fatal(err)
 			return &LoggerOptions{}
@@ -80,8 +77,8 @@ func (opts LoggerOptions) GetTimeProvider() func() time.Time {
 }
 
 func SetGlobalLoggerOptions(opts *LoggerOptions) {
-	if gOpts != nil {
-		*gOpts = *opts
+	if gOpts == nil {
+		gOpts = opts
 	} else {
 		os.Stderr.WriteString("Global Options already set")
 	}
