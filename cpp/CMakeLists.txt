@@ -53,5 +53,3 @@ gtest_discover_tests(UnitTests)
 
 # rViewerLog Executable
 add_executable(docViewerLog "./docViewerLog/docViewerLog.cpp" "./docViewerLog/icon.rc")
-
-set(POUELT "aheh")
