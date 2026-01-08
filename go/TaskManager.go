@@ -4,7 +4,7 @@ import (
 	"context"
 	"log"
 
-	"github.com/RyuTatsukiSama/docLogger/docLogger"
+	"github.com/RyuTatsukiSama/docLogger/go/docLogger"
 )
 
 func main() {
