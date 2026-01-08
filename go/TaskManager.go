@@ -1,10 +1,18 @@
 package main
 
 import (
-	"fmt"
+	"os"
 	"time"
+
+	"github.com/RyuTatsukiSama/docLogger/docLogger"
 )
 
 func main() {
-	fmt.Println(time.Now())
+	var log docLogger.Logger
+
+	log.RegisterOutputStream(os.Stdout)
+	log.RegisterTimeProvider(func() time.Time { return time.Now() })
+
+	log.Log(docLogger.Debug, "This is a debug")
+	log.Log(docLogger.Debug, "This is a debug")
 }
