@@ -10,7 +10,7 @@ func (this *Logger) formatLog(severity LoggerSeverity, message string) string {
 	return fmt.Sprintf("[%s] [\033[30;47m%s\033[0m] [%s] %s\n",
 		severityText[severity],
 		this.threadName,
-		this.timeProvider().Format("1970-30-12 00:00:00"),
+		this.timeProvider().Format(time.DateTime),
 		message)
 }
 
