@@ -1,7 +1,9 @@
 package docLogger
 
 import (
+	"fmt"
 	"io"
+	"log"
 	"os"
 	"time"
 )
@@ -14,13 +16,47 @@ type LoggerOptions struct {
 	outputConsole bool
 	outputFile    bool
 	fileName      string
-	fileStream    *io.Writer
+	fileStream    io.Writer
 	timeProvider  func() time.Time
 }
 
-func NewLoggerOptions(bool, bool, string, func() time.Time) (opts *LoggerOptions) {
+func newLoggerOptions(oc bool, of bool, fName string, tp func() time.Time) *LoggerOptions {
+	var fs io.Writer
 
-	return opts
+	if oc {
+		if fName == "" {
+			fName = time.Now().Format("1970-30-12 00:00:00")
+		}
+
+		// check if the docLogs dir exist, if not create it
+		info, err := os.Stat("/docLogs")
+		if err != nil {
+			log.Fatal(err)
+			return &LoggerOptions{}
+		} else if !info.IsDir() {
+			err = os.MkdirAll("/docLogs/", 0700)
+			if err != nil {
+				log.Fatal(err)
+				return &LoggerOptions{}
+			}
+		}
+
+		// TODO : manage previous log
+
+		fs, err = os.Create(fmt.Sprintf("/docLogs/%s.log", fName))
+		if err != nil {
+			log.Fatal(err)
+			return &LoggerOptions{}
+		}
+	}
+
+	return &LoggerOptions{
+		outputConsole: oc,
+		outputFile:    of,
+		fileName:      fName,
+		timeProvider:  tp,
+		fileStream:    fs,
+	}
 }
 
 func (opts LoggerOptions) IsOutputConsole() bool {
@@ -35,7 +71,7 @@ func (opts LoggerOptions) GetFileName() string {
 	return opts.fileName
 }
 
-func (opts LoggerOptions) GetFileStream() *io.Writer {
+func (opts LoggerOptions) GetFileStream() io.Writer {
 	return opts.fileStream
 }
 

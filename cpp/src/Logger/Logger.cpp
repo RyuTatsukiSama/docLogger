@@ -32,10 +32,10 @@ namespace doc
 
 	std::string Logger::FormatLog(const LoggerSeverity &_severity, const std::string _message)
 	{
-		return std::format("[{}] [{:%Y-%m-%d %H:%M:%S}] [\033[30;47m{}\033[0m] {}",
+		return std::format("[{}] [\033[30;47m{}\033[0m] [{:%Y-%m-%d %H:%M:%S}] {}",
 						   getSeverityTextAt(_severity), // Put the severity Name
-						   timeProvider(),				 // Put the time stamp in this format (YYYY-mm-dd HH:MM:SS)
 						   doc::threadName,				 // Put the thread Name
+						   timeProvider(),				 // Put the time stamp in this format (YYYY-mm-dd HH:MM:SS)
 						   _message);					 // Put the message
 	}
 

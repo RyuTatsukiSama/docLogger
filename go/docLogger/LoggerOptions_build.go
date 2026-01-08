@@ -41,5 +41,5 @@ func (opbd *OptionsBuilder) SetTimeProvider(tp func() time.Time) (ropbd *Options
 }
 
 func (opbd *OptionsBuilder) Build() *LoggerOptions {
-	return NewLoggerOptions(opbd.outputConsole, opbd.outputFile, opbd.fileName, opbd.timeProvider)
+	return newLoggerOptions(opbd.outputConsole, opbd.outputFile, opbd.fileName, opbd.timeProvider)
 }
