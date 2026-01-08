@@ -4,6 +4,7 @@ import "context"
 
 func NewLogger(threadName string, options LoggerOptions, iCtx context.Context) (l *Logger, oCtx context.Context, err error) {
 	l = &Logger{}
+	l.lOpts = options
 
 	if iCtx != nil {
 		if ctxThreadName, ok := iCtx.Value("threadName").(string); ok {
@@ -13,6 +14,14 @@ func NewLogger(threadName string, options LoggerOptions, iCtx context.Context) (
 		}
 
 	} else {
+
+	}
+
+	if l.lOpts.outputConsole {
+
+	}
+
+	if l.lOpts.outputFile {
 
 	}
 
