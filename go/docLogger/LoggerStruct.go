@@ -28,5 +28,7 @@ type Logger struct {
 
 	timeProvider func() time.Time
 
+	lOpts LoggerOptions
+
 	threadName string
 }

@@ -1,6 +1,8 @@
 package main
 
 import (
+	"context"
+	"log"
 	"os"
 	"time"
 
@@ -8,15 +10,20 @@ import (
 )
 
 func main() {
-	var log docLogger.Logger
+	opts := docLogger.NewOptionsBuilder().Build()
+	docLogger.SetGlobalLoggerOptions(opts)
+	dlog, _, err := docLogger.NewLogger("Main", *opts, context.Background())
+	if err != nil {
+		log.Fatal(err)
+	}
 
-	log.RegisterOutputStream(os.Stdout)
-	log.RegisterTimeProvider(func() time.Time { return time.Now() })
+	dlog.RegisterOutputStream(os.Stdout)
+	dlog.RegisterTimeProvider(func() time.Time { return time.Now() })
 
-	log.Log(docLogger.Trace, "This is a trace")
-	log.Log(docLogger.Debug, "This is a debug")
-	log.Log(docLogger.Info, "This is a info")
-	log.Log(docLogger.Warning, "This is a warning")
-	log.Log(docLogger.Error, "This is a error")
-	log.Log(docLogger.Critical, "This is a critical")
+	dlog.Log(docLogger.Trace, "This is a trace")
+	dlog.Log(docLogger.Debug, "This is a debug")
+	dlog.Log(docLogger.Info, "This is a info")
+	dlog.Log(docLogger.Warning, "This is a warning")
+	dlog.Log(docLogger.Error, "This is a error")
+	dlog.Log(docLogger.Critical, "This is a critical")
 }
