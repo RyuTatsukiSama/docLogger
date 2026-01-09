@@ -1,26 +1,15 @@
 package docLogger
 
 import (
-	"context"
 	"os"
 )
 
-func NewLogger(threadName string, options LoggerOptions, iCtx context.Context) (l *Logger, oCtx context.Context) {
+func NewLogger(threadName string, options LoggerOptions) (l *Logger) {
 	l = &Logger{}
 	l.lOpts = options
 	l.timeProvider = l.lOpts.timeProvider
 
-	if iCtx != nil {
-		if ctxThreadName, ok := iCtx.Value("threadName").(string); ok {
-			l.threadName = ctxThreadName
-		} else {
-			oCtx = context.WithValue(iCtx, "threadName", threadName)
-			l.threadName = threadName
-		}
-	} else {
-		oCtx = context.WithValue(context.Background(), "threadName", threadName)
-		l.threadName = threadName
-	}
+	l.threadName = threadName
 
 	if l.lOpts.IsOutputConsole() {
 		l.RegisterOutputStream(os.Stdout)
@@ -32,5 +21,9 @@ func NewLogger(threadName string, options LoggerOptions, iCtx context.Context) (
 		}
 	}
 
-	return l, oCtx
+	return l
+}
+
+func NewLoggerWithGOpts(threadName string) (l *Logger) {
+	return NewLogger(threadName, *gOpts)
 }
