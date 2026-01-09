@@ -5,7 +5,7 @@ import (
 	"os"
 )
 
-func NewLogger(threadName string, options LoggerOptions, iCtx context.Context) (l *Logger, oCtx context.Context, err error) {
+func NewLogger(threadName string, options LoggerOptions, iCtx context.Context) (l *Logger, oCtx context.Context) {
 	l = &Logger{}
 	l.lOpts = options
 	l.timeProvider = l.lOpts.timeProvider
@@ -32,5 +32,5 @@ func NewLogger(threadName string, options LoggerOptions, iCtx context.Context) (
 		}
 	}
 
-	return l, oCtx, err
+	return l, oCtx
 }
