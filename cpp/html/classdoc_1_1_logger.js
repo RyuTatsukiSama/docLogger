@@ -1,0 +1,28 @@
+var classdoc_1_1_logger =
+[
+    [ "Logger", "classdoc_1_1_logger.html#abb4a35f8a4d9b10a998e512bc3bcbb95", null ],
+    [ "Logger", "classdoc_1_1_logger.html#a73d1f001cefb202d4d5886cb349b4764", null ],
+    [ "Logger", "classdoc_1_1_logger.html#ae962bf066787cda0da8ccce3434eea35", null ],
+    [ "Logger", "classdoc_1_1_logger.html#a402424189ca3b2f498aee7194668dd3b", null ],
+    [ "~Logger", "classdoc_1_1_logger.html#a465391f93e024e1bf29db8a7d811b8fd", null ],
+    [ "Caller", "classdoc_1_1_logger.html#afe21530286372e1a747b932ed6da9d77", null ],
+    [ "Critical", "classdoc_1_1_logger.html#a9d5b15b2881b2e2d29ce9c1454666bfe", null ],
+    [ "Debug", "classdoc_1_1_logger.html#ac3db6457d94e58e67d7dbc84776c4d7f", null ],
+    [ "Error", "classdoc_1_1_logger.html#afb84fd197fede76fa17292cb0a19507f", null ],
+    [ "FormatLog", "classdoc_1_1_logger.html#ac896243971dec18fe50fcfa18303ea47", null ],
+    [ "getSeverityTextAt", "classdoc_1_1_logger.html#adee49eb1bf1c9a88e3c25f5e5feb3c3b", null ],
+    [ "Info", "classdoc_1_1_logger.html#acfdc1869a65ff80fd7c2c9fdad513f10", null ],
+    [ "initSeverityMap", "classdoc_1_1_logger.html#a66f719f11ebee56445b730331118f357", null ],
+    [ "Log", "classdoc_1_1_logger.html#a302786d2564c08776c57db752db8db5e", null ],
+    [ "RegisterLogCallback", "classdoc_1_1_logger.html#a39638ebc8f005cba7a599842a2c5517a", null ],
+    [ "RegisterOutputStream", "classdoc_1_1_logger.html#afba3d38004cdcf7bfe9c5744a8407d8b", null ],
+    [ "setSeverityThreshdold", "classdoc_1_1_logger.html#adf72d6b910be3888800841a5127f7e46", null ],
+    [ "Trace", "classdoc_1_1_logger.html#ae993fbf56de648cce7b15c6b7190a3c7", null ],
+    [ "Warning", "classdoc_1_1_logger.html#ad953fb2507b55172898b25b3d92e2a23", null ],
+    [ "logCallbacks", "classdoc_1_1_logger.html#a7b4c8c965eba5329dc9249a17b4579e5", null ],
+    [ "lOpts", "classdoc_1_1_logger.html#ab56394589703d988ac47fa1f9aa8d3b7", null ],
+    [ "outputStreams", "classdoc_1_1_logger.html#aa2809170abcddb6108e06522d8a4b160", null ],
+    [ "severityText", "classdoc_1_1_logger.html#a556a4aa2769c9bbac1698770488311b6", null ],
+    [ "severityThreshold", "classdoc_1_1_logger.html#a4d8354d93dec3ed5920ffa4f914be40c", null ],
+    [ "timeProvider", "classdoc_1_1_logger.html#a889561795575efabbc97c09475b5b8b1", null ]
+];
