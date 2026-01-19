@@ -60,7 +60,7 @@ echo [34mDetected project: %ProjectName%[0m
 
 :: Delete specific folders
 echo Deleting Intermediate, DerivedDataCache, Build, .vs, and Binaries folders...
-for %%d in (Intermediate DerivedDataCache Build .vs Binaries) do (
+for %%d in (Intermediate DerivedDataCache Build .vs Binaries .idea .vscode) do (
     rmdir /s /q "%CurrentDir%\%%d"
 )
 
