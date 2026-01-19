@@ -91,7 +91,6 @@ namespace doc
 		void RegisterOutputStream(std::ostream *_stream);
 
 		/// @brief Use it if you want to display the formatted message, but not with a stream
-		/// Warning the ANSI code for the color are not present in this string
 		/// @param _callback The function/lambda/method that will use the formatted message, with a std::string parameters
 		void RegisterLogCallback(std::function<void(const std::string)> _callback);
 
