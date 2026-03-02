@@ -8,17 +8,11 @@ set(FETCHCONTENT_BASE_DIR "${CMAKE_SOURCE_DIR}/.cache" CACHE PATH "FetchContent 
 
 # dynamic libray logger
 add_library(docLogger SHARED
-    "./src/Logger/include/doc/ThreadIDFormatter.h"
     "./src/Logger/LoggerSeverity.cpp"
-    "./src/Logger/include/doc/LoggerSeverity.h"
     "./src/Logger/LoggerOptions.cpp"
-    "./src/Logger/include/doc/LoggerOptions.h"
     "./src/Logger/Logger.cpp"
     "./src/Logger/Logger_severityMethods.cpp"
-    "./src/Logger/include/doc/Logger.h"
     "./src/TaskManager/taskManager.cpp"
-    "./src/TaskManager/taskManager.h"
-    "./src/Logger/include/doc/DLL_API.h"
 )
 
 target_include_directories(docLogger PUBLIC "./src/Logger/include")
