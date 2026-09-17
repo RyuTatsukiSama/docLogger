@@ -52,6 +52,4 @@ include(GoogleTest)
 gtest_discover_tests(UnitTests)
 
 # rViewerLog Executable
-if(WIN32)
-    add_executable(docViewerLog "./docViewerLog/docViewerLog.cpp" "./docViewerLog/icon.rc")
-endif()
+add_executable(docViewerLog "./docViewerLog/docViewerLog.cpp" "./docViewerLog/icon.rc")
