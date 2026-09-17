@@ -1,5 +1,7 @@
 name: Run Unit Tests
-
+permissions:
+  checks: write
+  contents: read
 on:
   push:
     branches: [ cpp-test-ci ]
@@ -32,4 +34,12 @@ jobs:
 
       - name: Run tests
         working-directory: ./cpp
-        run: ctest --test-dir build --output-on-failure
+        run: ctest --test-dir build --output-on-failure --output-junit results.xml
+
+      - name: Test Report
+        uses: dorny/test-reporter@v1
+        if: always()
+        with:
+          name: Résultats Unit Tests
+          path: '**/results.xml'
+          reporter: java-junit
