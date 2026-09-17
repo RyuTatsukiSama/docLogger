@@ -1,4 +1,4 @@
-name: Run Unit Tests
+name: Run CPP Unit Tests
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
       #- 'CMakeLists.txt'
 
 jobs:
-  test:
+  CPP_Unit_Test:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,10 +23,13 @@ jobs:
           sudo apt-get install -y cmake g++
 
       - name: Configure CMake
-        run: cmake -B cpp/build -DCMAKE_BUILD_TYPE=Release
+        working-directory: ./cpp
+        run: cmake -B build -DCMAKE_BUILD_TYPE=Release
 
       - name: Build (includes GTest via FetchContent)
-        run: cmake --build cpp/build --target UnitTest --config Release -j$(nproc)
+        working-directory: ./cpp
+        run: cmake --build build --target UnitTest --config Release -j$(nproc)
 
       - name: Run tests
-        run: ctest --test-dir cpp/build --output-on-failure
+        working-directory: ./cpp
+        run: ctest --test-dir build --output-on-failure
