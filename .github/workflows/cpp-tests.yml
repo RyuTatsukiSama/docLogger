@@ -1,4 +1,4 @@
-name: Run CPP Unit Tests
+name: Run Unit Tests
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
       #- 'CMakeLists.txt'
 
 jobs:
-  CPP_Unit_Test:
+  cpp:
     runs-on: ubuntu-latest
 
     steps:
@@ -28,7 +28,7 @@ jobs:
 
       - name: Build (includes GTest via FetchContent)
         working-directory: ./cpp
-        run: cmake --build build --target UnitTests --config Release -j$(nproc)
+        run: cmake --build build --config Release -j$(nproc)
 
       - name: Run tests
         working-directory: ./cpp
