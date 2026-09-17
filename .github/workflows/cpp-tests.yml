@@ -3,13 +3,13 @@ permissions:
   checks: write
   contents: read
 on:
-  push:
-    branches: [ cpp-test-ci ]
-    #paths:
-      #- '**.cpp'
-      #- '**.h'
-      #- '**.hpp'
-      #- 'CMakeLists.txt'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - '**.cpp'
+      - '**.h'
+      - '**.hpp'
+      - 'CMakeLists.txt'
 
 jobs:
   cpp:
