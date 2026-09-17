@@ -1,0 +1,32 @@
+name: Run Unit Tests
+
+on:
+  push:
+    branches: [ cpp-test-ci ]
+    #paths:
+      #- '**.cpp'
+      #- '**.h'
+      #- '**.hpp'
+      #- 'CMakeLists.txt'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install build tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake g++
+
+      - name: Configure CMake
+        run: cmake -B cpp/build -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build (includes GTest via FetchContent)
+        run: cmake --build cpp/build --target UnitTest --config Release -j$(nproc)
+
+      - name: Run tests
+        run: ctest --test-dir cpp/build --output-on-failure
