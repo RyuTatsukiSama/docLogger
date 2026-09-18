@@ -44,8 +44,11 @@ TEST(docLoggerTest, CallerTest)
                              .build();
     Logger logger(opts);
     logger.RegisterLogCallback(FormatLogTester);
-
+#if WIN32
+    std::string tester = std::format("[\x1B[44mDEBUG\x1B[0m] [\x1B[30;47m{}\x1B[0m] [{:%Y-%m-%d %H:%M:%S}] virtual void docLoggerTest_CallerTest_Test::TestBody() is called", std::this_thread::get_id(), fixedTime);
+#else
     std::string tester = std::format("[\x1B[44mDEBUG\x1B[0m] [\x1B[30;47m{}\x1B[0m] [{:%Y-%m-%d %H:%M:%S}] void __cdecl docLoggerTest_CallerTest_Test::TestBody(void) is called", std::this_thread::get_id(), fixedTime);
+#endif
     logger.Caller();
     EXPECT_EQ(formatedMessage, tester);
 }
