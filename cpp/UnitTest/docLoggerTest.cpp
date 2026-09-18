@@ -63,22 +63,22 @@ TEST(docLoggerTest, SeverityFuncTest)
     Logger logger(opts);
     logger.RegisterLogCallback(FormatLogTester);
 
-    std::string tester = std::format("| [TRACE] [{:%Y-%m-%d %H:%M:%S}] [{}] Log |", fixedTime, std::this_thread::get_id());
+    std::string tester = std::format("[\033[45mTRACE\033[0m] [\033[30;47m{}\033[0m] [{:%Y-%m-%d %H:%M:%S}] Log", std::this_thread::get_id(), fixedTime);
     logger.Trace("Log");
     EXPECT_EQ(tester, formatedMessage);
-    tester = std::format("| [DEBUG] [{:%Y-%m-%d %H:%M:%S}] [{}] Log |", fixedTime, std::this_thread::get_id());
+    tester = std::format("[\033[44mDEBUG\033[0m] [\033[30;47m{}\033[0m] [{:%Y-%m-%d %H:%M:%S}] Log", std::this_thread::get_id(), fixedTime);
     logger.Debug("Log");
     EXPECT_EQ(tester, formatedMessage);
-    tester = std::format("| [INFO] [{:%Y-%m-%d %H:%M:%S}] [{}] Log |", fixedTime, std::this_thread::get_id());
+    tester = std::format("[\033[42mINFO\033[0m] [\033[30;47m{}\033[0m] [{:%Y-%m-%d %H:%M:%S}] Log", std::this_thread::get_id(), fixedTime);
     logger.Info("Log");
     EXPECT_EQ(tester, formatedMessage);
-    tester = std::format("| [WARNING] [{:%Y-%m-%d %H:%M:%S}] [{}] Log |", fixedTime, std::this_thread::get_id());
+    tester = std::format("[\033[43mWARNING\033[0m] [\033[30;47m{}\033[0m] [{:%Y-%m-%d %H:%M:%S}] Log", std::this_thread::get_id(), fixedTime);
     logger.Warning("Log");
     EXPECT_EQ(tester, formatedMessage);
-    tester = std::format("| [ERROR] [{:%Y-%m-%d %H:%M:%S}] [{}] Log |", fixedTime, std::this_thread::get_id());
+    tester = std::format("[\033[41mERROR\033[0m] [\033[30;47m{}\033[0m] [{:%Y-%m-%d %H:%M:%S}] Log", std::this_thread::get_id(), fixedTime);
     logger.Error("Log");
     EXPECT_EQ(tester, formatedMessage);
-    tester = std::format("| [CRITICAL] [{:%Y-%m-%d %H:%M:%S}] [{}] Log |", fixedTime, std::this_thread::get_id());
+    tester = std::format("[\033[31;47mCRITICAL\033[0m] [\033[30;47m{}\033[0m] [{:%Y-%m-%d %H:%M:%S}] Log", std::this_thread::get_id(), fixedTime);
     logger.Critical("Log");
     EXPECT_EQ(tester, formatedMessage);
 }
