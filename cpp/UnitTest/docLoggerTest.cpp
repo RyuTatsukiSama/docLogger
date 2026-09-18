@@ -27,7 +27,7 @@ TEST(docLoggerTest, FormatLogTest)
     Logger testLogger(opts);
     testLogger.RegisterLogCallback(FormatLogTester);
 
-    std::string tester = std::format("| [TRACE] [{:%Y-%m-%d %H:%M:%S}] [{}] This is a trace level |", fixedTime, std::this_thread::get_id());
+    std::string tester = std::format("[\033[45mTRACE\033[0m] [\033[30;47m{}\033[0m] [{:%Y-%m-%d %H:%M:%S}] This is a trace level" , std::this_thread::get_id(), fixedTime);
     testLogger.Log(LoggerSeverity::Trace, "This is a trace level");
     EXPECT_EQ(formatedMessage, tester);
 }
@@ -45,7 +45,7 @@ TEST(docLoggerTest, CallerTest)
     Logger logger(opts);
     logger.RegisterLogCallback(FormatLogTester);
 
-    std::string tester = std::format("| [DEBUG] [{:%Y-%m-%d %H:%M:%S}] [{}] void __thiscall docLoggerTest_CallerTest_Test::TestBody(void) is called |", fixedTime, std::this_thread::get_id());
+    std::string tester = std::format("| [DEBUG] [{}] [{:%Y-%m-%d %H:%M:%S}] void __cdecl docLoggerTest_CallerTest_Test::TestBody(void) is called |", std::this_thread::get_id(), fixedTime);
     logger.Caller();
     EXPECT_EQ(formatedMessage, tester);
 }
