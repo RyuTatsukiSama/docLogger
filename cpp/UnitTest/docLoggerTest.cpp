@@ -176,8 +176,8 @@ TEST(docLoggerTest, multithreadTest)
         readers.push_back(reader);
 
         EXPECT_THAT(readers, testing::UnorderedElementsAre(
-                                 std::format("\x1B[31m| [ERROR] [{:%Y-%m-%d %H:%M:%S}] [Error] From Error thread |\x1B[0m", fixedTime),
-                                 std::format("\x1B[34m| [DEBUG] [{:%Y-%m-%d %H:%M:%S}] [Debug] From Debug thread |\x1B[0m", fixedTime)));
+                                std::format("[\033[41mERROR\033[0m] [\033[30;47mError\033[0m] [{:%Y-%m-%d %H:%M:%S}] From Error thread", fixedTime),
+                                std::format("[\033[44mDEBUG\033[0m] [\033[30;47mDebug\033[0m] [{:%Y-%m-%d %H:%M:%S}] From Debug thread", fixedTime)));
     }
 }
 
