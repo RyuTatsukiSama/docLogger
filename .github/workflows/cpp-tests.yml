@@ -3,6 +3,7 @@ permissions:
   checks: write
   contents: read
 on:
+  workflow_dispatch:
   pull_request:
     branches: [ main ]
     paths:
