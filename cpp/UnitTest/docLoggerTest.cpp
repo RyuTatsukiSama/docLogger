@@ -4,14 +4,13 @@
 #include <doc/Logger.h>
 #include <thread>
 #include <doc/ThreadIDFormatter.h>
+#include "docLoggerTestsData.h"
 
 using namespace doc;
 
-static std::string formatedMessage;
-
 void FormatLogTester(std::string _formatedMessage)
 {
-    formatedMessage = _formatedMessage;
+    docLoggerTestsData::formatedMessage = _formatedMessage;
 }
 
 TEST(docLoggerTest, FormatLogTest)
@@ -29,7 +28,7 @@ TEST(docLoggerTest, FormatLogTest)
 
     std::string tester = std::format("[\x1B[45mTRACE\x1B[0m] [\x1B[30;47m{}\x1B[0m] [{:%Y-%m-%d %H:%M:%S}] This is a trace level" , std::this_thread::get_id(), fixedTime); // NOSONAR
     testLogger.Log(LoggerSeverity::Trace, "This is a trace level");
-    EXPECT_EQ(formatedMessage, tester);
+    EXPECT_EQ(docLoggerTestsData::formatedMessage, tester);
 }
 
 TEST(docLoggerTest, CallerTest)
@@ -50,7 +49,7 @@ TEST(docLoggerTest, CallerTest)
     std::string tester = std::format("[\x1B[44mDEBUG\x1B[0m] [\x1B[30;47m{}\x1B[0m] [{:%Y-%m-%d %H:%M:%S}] virtual void docLoggerTest_CallerTest_Test::TestBody() is called", std::this_thread::get_id(), fixedTime); // NOSONAR
 #endif
     logger.Caller();
-    EXPECT_EQ(formatedMessage, tester);
+    EXPECT_EQ(docLoggerTestsData::formatedMessage, tester);
 }
 
 TEST(docLoggerTest, SeverityFuncTest)
@@ -68,22 +67,22 @@ TEST(docLoggerTest, SeverityFuncTest)
 
     std::string tester = std::format("[\x1B[45mTRACE\x1B[0m] [\x1B[30;47m{}\x1B[0m] [{:%Y-%m-%d %H:%M:%S}] Log", std::this_thread::get_id(), fixedTime); // NOSONAR
     logger.Trace("Log");
-    EXPECT_EQ(tester, formatedMessage);
+    EXPECT_EQ(tester, docLoggerTestsData::formatedMessage);
     tester = std::format("[\x1B[44mDEBUG\x1B[0m] [\x1B[30;47m{}\x1B[0m] [{:%Y-%m-%d %H:%M:%S}] Log", std::this_thread::get_id(), fixedTime); // NOSONAR
     logger.Debug("Log");
-    EXPECT_EQ(tester, formatedMessage);
+    EXPECT_EQ(tester, docLoggerTestsData::formatedMessage);
     tester = std::format("[\x1B[42mINFO\x1B[0m] [\x1B[30;47m{}\x1B[0m] [{:%Y-%m-%d %H:%M:%S}] Log", std::this_thread::get_id(), fixedTime); // NOSONAR
     logger.Info("Log");
-    EXPECT_EQ(tester, formatedMessage);
+    EXPECT_EQ(tester, docLoggerTestsData::formatedMessage);
     tester = std::format("[\x1B[43mWARNING\x1B[0m] [\x1B[30;47m{}\x1B[0m] [{:%Y-%m-%d %H:%M:%S}] Log", std::this_thread::get_id(), fixedTime); // NOSONAR
     logger.Warning("Log");
-    EXPECT_EQ(tester, formatedMessage);
+    EXPECT_EQ(tester, docLoggerTestsData::formatedMessage);
     tester = std::format("[\x1B[41mERROR\x1B[0m] [\x1B[30;47m{}\x1B[0m] [{:%Y-%m-%d %H:%M:%S}] Log", std::this_thread::get_id(), fixedTime); // NOSONAR
     logger.Error("Log");
-    EXPECT_EQ(tester, formatedMessage);
+    EXPECT_EQ(tester, docLoggerTestsData::formatedMessage);
     tester = std::format("[\x1B[31;47mCRITICAL\x1B[0m] [\x1B[30;47m{}\x1B[0m] [{:%Y-%m-%d %H:%M:%S}] Log", std::this_thread::get_id(), fixedTime); // NOSONAR
     logger.Critical("Log");
-    EXPECT_EQ(tester, formatedMessage);
+    EXPECT_EQ(tester, docLoggerTestsData::formatedMessage);
 }
 
 TEST(docLoggerTest, WriteFileTest)

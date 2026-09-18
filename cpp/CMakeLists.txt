@@ -45,7 +45,7 @@ FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 
-add_executable(UnitTests "UnitTest/unitTest.cpp" "UnitTest/logSeverityTest.cpp" "UnitTest/docLoggerTest.cpp" "UnitTest/optionsTest.cpp")
+add_executable(UnitTests "UnitTest/docLoggerTestsData.h" "UnitTest/unitTest.cpp" "UnitTest/logSeverityTest.cpp" "UnitTest/docLoggerTest.cpp" "UnitTest/optionsTest.cpp")
 target_link_libraries(UnitTests PRIVATE docLogger gtest gmock gtest_main gmock_main)
 
 include(GoogleTest)
