@@ -22,17 +22,17 @@ namespace doc
 	void Logger::initSeverityMap()
 	{
 		severityText = {
-			{LoggerSeverity::Trace, "\x1B[45mTRACE\x1B[0m"},
-			{LoggerSeverity::Debug, "\x1B[44mDEBUG\x1B[0m"},
-			{LoggerSeverity::Info, "\x1B[42mINFO\x1B[0m"},
-			{LoggerSeverity::Warning, "\x1B[43mWARNING\x1B[0m"},
-			{LoggerSeverity::Error, "\x1B[41mERROR\x1B[0m"},
-			{LoggerSeverity::Critical, "\x1B[31;47mCRITICAL\x1B[0m"}};
+			{LoggerSeverity::Trace, "\x1B[45mTRACE\x1B[0m"}, // NOSONAR
+			{LoggerSeverity::Debug, "\x1B[44mDEBUG\x1B[0m"}, // NOSONAR
+			{LoggerSeverity::Info, "\x1B[42mINFO\x1B[0m"}, // NOSONAR
+			{LoggerSeverity::Warning, "\x1B[43mWARNING\x1B[0m"}, // NOSONAR
+			{LoggerSeverity::Error, "\x1B[41mERROR\x1B[0m"}, // NOSONAR
+			{LoggerSeverity::Critical, "\x1B[31;47mCRITICAL\x1B[0m"}}; // NOSONAR
 	}
 
 	std::string Logger::FormatLog(const LoggerSeverity &_severity, const std::string _message)
 	{
-		return std::format("[{}] [\033[30;47m{}\033[0m] [{:%Y-%m-%d %H:%M:%S}] {}",
+		return std::format("[{}] [\x1B[30;47m{}\x1B[0m] [{:%Y-%m-%d %H:%M:%S}] {}", // NOSONAR
 						   getSeverityTextAt(_severity), // Put the severity Name
 						   doc::threadName,				 // Put the thread Name
 						   timeProvider(),				 // Put the time stamp in this format (YYYY-mm-dd HH:MM:SS)
