@@ -107,22 +107,22 @@ TEST(docLoggerTest, WriteFileTest)
 
     std::string line = "";
     std::getline(file, line);
-    std::string tester = std::format("\033[35m| [TRACE] [1970-01-01 00:00:00.0000000] [{}] Log |\033[0m",std::this_thread::get_id());
+    std::string tester = std::format("[\033[45mTRACE\033[0m] [\033[30;47m{}\033[0m] [{:%Y-%m-%d %H:%M:%S}] Log", std::this_thread::get_id(), fixedTime);
     EXPECT_EQ(line, tester);
     std::getline(file, line);
-    tester = std::format("\033[34m| [DEBUG] [1970-01-01 00:00:00.0000000] [{}] Log |\033[0m",std::this_thread::get_id());
+    tester = std::format("[\033[44mDEBUG\033[0m] [\033[30;47m{}\033[0m] [{:%Y-%m-%d %H:%M:%S}] Log", std::this_thread::get_id(), fixedTime);
     EXPECT_EQ(line, tester);
     std::getline(file, line);
-    tester = std::format("\033[32m| [INFO] [1970-01-01 00:00:00.0000000] [{}] Log |\033[0m",std::this_thread::get_id());
+    tester = std::format("[\033[42mINFO\033[0m] [\033[30;47m{}\033[0m] [{:%Y-%m-%d %H:%M:%S}] Log", std::this_thread::get_id(), fixedTime);
     EXPECT_EQ(line, tester);
     std::getline(file, line);
-    tester = std::format("\033[33m| [WARNING] [1970-01-01 00:00:00.0000000] [{}] Log |\033[0m",std::this_thread::get_id());
+    tester = std::format("[\033[43mWARNING\033[0m] [\033[30;47m{}\033[0m] [{:%Y-%m-%d %H:%M:%S}] Log", std::this_thread::get_id(), fixedTime);
     EXPECT_EQ(line, tester);
     std::getline(file, line);
-    tester = std::format("\033[31m| [ERROR] [1970-01-01 00:00:00.0000000] [{}] Log |\033[0m",std::this_thread::get_id());
+    tester = std::format("[\033[41mERROR\033[0m] [\033[30;47m{}\033[0m] [{:%Y-%m-%d %H:%M:%S}] Log", std::this_thread::get_id(), fixedTime);
     EXPECT_EQ(line, tester);
     std::getline(file, line);
-    tester = std::format("\033[97;41m| [CRITICAL] [1970-01-01 00:00:00.0000000] [{}] Log |\033[0m",std::this_thread::get_id());
+    tester = std::format("[\033[31;47mCRITICAL\033[0m] [\033[30;47m{}\033[0m] [{:%Y-%m-%d %H:%M:%S}] Log", std::this_thread::get_id(), fixedTime);
     EXPECT_EQ(line, tester);
 }
 
