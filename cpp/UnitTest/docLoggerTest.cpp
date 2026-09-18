@@ -45,7 +45,7 @@ TEST(docLoggerTest, CallerTest)
     Logger logger(opts);
     logger.RegisterLogCallback(FormatLogTester);
 
-    std::string tester = std::format("| [DEBUG] [{}] [{:%Y-%m-%d %H:%M:%S}] void __cdecl docLoggerTest_CallerTest_Test::TestBody(void) is called |", std::this_thread::get_id(), fixedTime);
+    std::string tester = std::format("[\033[44mDEBUG\033[0m] [\033[30;47m{}\033[0m] [{:%Y-%m-%d %H:%M:%S}] void __cdecl docLoggerTest_CallerTest_Test::TestBody(void) is called", std::this_thread::get_id(), fixedTime);
     logger.Caller();
     EXPECT_EQ(formatedMessage, tester);
 }
