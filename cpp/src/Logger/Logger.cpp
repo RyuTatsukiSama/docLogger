@@ -22,12 +22,12 @@ namespace doc
 	void Logger::initSeverityMap()
 	{
 		severityText = {
-			{LoggerSeverity::Trace, "\033[45mTRACE\033[0m"},
-			{LoggerSeverity::Debug, "\033[44mDEBUG\033[0m"},
-			{LoggerSeverity::Info, "\033[42mINFO\033[0m"},
-			{LoggerSeverity::Warning, "\033[43mWARNING\033[0m"},
-			{LoggerSeverity::Error, "\033[41mERROR\033[0m"},
-			{LoggerSeverity::Critical, "\033[31;47mCRITICAL\033[0m"}};
+			{LoggerSeverity::Trace, "\x1B[45mTRACE\x1B[0m"},
+			{LoggerSeverity::Debug, "\x1B[44mDEBUG\x1B[0m"},
+			{LoggerSeverity::Info, "\x1B[42mINFO\x1B[0m"},
+			{LoggerSeverity::Warning, "\x1B[43mWARNING\x1B[0m"},
+			{LoggerSeverity::Error, "\x1B[41mERROR\x1B[0m"},
+			{LoggerSeverity::Critical, "\x1B[31;47mCRITICAL\x1B[0m"}};
 	}
 
 	std::string Logger::FormatLog(const LoggerSeverity &_severity, const std::string _message)

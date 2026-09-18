@@ -27,7 +27,7 @@ TEST(docLoggerTest, FormatLogTest)
     Logger testLogger(opts);
     testLogger.RegisterLogCallback(FormatLogTester);
 
-    std::string tester = std::format("[\033[45mTRACE\033[0m] [\033[30;47m{}\033[0m] [{:%Y-%m-%d %H:%M:%S}] This is a trace level" , std::this_thread::get_id(), fixedTime);
+    std::string tester = std::format("[\x1B[45mTRACE\x1B[0m] [\x1B[30;47m{}\x1B[0m] [{:%Y-%m-%d %H:%M:%S}] This is a trace level" , std::this_thread::get_id(), fixedTime);
     testLogger.Log(LoggerSeverity::Trace, "This is a trace level");
     EXPECT_EQ(formatedMessage, tester);
 }
@@ -45,7 +45,7 @@ TEST(docLoggerTest, CallerTest)
     Logger logger(opts);
     logger.RegisterLogCallback(FormatLogTester);
 
-    std::string tester = std::format("[\033[44mDEBUG\033[0m] [\033[30;47m{}\033[0m] [{:%Y-%m-%d %H:%M:%S}] void __cdecl docLoggerTest_CallerTest_Test::TestBody(void) is called", std::this_thread::get_id(), fixedTime);
+    std::string tester = std::format("[\x1B[44mDEBUG\x1B[0m] [\x1B[30;47m{}\x1B[0m] [{:%Y-%m-%d %H:%M:%S}] void __cdecl docLoggerTest_CallerTest_Test::TestBody(void) is called", std::this_thread::get_id(), fixedTime);
     logger.Caller();
     EXPECT_EQ(formatedMessage, tester);
 }
@@ -63,22 +63,22 @@ TEST(docLoggerTest, SeverityFuncTest)
     Logger logger(opts);
     logger.RegisterLogCallback(FormatLogTester);
 
-    std::string tester = std::format("[\033[45mTRACE\033[0m] [\033[30;47m{}\033[0m] [{:%Y-%m-%d %H:%M:%S}] Log", std::this_thread::get_id(), fixedTime);
+    std::string tester = std::format("[\x1B[45mTRACE\x1B[0m] [\x1B[30;47m{}\x1B[0m] [{:%Y-%m-%d %H:%M:%S}] Log", std::this_thread::get_id(), fixedTime);
     logger.Trace("Log");
     EXPECT_EQ(tester, formatedMessage);
-    tester = std::format("[\033[44mDEBUG\033[0m] [\033[30;47m{}\033[0m] [{:%Y-%m-%d %H:%M:%S}] Log", std::this_thread::get_id(), fixedTime);
+    tester = std::format("[\x1B[44mDEBUG\x1B[0m] [\x1B[30;47m{}\x1B[0m] [{:%Y-%m-%d %H:%M:%S}] Log", std::this_thread::get_id(), fixedTime);
     logger.Debug("Log");
     EXPECT_EQ(tester, formatedMessage);
-    tester = std::format("[\033[42mINFO\033[0m] [\033[30;47m{}\033[0m] [{:%Y-%m-%d %H:%M:%S}] Log", std::this_thread::get_id(), fixedTime);
+    tester = std::format("[\x1B[42mINFO\x1B[0m] [\x1B[30;47m{}\x1B[0m] [{:%Y-%m-%d %H:%M:%S}] Log", std::this_thread::get_id(), fixedTime);
     logger.Info("Log");
     EXPECT_EQ(tester, formatedMessage);
-    tester = std::format("[\033[43mWARNING\033[0m] [\033[30;47m{}\033[0m] [{:%Y-%m-%d %H:%M:%S}] Log", std::this_thread::get_id(), fixedTime);
+    tester = std::format("[\x1B[43mWARNING\x1B[0m] [\x1B[30;47m{}\x1B[0m] [{:%Y-%m-%d %H:%M:%S}] Log", std::this_thread::get_id(), fixedTime);
     logger.Warning("Log");
     EXPECT_EQ(tester, formatedMessage);
-    tester = std::format("[\033[41mERROR\033[0m] [\033[30;47m{}\033[0m] [{:%Y-%m-%d %H:%M:%S}] Log", std::this_thread::get_id(), fixedTime);
+    tester = std::format("[\x1B[41mERROR\x1B[0m] [\x1B[30;47m{}\x1B[0m] [{:%Y-%m-%d %H:%M:%S}] Log", std::this_thread::get_id(), fixedTime);
     logger.Error("Log");
     EXPECT_EQ(tester, formatedMessage);
-    tester = std::format("[\033[31;47mCRITICAL\033[0m] [\033[30;47m{}\033[0m] [{:%Y-%m-%d %H:%M:%S}] Log", std::this_thread::get_id(), fixedTime);
+    tester = std::format("[\x1B[31;47mCRITICAL\x1B[0m] [\x1B[30;47m{}\x1B[0m] [{:%Y-%m-%d %H:%M:%S}] Log", std::this_thread::get_id(), fixedTime);
     logger.Critical("Log");
     EXPECT_EQ(tester, formatedMessage);
 }
@@ -107,22 +107,22 @@ TEST(docLoggerTest, WriteFileTest)
 
     std::string line = "";
     std::getline(file, line);
-    std::string tester = std::format("[\033[45mTRACE\033[0m] [\033[30;47m{}\033[0m] [{:%Y-%m-%d %H:%M:%S}] Log", std::this_thread::get_id(), fixedTime);
+    std::string tester = std::format("[\x1B[45mTRACE\x1B[0m] [\x1B[30;47m{}\x1B[0m] [{:%Y-%m-%d %H:%M:%S}] Log", std::this_thread::get_id(), fixedTime);
     EXPECT_EQ(line, tester);
     std::getline(file, line);
-    tester = std::format("[\033[44mDEBUG\033[0m] [\033[30;47m{}\033[0m] [{:%Y-%m-%d %H:%M:%S}] Log", std::this_thread::get_id(), fixedTime);
+    tester = std::format("[\x1B[44mDEBUG\x1B[0m] [\x1B[30;47m{}\x1B[0m] [{:%Y-%m-%d %H:%M:%S}] Log", std::this_thread::get_id(), fixedTime);
     EXPECT_EQ(line, tester);
     std::getline(file, line);
-    tester = std::format("[\033[42mINFO\033[0m] [\033[30;47m{}\033[0m] [{:%Y-%m-%d %H:%M:%S}] Log", std::this_thread::get_id(), fixedTime);
+    tester = std::format("[\x1B[42mINFO\x1B[0m] [\x1B[30;47m{}\x1B[0m] [{:%Y-%m-%d %H:%M:%S}] Log", std::this_thread::get_id(), fixedTime);
     EXPECT_EQ(line, tester);
     std::getline(file, line);
-    tester = std::format("[\033[43mWARNING\033[0m] [\033[30;47m{}\033[0m] [{:%Y-%m-%d %H:%M:%S}] Log", std::this_thread::get_id(), fixedTime);
+    tester = std::format("[\x1B[43mWARNING\x1B[0m] [\x1B[30;47m{}\x1B[0m] [{:%Y-%m-%d %H:%M:%S}] Log", std::this_thread::get_id(), fixedTime);
     EXPECT_EQ(line, tester);
     std::getline(file, line);
-    tester = std::format("[\033[41mERROR\033[0m] [\033[30;47m{}\033[0m] [{:%Y-%m-%d %H:%M:%S}] Log", std::this_thread::get_id(), fixedTime);
+    tester = std::format("[\x1B[41mERROR\x1B[0m] [\x1B[30;47m{}\x1B[0m] [{:%Y-%m-%d %H:%M:%S}] Log", std::this_thread::get_id(), fixedTime);
     EXPECT_EQ(line, tester);
     std::getline(file, line);
-    tester = std::format("[\033[31;47mCRITICAL\033[0m] [\033[30;47m{}\033[0m] [{:%Y-%m-%d %H:%M:%S}] Log", std::this_thread::get_id(), fixedTime);
+    tester = std::format("[\x1B[31;47mCRITICAL\x1B[0m] [\x1B[30;47m{}\x1B[0m] [{:%Y-%m-%d %H:%M:%S}] Log", std::this_thread::get_id(), fixedTime);
     EXPECT_EQ(line, tester);
 }
 
@@ -176,8 +176,8 @@ TEST(docLoggerTest, multithreadTest)
         readers.push_back(reader);
 
         EXPECT_THAT(readers, testing::UnorderedElementsAre(
-                                std::format("[\033[41mERROR\033[0m] [\033[30;47mError\033[0m] [{:%Y-%m-%d %H:%M:%S}] From Error thread", fixedTime),
-                                std::format("[\033[44mDEBUG\033[0m] [\033[30;47mDebug\033[0m] [{:%Y-%m-%d %H:%M:%S}] From Debug thread", fixedTime)));
+                                std::format("[\x1B[41mERROR\x1B[0m] [\x1B[30;47mError\x1B[0m] [{:%Y-%m-%d %H:%M:%S}] From Error thread", fixedTime),
+                                std::format("[\x1B[44mDEBUG\x1B[0m] [\x1B[30;47mDebug\x1B[0m] [{:%Y-%m-%d %H:%M:%S}] From Debug thread", fixedTime)));
     }
 }
 
