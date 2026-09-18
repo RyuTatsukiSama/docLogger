@@ -88,7 +88,7 @@ namespace doc
 
 		for (const auto stream : outputStreams) // browse all the stream
 		{
-			// send the message, with its ANSI code for the color, into each stream
+			// send the message, into each stream
 			(*stream) << formattedMessage << std::endl;
 		}
 
