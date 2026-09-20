@@ -4,6 +4,7 @@ on:
     branches: [unit-test-action]
   pull_request:
     branches: [unit-test-action]
+    
 jobs:
   cpp:
     runs-on: ubuntu-latest
@@ -22,7 +23,7 @@ jobs:
 
       - name: Build project
         working-directory: ./cpp
-        run: cmake --build build -DCMAKE_BUILD_TYPE=Release
+        run: cmake --build build --target UnitTests --config Release
 
       - name: Execute tests
         working-directory: ./cpp
