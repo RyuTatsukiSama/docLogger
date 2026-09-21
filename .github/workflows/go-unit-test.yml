@@ -3,18 +3,18 @@ on:
   workflow_dispatch:
   push:
     branches: [unit-test-action]
-    #paths:
-      #- 'go/**.go'
-      #- 'go/**.mod'
-      #- 'go/**.sum'
-      #- '.github/workflows/go-unit-test.yml'
+    paths:
+      - 'go/**.go'
+      - 'go/**.mod'
+      - 'go/**.sum'
+      - '.github/workflows/go-unit-test.yml'
   pull_request:
     branches: [unit-test-action]
-    #paths:
-      #- 'go/**.go'
-      #- 'go/**.mod'
-      #- 'go/**.sum'
-      #- '.github/workflows/go-unit-test.yml'
+    paths:
+      - 'go/**.go'
+      - 'go/**.mod'
+      - 'go/**.sum'
+      - '.github/workflows/go-unit-test.yml'
     
 jobs:
   unit-test:
