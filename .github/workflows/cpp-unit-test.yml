@@ -1,13 +1,25 @@
-name: Unit Tests
+name: CPP Unit Tests
 on: 
   workflow_dispatch:
   push:
     branches: [unit-test-action]
+    paths:
+      - 'cpp/**.cpp'
+      - 'cpp/**.h'
+      - 'cpp/**.hpp'
+      - 'cpp/CMakeLists.txt'
+      - '.github/workflows/cpp-unit-test.yml'
   pull_request:
     branches: [unit-test-action]
+    paths:
+      - 'cpp/**.cpp'
+      - 'cpp/**.h'
+      - 'cpp/**.hpp'
+      - 'cpp/CMakeLists.txt'
+      - '.github/workflows/cpp-unit-test.yml'
     
 jobs:
-  cpp:
+  unit-test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
