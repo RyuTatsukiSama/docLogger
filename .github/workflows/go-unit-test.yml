@@ -1,6 +1,5 @@
 name: Go Unit Tests
 on: 
-  workflow_dispatch:
   push:
     branches: [unit-test-action]
     paths:
@@ -15,6 +14,7 @@ on:
       - 'go/**.mod'
       - 'go/**.sum'
       - '.github/workflows/go-unit-test.yml'
+  workflow_dispatch:
     
 jobs:
   unit-test:
