@@ -34,5 +34,5 @@ jobs:
       
       - name: Test Go
         working-directory: ./go
-        run: go test ./...
+        run: go test ./... -v
     
