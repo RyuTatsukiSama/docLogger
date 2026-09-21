@@ -1,6 +1,5 @@
 name: CPP Unit Tests
 on: 
-  workflow_dispatch:
   push:
     branches: [unit-test-action]
     paths:
@@ -17,6 +16,7 @@ on:
       - 'cpp/**.hpp'
       - 'cpp/CMakeLists.txt'
       - '.github/workflows/cpp-unit-test.yml'
+  workflow_dispatch:
     
 jobs:
   unit-test:
