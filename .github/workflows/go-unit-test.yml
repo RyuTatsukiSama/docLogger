@@ -1,0 +1,38 @@
+name: Go Unit Tests
+on: 
+  workflow_dispatch:
+  push:
+    branches: [unit-test-action]
+    #paths:
+      #- 'go/**.go'
+      #- 'go/**.mod'
+      #- 'go/**.sum'
+      #- '.github/workflows/go-unit-test.yml'
+  pull_request:
+    branches: [unit-test-action]
+    #paths:
+      #- 'go/**.go'
+      #- 'go/**.mod'
+      #- 'go/**.sum'
+      #- '.github/workflows/go-unit-test.yml'
+    
+jobs:
+  unit-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v7
+
+      - name: Setup Go
+        uses: actions/setup-go@v7
+        with: 
+          go-version-file: go/go.mod
+
+      - name: Build Go
+        working-directory: ./go
+        run: go build ./...
+      
+      - name: Test Go
+        working-directory: ./go
+        run: go test ./...
+    
