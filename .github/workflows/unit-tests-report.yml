@@ -1,13 +1,11 @@
 name: Unit Test Report
 on: 
   workflow_run:
-    workflows: [CPP Unit Tests, Go Unit Tests]
+    workflow: [CPP Unit Tests, Go Unit Tests]
     types:
       - completed
   workflow_dispatch:
 
 jobs:
-  report:
+  unit-test:
     runs-on: ubuntu-latest
-    steps:
-      - run: echo hello
