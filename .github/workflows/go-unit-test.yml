@@ -40,6 +40,7 @@ jobs:
         run: gotestsum --format testname --junitfile go-output.xml -- ./...
       
       - name: Upload JUnit file
+        if: always()
         uses: actions/upload-artifact@v7
         with:
           name: go-result

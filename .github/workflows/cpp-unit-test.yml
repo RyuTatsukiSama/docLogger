@@ -43,6 +43,7 @@ jobs:
         run: ctest --test-dir build --output-on-failure --output-junit cpp-output.xml
       
       - name: Upload JUnit file
+        if: always()
         uses: actions/upload-artifact@v7
         with:
           name: cpp-result
