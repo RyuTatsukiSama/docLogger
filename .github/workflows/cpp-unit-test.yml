@@ -45,5 +45,5 @@ jobs:
       - name: Upload JUnit file
         uses: actions/upload-artifact@v7
         with:
-          name: go-result
+          name: cpp-result
           path: ./cpp/build/cpp-output.xml
