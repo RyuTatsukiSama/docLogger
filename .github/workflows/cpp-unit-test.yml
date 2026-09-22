@@ -41,3 +41,9 @@ jobs:
       - name: Execute tests
         working-directory: ./cpp
         run: ctest --test-dir build --output-on-failure --output-junit cpp-output.xml
+      
+      - name: Upload JUnit file
+        uses: actions/upload-artifact@v7
+        with:
+          name: go-result
+          path: ./cpp/build/cpp-output.xml
