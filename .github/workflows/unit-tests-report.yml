@@ -1,7 +1,7 @@
 name: Unit Test Report
 on: 
   workflow_run:
-    workflow: [CPP Unit Tests, Go Unit Tests]
+    workflows: [CPP Unit Tests, Go Unit Tests]
     types:
       - completed
   workflow_dispatch:
