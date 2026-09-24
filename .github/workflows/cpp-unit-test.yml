@@ -1,7 +1,7 @@
 name: CPP Unit Tests
 on: 
   push:
-    branches: [unit-test-action]
+    branches: [main]
     paths:
       - 'cpp/**.cpp'
       - 'cpp/**.h'
@@ -9,7 +9,7 @@ on:
       - 'cpp/CMakeLists.txt'
       - '.github/workflows/cpp-unit-test.yml'
   pull_request:
-    branches: [unit-test-action]
+    branches: [main]
     paths:
       - 'cpp/**.cpp'
       - 'cpp/**.h'
