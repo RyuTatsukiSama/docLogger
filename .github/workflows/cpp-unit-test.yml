@@ -1,6 +1,4 @@
 name: CPP Unit Tests
-permissions:
-  pull-requests: write
 on: 
   push:
     branches: [unit-test-action]
@@ -51,6 +49,8 @@ jobs:
           name: cpp-result
           path: ./cpp/build/cpp-output.xml
   comment-pr:
+    permissions:
+      pull-requests: write
     runs-on: ubuntu-latest
     if: ${{always() && github.event_name == 'pull_request'}}
     needs: unit-test
