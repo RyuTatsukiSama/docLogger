@@ -86,10 +86,9 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Download Artifact cpp
-        uses: actions/download-artifact@v8
+        uses: actions/download-artifact@a43b3a5f7366b97d083190328d2c652e1a8b6aa2
         with:
           name: cpp-report
-          artifact-ids: 10860950515
       
       - name: Test Report
         uses: dorny/test-reporter@v3
