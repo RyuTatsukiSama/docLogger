@@ -82,6 +82,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: unit-test
     steps:
+      - name: Checkout repo
+        uses: actions/checkout@v7
 
       - name: Download Artifact cpp
         uses: actions/download-artifact@v8
