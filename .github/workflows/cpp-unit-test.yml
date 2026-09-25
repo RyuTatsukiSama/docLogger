@@ -86,12 +86,12 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Download Artifact cpp
-        uses: actions/download-artifact@a43b3a5f7366b97d083190328d2c652e1a8b6aa2
+        uses: actions/download-artifact@v8
         with:
           name: cpp-report
       
       - name: Test Report
-        uses: dorny/test-reporter@v3
+        uses: dorny/test-reporter@a43b3a5f7366b97d083190328d2c652e1a8b6aa2
         with:
           name: Résultats Unit Tests CPP
           path: '**/results.xml'
