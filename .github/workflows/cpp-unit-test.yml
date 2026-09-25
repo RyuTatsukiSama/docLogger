@@ -87,6 +87,8 @@ jobs:
 
       - name: Download Artifact cpp
         uses: actions/download-artifact@v8
+        with:
+          name: cpp-report.xml
       
       - name: Test Report
         uses: dorny/test-reporter@v3
