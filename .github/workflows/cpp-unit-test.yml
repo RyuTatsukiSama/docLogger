@@ -44,7 +44,7 @@ jobs:
       
       - name: Upload JUnit file
         if: always()
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@v4
         with:
           name: cpp-result
           path: ./cpp/build/cpp-output.xml
@@ -86,7 +86,7 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Download Artifact cpp
-        uses: actions/download-artifact@v8
+        uses: actions/download-artifact@v4
         with:
           name: cpp-report
       
