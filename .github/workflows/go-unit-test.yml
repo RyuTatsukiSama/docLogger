@@ -56,6 +56,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: go-result
+          
 
       - name: Install XML parser
         run: npm install fast-xml-parser
