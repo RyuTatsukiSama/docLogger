@@ -5,7 +5,14 @@ module.exports = async ({ github, context, core, report_name }) => {
   const data = fs.readFileSync(report_name, "utf8");
   console.log(data);
 
-  const parser = new XMLParser();
+  const options = {
+    ignoreAttributes : false,
+    isArray: (name, jpath, isLeafNode, isAttribute) => { 
+        return jpath === 'testsuites' || jpath === 'testsuites.testsuite';
+    }
+};
+
+  const parser = new XMLParser(options);
   let jsonObj = parser.parse(data);
   console.log(jsonObj);
 
