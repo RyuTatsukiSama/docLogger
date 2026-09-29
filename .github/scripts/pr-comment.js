@@ -2,7 +2,7 @@ const fs = require("node:fs");
 const { XMLParser, XMLBuilder, XMLValidator } = require("fast-xml-parser");
 
 module.exports = async ({ github, context, core, report_name }) => {
-  const data = fs.readFileSync(report_name, "utf8");
+  const data = fs.readFileSync('artifacts/'+report_name, "utf8");
   console.log(data);
 
   if (XMLValidator.validate()) {
