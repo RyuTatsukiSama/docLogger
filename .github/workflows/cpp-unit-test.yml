@@ -60,7 +60,7 @@ jobs:
         with:
           script: |
             const script = require('./.github/scripts/pr-comment.js');
-            await script({github, context, core});
+            await script({github, context, core, 'cpp-output.xml'});
   test-reporter:
     if: always()
     permissions:
