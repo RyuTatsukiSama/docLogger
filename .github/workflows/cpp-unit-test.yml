@@ -55,6 +55,14 @@ jobs:
     if: ${{always() && github.event_name == 'pull_request'}}
     needs: unit-test
     steps:
+      - name: Download Artifact cpp
+        uses: actions/download-artifact@v4
+        with:
+          name: cpp-result
+
+      - name: Install XML parser
+        run: npm install fast-xml-parser
+
       - name: Github Script
         uses: actions/github-script@v7
         with:
