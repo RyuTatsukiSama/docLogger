@@ -58,8 +58,8 @@ jobs:
           name: go-result
 
       - name: Install XML parser
-        run: npm install fast-xml-parser    
-          
+        run: npm install fast-xml-parser
+
       - name: Github Script
         uses: actions/github-script@v7
         with:
