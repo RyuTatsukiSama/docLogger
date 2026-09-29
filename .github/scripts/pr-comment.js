@@ -6,7 +6,7 @@ module.exports = async ({ github, context, core, report_name }) => {
   console.log(data);
 
   const parser = new XMLParser();
-  let jsonObj = parser.parse(xmlData);
+  let jsonObj = parser.parse(data);
   console.log(jsonObj);
 
   await github.rest.issues.createComment({
