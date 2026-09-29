@@ -8,7 +8,7 @@ module.exports = async ({ github, context, core, report_name }) => {
   const options = {
     ignoreAttributes : false,
     isArray: (name, jpath, isLeafNode, isAttribute) => { 
-        return jpath === 'testsuites' || jpath === 'testsuites.testsuite';
+        return jpath === 'testsuites' || jpath === 'testsuite';
     }
 };
 
