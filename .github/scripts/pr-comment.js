@@ -2,6 +2,9 @@ const fs = require("node:fs");
 const { XMLParser, XMLBuilder, XMLValidator } = require("fast-xml-parser");
 
 module.exports = async ({ github, context, core, report_name }) => {
+
+  DeleteOldComments(github, context, core);
+
   const data = fs.readFileSync(report_name, "utf8");
 
   const options = {
@@ -44,4 +47,22 @@ function GetLanguage(report_name) {
     case 'go-output.xml': return 'Go';    
     default: return 'None';
   }
+}
+
+function DeleteOldComments(github, context, core, report_name) {
+  
+  let comments = github.paginate({
+    owner: context.repo.owner,
+    repo: context.repo.repo,
+    issue_number: context.issue.number
+  });
+
+  let it = 0;
+  for (const comment of comments) {
+    if (comment.body.include("<!--${report_name}Comment-->")) {
+      console.log(comment.body);
+      it++;
+    }
+  }
+  console.log(it);
 }
