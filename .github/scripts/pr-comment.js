@@ -32,7 +32,7 @@ module.exports = async ({ github, context, core, report_name }) => {
     issue_number: context.issue.number,
     body: `<!--${report_name}Comment--> 
 # ${language} Unit Test ${result}
-![Test count](https://img.shields.io/badge/Test_Count-${jsonObj.testsuites[0]["@_tests"]}-orange?style=for-the-badge) ![Success count](https://img.shields.io/badge/sucess-${jsonObj.testsuites[0]["@_tests"] - jsonObj.testsuites[0]["@_failures"]}-green?style=for-the-badge) ![Failed count](https://img.shields.io/badge/Failed-${jsonObj.testsuites[0]["@_failures"]}-red?style=for-the-badge)
+![Test count](https://img.shields.io/badge/Test_Count-${jsonObj.testsuites[0]["@_tests"]}-orange?style=for-the-badge) ![Success count](https://img.shields.io/badge/success-${jsonObj.testsuites[0]["@_tests"] - jsonObj.testsuites[0]["@_failures"]}-green?style=for-the-badge) ![Failed count](https://img.shields.io/badge/Failed-${jsonObj.testsuites[0]["@_failures"]}-red?style=for-the-badge)
 
 [![Voir le run](https://img.shields.io/badge/Check_Run-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)](${runUrl})`,
   });
