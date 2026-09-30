@@ -13,7 +13,7 @@ module.exports = async ({ github, context, core, report_name }) => {
 
   const parser = new XMLParser(options);
   let jsonObj = parser.parse(data);
-  console.log(jsonObj.testsuites["@_tests"]);
+  console.log(jsonObj.testsuites[0]["@_tests"]);
 
   await github.rest.issues.createComment({
     owner: context.repo.owner,
