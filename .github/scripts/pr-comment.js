@@ -3,7 +3,6 @@ const { XMLParser, XMLBuilder, XMLValidator } = require("fast-xml-parser");
 
 module.exports = async ({ github, context, core, report_name }) => {
   const data = fs.readFileSync(report_name, "utf8");
-  console.log(data);
 
   const options = {
     ignoreAttributes : false,
@@ -12,11 +11,9 @@ module.exports = async ({ github, context, core, report_name }) => {
     }
   };
 
-  
-
   const parser = new XMLParser(options);
   let jsonObj = parser.parse(data);
-  console.log(jsonObj['@_tests']);
+  console.log(jsonObj.root.item[0]["@_tests"]);
 
   await github.rest.issues.createComment({
     owner: context.repo.owner,
