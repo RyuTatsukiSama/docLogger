@@ -3,7 +3,7 @@ const { XMLParser, XMLBuilder, XMLValidator } = require("fast-xml-parser");
 
 module.exports = async ({ github, context, core, report_name }) => {
 
-  await DeleteOldComments(github, context, core);
+  await DeleteOldComments(github, context, core, report_name);
 
   const data = fs.readFileSync(report_name, "utf8");
 
@@ -45,7 +45,7 @@ function GetLanguage(report_name) {
   switch (report_name) {
     case 'cpp-output.xml': return 'CPP';    
     case 'go-output.xml': return 'Go';    
-    default: return 'None';
+    default: return 'Null';
   }
 }
 
