@@ -3,7 +3,7 @@ const { XMLParser, XMLBuilder, XMLValidator } = require("fast-xml-parser");
 
 module.exports = async ({ github, context, core, report_name }) => {
 
-  DeleteOldComments(github, context, core);
+  await DeleteOldComments(github, context, core);
 
   const data = fs.readFileSync(report_name, "utf8");
 
@@ -49,9 +49,8 @@ function GetLanguage(report_name) {
   }
 }
 
-function DeleteOldComments(github, context, core, report_name) {
-  
-  let comments = github.paginate({
+async function DeleteOldComments(github, context, core, report_name) {
+  let comments = await github.paginate(github.rest.issues.listComments,{
     owner: context.repo.owner,
     repo: context.repo.repo,
     issue_number: context.issue.number
@@ -59,7 +58,7 @@ function DeleteOldComments(github, context, core, report_name) {
 
   let it = 0;
   for (const comment of comments) {
-    if (comment.body.include("<!--${report_name}Comment-->")) {
+    if (comment.body.includes(`<!--${report_name}Comment-->`)) {
       console.log(comment.body);
       it++;
     }
