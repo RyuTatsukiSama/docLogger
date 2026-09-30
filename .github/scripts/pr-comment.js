@@ -33,7 +33,7 @@ module.exports = async ({ github, context, core, report_name }) => {
     owner: context.repo.owner,
     repo: context.repo.repo,
     issue_number: context.issue.number,
-    body: `<!--${report_name}Comment--> 
+    body: `<!--${language}Comment--> 
 # ${language} Unit Test ${result}
 ![Test count](https://img.shields.io/badge/Test_Count-${jsonObj.testsuites[0]["@_tests"]}-orange?style=for-the-badge) ![Success count](https://img.shields.io/badge/success-${jsonObj.testsuites[0]["@_tests"] - jsonObj.testsuites[0]["@_failures"]}-green?style=for-the-badge) ![Failed count](https://img.shields.io/badge/Failed-${jsonObj.testsuites[0]["@_failures"]}-red?style=for-the-badge)
 
@@ -59,7 +59,7 @@ async function DeleteOldComments(github, context, core, report_name) {
   let it = 0;
   for (const comment of comments) {
     console.log(comment.body);
-    if (comment.body.includes(`<!--${report_name}Comment-->`)) {
+    if (comment.body.includes(`<!--${GetLanguage(report_name)}Comment-->`)) {
       it++;
     }
   }
