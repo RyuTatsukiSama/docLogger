@@ -58,8 +58,8 @@ async function DeleteOldComments(github, context, core, report_name) {
 
   let it = 0;
   for (const comment of comments) {
+    console.log(comment.body);
     if (comment.body.includes(`<!--${report_name}Comment-->`)) {
-      console.log(comment.body);
       it++;
     }
   }
