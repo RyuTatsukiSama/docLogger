@@ -23,10 +23,10 @@ module.exports = async ({ github, context, core, report_name }) => {
     repo: context.repo.repo,
     issue_number: context.issue.number,
     body: `<!--${report_name}Comment--> 
-    # ${language} Unit Test
-    ![Test count](https://img.shields.io/badge/test-${jsonObj.testsuites[0]["@_tests"]}-grey?style=for-the-badge)
+# ${language} Unit Test
+![Test count](https://img.shields.io/badge/test-${jsonObj.testsuites[0]["@_tests"]}-grey?style=for-the-badge)
 
-    [Voir le run](${runUrl})`,
+[Voir le run](${runUrl})`,
   });
 };
 
