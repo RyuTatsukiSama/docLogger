@@ -59,6 +59,7 @@ async function DeleteOldComments(github, context, core, report_name) {
   let it = 0;
   for (const comment of comments) {
     console.log(comment.body);
+    console.log(`<!--${GetLanguage(report_name)}Comment-->`);
     if (comment.body.includes(`<!--${GetLanguage(report_name)}Comment-->`)) {
       it++;
     }
