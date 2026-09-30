@@ -10,11 +10,13 @@ module.exports = async ({ github, context, core, report_name }) => {
     isArray: (name, jpath, isLeafNode, isAttribute) => { 
         return jpath === 'testsuites' || jpath === 'testsuite';
     }
-};
+  };
+
+  
 
   const parser = new XMLParser(options);
   let jsonObj = parser.parse(data);
-  console.log(jsonObj);
+  console.log(jsonObj['@_tests']);
 
   await github.rest.issues.createComment({
     owner: context.repo.owner,
