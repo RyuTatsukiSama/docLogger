@@ -56,13 +56,17 @@ async function DeleteOldComments(github, context, core, report_name) {
     issue_number: context.issue.number
   });
 
-  let it = 0;
   for (const comment of comments) {
-    console.log(comment.body);
-    console.log(`<!--${GetLanguage(report_name)}Comment-->`);
     if (comment.body.includes(`<!--${GetLanguage(report_name)}Comment-->`)) {
-      it++;
+      try {
+        github.rest.issues.deleteComment({
+          owner: context.repo.owner,
+          repo: context.repo.repo,
+          comment_id: comment.id
+        });
+      } catch (error) {
+        console.log(error);
+      }
     }
   }
-  console.log(it);
 }
