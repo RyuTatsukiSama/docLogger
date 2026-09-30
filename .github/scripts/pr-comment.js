@@ -13,12 +13,16 @@ module.exports = async ({ github, context, core, report_name }) => {
 
   const parser = new XMLParser(options);
   let jsonObj = parser.parse(data);
-  console.log(jsonObj.testsuites[0]["@_tests"]);
+
+  const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
 
   await github.rest.issues.createComment({
     owner: context.repo.owner,
     repo: context.repo.repo,
     issue_number: context.issue.number,
-    body: `${result} ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
+    body: `<!--GoComment--> 
+    ![Test count](https://img.shields.io/badge/test-${jsonObj.testsuites[0]["@_tests"]}-grey?style=for-the-badge)
+
+    [Voir le run](${runUrl})`,
   });
 };
